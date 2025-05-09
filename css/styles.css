@@ -1,0 +1,51 @@
+/* افکت hover برای کاردها */
+.card-tours {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-tours:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* استایل‌های سفارشی */
+.dropdown-menu {
+  text-align: right;
+  right: 0;
+  left: auto;
+}
+
+.dropdown-item {
+  text-align: right;
+  direction: rtl;
+}
+
+/* منوی موبایل - آف‌کنواس */
+@media (max-width: 991.98px) {
+  .offcanvas {
+    width: 50% !important;
+    left: auto;
+    right: 0;
+  }
+
+  .offcanvas-start {
+    transform: translateX(100%);
+  }
+
+  .offcanvas.show {
+    transform: none;
+  }
+}
+
+/* دکمه منوی موبایل */
+.navbar-toggler {
+  border: none;
+  padding: 0.5rem;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
