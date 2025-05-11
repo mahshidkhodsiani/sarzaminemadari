@@ -1,3 +1,27 @@
+@font-face {
+  font-family: "Farhang";
+  src: url("../fonts/FarhangFamily/Farhang2-Medium.ttf") format("truetype"),
+    url("../fonts/woff/Farhang2-Medium.woff") format("woff"),
+    url("../fonts/Farhang.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button,
+input,
+textarea {
+  font-family: "Farhang", sans-serif;
+}
+
 /* افکت hover برای کاردها */
 .card-tours {
   transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -48,4 +72,24 @@
 
 .navbar-toggler:focus {
   box-shadow: none;
+}
+
+@keyframes rotate-bg {
+  from {
+    transform: rotate(0deg) scale(1.2);
+  }
+
+  to {
+    transform: rotate(360deg) scale(1.2);
+  }
+}
+
+.rotating-background {
+  background-attachment: fixed;
+}
+
+@media (min-width: 768px) {
+  .rotating-background {
+    background-size: 100% auto;
+  }
 }

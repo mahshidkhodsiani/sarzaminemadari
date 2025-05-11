@@ -15,10 +15,10 @@ if ($conn->connect_error) {
 
 
 
-// $servername = '185.141.212.171'; 
-// $username = 'adsbarg_admin'; 
-// $password = 'HL(to{PCYL=b'; 
-// $dbname = 'adsbarg_dashboard'; 
+// $servername = '89.42.211.172'; 
+// $username = 'vkwpsaop_admin'; 
+// $password = 'k.YX4yxO(j7['; 
+// $dbname = 'vkwpsaop_db'; 
 
 // $cfg['Lang'] = 'fa';
 // $cfg['Charset'] = 'utf8mb4';

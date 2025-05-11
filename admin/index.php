@@ -1,21 +1,13 @@
 <?php
-// session_start();
+session_start();
 
-// if (!isset($_SESSION['all_data'])) {
-//     header('Location: ../login.php');
-//     exit;
-// }
+if (!isset($_SESSION['all_data'])) {
+    header('Location: login.php');
+    exit;
+}
 
-// $all_data = $_SESSION['all_data'];
+$all_data = $_SESSION['all_data'];
 
-// if ($all_data['role'] == 'freelancer') {
-//     $role = 1;
-// } elseif ($all_data['role'] == 'employer') {
-//     $role = 2;
-// } else {
-//     header('Location: ../login');
-//     exit;
-// }
 ?>
 
 <!DOCTYPE html>
