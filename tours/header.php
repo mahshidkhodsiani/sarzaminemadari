@@ -1,6 +1,6 @@
 <!-- Bottom Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a href="./"><img src="../img/logo.png" width="70px" height="70px"></a>
+    <a href="../"><img src="../img/logo.png" width="70px" height="70px"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

@@ -129,7 +129,8 @@
                             <p><strong>تاریخ میلادی:</strong> <?= htmlspecialchars($row['date_en']) ?></p>
                             <p><strong>تاریخ شمسی:</strong> <?= htmlspecialchars($row['date_fa']) ?></p>
                             <p><strong>قیمت:</strong> <?= number_format($row['price']) ?> تومان</p>
-                            <a href="tour-details.php?id=<?= $row['id'] ?>" class="btn btn-success w-100">جزئیات بیشتر</a>
+                            <a href="tour-details.php?idt=<?= $row['id']?>" class="btn btn-warning w-100">دیدن تور</a>
+                            
                         </div>
                     </div>
                 <?php endwhile; ?>
