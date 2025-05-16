@@ -192,7 +192,6 @@
 
 
 
-
 <?php
 include "../config.php";
 
@@ -208,6 +207,7 @@ if (isset($_POST['submit'])) {
     $city_en = $_POST['city_en'];
     $category = $_POST['category'];
     $price = $_POST['price'];
+    $type = $_POST['type']; // اصلاح شده: = به جای -
     $image_path = "";
 
     // اعتبارسنجی اولیه
@@ -236,16 +236,29 @@ if (isset($_POST['submit'])) {
         die("لطفا یک تصویر انتخاب کنید");
     }
 
+    // ایجاد slug از عنوان
+    $slug = str_replace(' ', '-', $title);
+    $slug = preg_replace('/[^A-Za-z0-9\-]/', '', $slug);
+    $slug = strtolower($slug);
+
     // ذخیره اطلاعات پایه تور در دیتابیس
-    $sql = "INSERT INTO exhibition_tours 
-            (title, description, date_en, date_fa, country_fa, city_fa, 
-             country_en, city_en, category, price) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO tours 
+            (title, slug, description, date_en, date_fa, country_fa, city_fa, 
+             country_en, city_en, category, price, type, tour_image) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // 13 پارامتر
 
     $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("خطا در آماده‌سازی query: " . $conn->error);
+    }
+
+    // مقدار اولیه برای tour_image (موقت خالی)
+    $temp_tour_image = "";
+
     $stmt->bind_param(
-        "sssssssssi",
+        "sssssssssssss", // 13 کاراکتر s
         $title,
+        $slug,
         $description,
         $date_en,
         $date_fa,
@@ -254,43 +267,81 @@ if (isset($_POST['submit'])) {
         $country_en,
         $city_en,
         $category,
-        $price
+        $price,
+        $type,
+        $temp_tour_image
     );
 
     if ($stmt->execute()) {
         $tour_id = $conn->insert_id;
 
         // حالا مسیر نهایی را ایجاد کنید
-        $final_upload_dir = "../uploads/tours/" . $tour_id . "/";
+        $final_upload_dir = "../uploads/tour/" . $tour_id . "/";
         if (!file_exists($final_upload_dir)) {
             mkdir($final_upload_dir, 0755, true);
         }
 
         // انتقال تصویر به مسیر نهایی
         $file_extension = pathinfo($temp_image_path, PATHINFO_EXTENSION);
-        $final_file_name = uniqid() . '.' . $file_extension;
+        $final_file_name = 'main.' . $file_extension;
         $final_image_path = $final_upload_dir . $final_file_name;
 
         if (rename($temp_image_path, $final_image_path)) {
             // آپدیت مسیر تصویر در دیتابیس
-            $update_sql = "UPDATE exhibition_tours SET tour_image = ? WHERE id = ?";
+            $update_sql = "UPDATE tours SET tour_image = ? WHERE id = ?";
             $update_stmt = $conn->prepare($update_sql);
             $update_stmt->bind_param("si", $final_image_path, $tour_id);
             $update_stmt->execute();
             $update_stmt->close();
 
-            echo "تور با موفقیت ذخیره شد! تصویر در مسیر: " . $final_image_path;
-        } else {
-            // اگر انتقال تصویر ناموفق بود، حداقل اطلاعات تور ذخیره شده است
-            echo "تور ذخیره شد ولی خطا در انتقال تصویر به مسیر نهایی";
+            echo "<div id='successToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; top: 20px; right: 20px; width: 300px; z-index: 1055;'>
+            <div class='toast-header bg-success text-white'>
+                <strong class='mr-auto'>Success</strong>
+            </div>
+            <div class='toast-body'>
+              با موفقیت انجام شد!
+            </div>
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $('#successToast').toast({
+                        autohide: true,
+                        delay: 3000
+                    }).toast('show');
+                    setTimeout(function(){
+                        window.location.href = 'add_tour';
+                    }, 3000);
+                });
+            </script>";
         }
     } else {
         // اگر INSERT ناموفق بود، تصویر موقت را پاک کنید
         if (file_exists($temp_image_path)) {
             unlink($temp_image_path);
         }
-        die("خطا در ذخیره اطلاعات: " . $conn->error);
+
+        echo "<div id='errorToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; top: 20px; right: 20px; width: 300px; z-index: 1055;'>
+        <div class='toast-header bg-danger text-white'>
+            <strong class='mr-auto'>Error</strong>
+        </div>
+        <div class='toast-body'>
+            خطایی رخ داده، دوباره امتحان کنید!<br>Error: " . htmlspecialchars($stmt->error) . "
+        </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $('#errorToast').toast({
+                    autohide: true,
+                    delay: 3000
+                }).toast('show');
+                setTimeout(function(){
+                    window.location.href = 'add_tour';
+                }, 3000);
+            });
+        </script>";
     }
+
+
 
     $stmt->close();
 }

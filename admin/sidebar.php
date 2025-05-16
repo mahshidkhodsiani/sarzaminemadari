@@ -10,12 +10,14 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <i class="bi bi-house-door"></i> داشبورد
     </a>
     <a href="exhibition_tours.php" class="<?= $currentPage === 'exhibition_tours.php' ? 'active' : '' ?>">
-        <i class="bi bi-person"></i> افزودن تور نمایشگاهی
+        <i class="bi bi-airplane"></i> افزودن تور نمایشگاهی
     </a>
     <a href="add_tour.php" class="<?= $currentPage === 'add_tour.php' ? 'active' : '' ?>">
-        <i class="bi bi-person"></i> افزودن تور مسافرتی 
+        <i class="bi bi-airplane-fill"></i> افزودن تور مسافرتی 
     </a>
-
+    <a href="add_post.php" class="<?= $currentPage === 'add_post.php' ? 'active' : '' ?>">
+        <i class="bi bi-book"></i> افزودن مقاله جدید 
+    </a>
 
     <a href="#"><i class="bi bi-gear"></i> تنظیمات</a>
     <a href="logout.php">

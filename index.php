@@ -85,7 +85,9 @@
                                 <div class="d-flex justify-content-center mb-3">
                                     <!-- لینک جزئیات با آیدی تور -->
 
-                                    <a href="tours?id_tour=<?= $exhibition_row['id'] ?>" class="btn btn-warning rounded-pill">جزئیات تور</a>
+                                    <a href="e_tours/tour-details.php?tour=<?= $exhibition_row['title'] ?>" class="btn btn-warning w-100">دیدن تور</a>
+
+
                                 </div>
                             </div>
                         </div>
@@ -116,70 +118,52 @@
             </div>
         </div>
 
-        <div class="row mt-2 g-3"> <!-- فاصله بین کاردها را کمی کمتر کردیم -->
-            <!-- کارد 1 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6 "> <!-- تغییر در col-6 -->
-                <div class="card card-tours h-100">
-                    <img src="img/4.jpg" class="card-img-top" alt="تور استانبول">
-                    <div class="card-body tours">
-                        <h5 class="card-title">تور استانبول</h5>
-                        <p class="card-text">تور 5 روزه استانبول با پرواز مستقیم و اقامت در هتل 5 ستاره</p>
-                        <br>
-                        <div class="d-flex justify-content-center mb-3">
-                            <a href="#" class="btn btn-warning rounded-pill">جزئیات تور</a>
+
+        <?php
+        // کویری برای دریافت 4 تور آخر به ترتیب نزولی (جدیدترین اول)
+        $exhibition = "SELECT * FROM tours ORDER BY id DESC LIMIT 4";
+        $tours = $conn->query($exhibition);
+        ?>
+
+        <div class="row mt-2 g-3">
+            <?php
+            if ($tours->num_rows > 0) {
+                while ($tours_row = $tours->fetch_assoc()) {
+
+            ?>
+                    <div class="col-md-3 col-sm-6 col-6">
+                        <div class="card card-tours h-100">
+                            <!-- نمایش عکس تور از دیتابیس -->
+                            <img src="<?php echo str_replace('../', '', $tours_row['tour_image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($tours_row['title']); ?>">
+
+                            <div class="card-body tours">
+                                <h5 class="card-title"><?php echo htmlspecialchars($tours_row['title']); ?></h5>
+
+
+                                <p><i class="bi bi-cash-coin me-1"></i> شروع قیمت از <?= $tours_row['price'] ?> تومان</p>
+
+                                <p class="card-text"><?php echo substr($tours_row['description'], 0, 100); ?>...</p>
+                                <br>
+                                <div class="d-flex justify-content-center mb-3">
+                                    <!-- لینک جزئیات با آیدی تور -->
+
+                                    <a href="tours/tour-details.php?tour=<?= $tours_row['title'] ?>" class="btn btn-warning w-100">دیدن تور</a>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- کارد 2 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                <div class="card card-tours h-100">
-                    <img src="img/4.jpg" class="card-img-top" alt="تور کیش">
-                    <div class="card-body tours">
-                        <h5 class="card-title">تور کیش</h5>
-                        <p class="card-text">تور 4 روزه جزیره کیش با برنامه‌های تفریحی متنوع</p>
-                        <br>
-                        <div class="d-flex justify-content-center mb-3">
-                            <a href="#" class="btn btn-warning rounded-pill">جزئیات تور</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- کارد 3 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                <div class="card card-tours h-100">
-                    <img src="img/4.jpg" class="card-img-top" alt="تور دبی">
-                    <div class="card-body tours">
-                        <h5 class="card-title">تور دبی</h5>
-                        <p class="card-text">تور 6 روزه دبی با بازدید از برج خلیفه و مراکز خرید</p>
-                        <br>
-                        <div class="d-flex justify-content-center mb-3">
-                            <a href="#" class="btn btn-warning rounded-pill">جزئیات تور</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- کارد 4 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                <div class="card card-tours h-100">
-                    <img src="img/4.jpg" class="card-img-top" alt="تور شمال">
-                    <div class="card-body tours">
-                        <h5 class="card-title">تور شمال</h5>
-                        <p class="card-text">تور 3 روزه شمال با اقامت در ویلاهای ساحلی</p>
-                        <br>
-                        <div class="d-flex justify-content-center mb-3">
-                            <a href="#" class="btn btn-warning rounded-pill">جزئیات تور</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
+            <?php
+                }
+            } else {
+                // اگر توری وجود نداشت
+                echo '<div class="col-12 text-center"><p>تور نمایشگاهی موجود نیست</p></div>';
+            }
+            ?>
         </div>
     </div>
+
+
 
 
     <div class="position-relative overflow-hidden" style="">
@@ -224,6 +208,52 @@
             </div>
         </div>
     </div>
+
+
+
+
+    <div class="parallax-container">
+        <div class="parallax-image" style="background-image: url('img/17.png');"></div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <h3 class="text-center mb-4">وبلاگ سرزمین مادری</h3>
+
+            <?php
+
+            $query = "SELECT * FROM blog_posts WHERE status='published' ORDER BY created_at DESC LIMIT 3";
+            $result = $conn->query($query);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        ' . (!empty($row['featured_image']) ?
+                        '<img src="' . $row['featured_image'] . '" class="card-img-top" alt="' . $row['title'] . '" style="height: 200px; object-fit: cover;">' :
+                        '<div class="text-center py-5 bg-light">بدون تصویر</div>') . '
+                        <div class="card-body">
+                            <h5 class="card-title">' . $row['title'] . '</h5>
+                            <p class="card-text text-muted small">' . date('Y/m/d', strtotime($row['created_at'])) . '</p>
+                            <p class="card-text">' . substr(strip_tags($row['content']), 0, 100) . '...</p>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <a href="blog_post.php?slug=' . $row['slug'] . '" class="btn btn-outline-info btn-sm">مطالعه بیشتر</a>
+                        </div>
+                    </div>
+                </div>';
+                }
+            } else {
+                echo '<div class="col-12 text-center py-5">
+                <p>مقاله‌ای یافت نشد</p>
+            </div>';
+            }
+            $conn->close();
+            ?>
+        </div>
+    </div>
+
 
 
     <?php include 'footer.php'; ?>

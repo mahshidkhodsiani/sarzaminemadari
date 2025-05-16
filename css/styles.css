@@ -93,3 +93,22 @@ textarea {
     background-size: 100% auto;
   }
 }
+
+
+
+
+
+.parallax-container {
+  height: 300px; /* ارتفاع دلخواه */
+  overflow: hidden;
+  position: relative;
+}
+
+.parallax-image {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
