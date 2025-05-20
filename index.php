@@ -1,15 +1,54 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa-IR" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آژانس مسافرتی سرزمین مادری</title>
+    <meta name="description" content="آژانس مسافرتی سرزمین مادری | ارائه بهترین تورهای داخلی و خارجی با قیمت مناسب و خدمات اختصاصی - تور تایلند، تور اروپا، تورهای داخلی ایران| اولین ارائه دهنده تورهای نمایشگاهی">
+    <meta name="keywords" content="تور مسافرتی, تور تایلند, تور اروپا, تور داخلی, آژانس مسافرتی, سفر ارزان, تور لحظه آخری, تورهای نمایشگاهی">
+    <meta name="author" content="آژانس مسافرتی سرزمین مادری">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="آژانس مسافرتی سرزمین مادری - تخصصی ترین خدمات مسافرتی">
+    <meta property="og:description" content="برگزاری تورهای داخلی و خارجی و تورهای نمایشگاهی با بهترین کیفیت و قیمت">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fa_IR">
 
-    <link rel="stylesheet" href="css/styles.css">
+    <!-- Canonical URL برای جلوگیری از محتوای تکراری -->
+    <link rel="canonical" href="https://www.sarzaminemadari.com/" />
+
+    <title>آژانس مسافرتی سرزمین مادری | تورهای داخلی و خارجی با بهترین قیمت</title>
+
+    <!-- Favicon و آیکون های مختلف سایز -->
     <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
 
 
+
+    <!-- ساختار داده ای Schema.org برای بهبود نمایش در نتایج جستجو -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "TravelAgency",
+            "name": "آژانس مسافرتی سرزمین مادری",
+            "description": "ارائه دهنده تورهای مسافرتی داخلی و خارجی و نمایشگاهی با کیفیت عالی",
+            "url": "https://www.sarzaminemadari.com",
+            "logo": "https://www.sarzaminemadari.com/img/logo.png",
+            "telephone": "+982122345678",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "اصفهان- خیابان مشتاق دوم- خیابان بازارچه- ابتدای کوچه نوروز- پلاک 2 ",
+                "addressLocality": "اصفهان",
+                "addressRegion": "اصفهان",
+                "addressCountry": "IR"
+            },
+            "openingHours": "Mo,Tu,We,Th,Fr,Sa 09:00-18:00"
+        }
+    </script>
+
+    <!-- فایل های CSS -->
+    <link rel="stylesheet" href="css/styles.css">
     <?php
     include 'includes.php';
     include 'config.php';
@@ -41,6 +80,75 @@
             <span class="carousel-control-next-icon"></span>
         </button>
     </div>
+
+
+
+
+    <div class="container my-5">
+        <div class="row g-4">
+            <!-- تورهای تایلند -->
+            <div class="col-md-4">
+                <div class="destination-card  rounded-4 p-0 h-100  overflow-hidden">
+                    <div class="text-center p-3">
+                        <i class="bi bi-luggage-fill"></i>
+                        <img src="img/20.png" alt="تور تایلند" class="img-fluid" style="height: 80px;">
+                    </div>
+                    <div class="p-4 pt-0">
+                        <h3 class="fw-bold mb-3 text-center">تورهای تایلند</h3>
+                        <p class="text-muted text-center mb-4">تجربه‌ای فراموش‌نشدنی در سواحل بکر، معابد تاریخی و جزایر رویایی</p>
+                        <div class="text-center">
+                            <a href="tours/tour_thailand" class="btn btn-outline-dark btn-lg px-4 py-2 rounded-pill">
+                                <i class="bi bi-airplane me-2"></i>درباره تایلند
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="destination-card  rounded-4 p-0 h-100  overflow-hidden">
+                    <div class="text-center p-3">
+                        <i class="bi bi-luggage-fill"></i>
+                        <img src="img/20.png" alt="تور تایلند" class="img-fluid" style="height: 80px;">
+                    </div>
+                    <div class="p-4 pt-0">
+                        <h3 class="fw-bold mb-3 text-center">تورهای تایلند</h3>
+                        <p class="text-muted text-center mb-4">تجربه‌ای فراموش‌نشدنی در سواحل بکر، معابد تاریخی و جزایر رویایی</p>
+                        <div class="text-center">
+                            <a href="tours/tour_thailand" class="btn btn-outline-dark btn-lg px-4 py-2 rounded-pill">
+                                <i class="bi bi-airplane me-2"></i>درباره تایلند
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="destination-card  rounded-4 p-0 h-100  overflow-hidden">
+                    <div class="text-center p-3">
+                        <i class="bi bi-luggage-fill"></i>
+                        <img src="img/20.png" alt="تور تایلند" class="img-fluid" style="height: 80px;">
+                    </div>
+                    <div class="p-4 pt-0">
+                        <h3 class="fw-bold mb-3 text-center">تورهای تایلند</h3>
+                        <p class="text-muted text-center mb-4">تجربه‌ای فراموش‌نشدنی در سواحل بکر، معابد تاریخی و جزایر رویایی</p>
+                        <div class="text-center">
+                            <a href="tours/tour_thailand" class="btn btn-outline-dark btn-lg px-4 py-2 rounded-pill">
+                                <i class="bi bi-airplane me-2"></i>درباره تایلند
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <style>
+
+    </style>
+
+
+
 
 
 
@@ -168,6 +276,8 @@
 
 
 
+
+
     <div class="position-relative overflow-hidden" style="">
         <!-- تصویر پس‌زمینه با افکت چرخش و سفیدی -->
         <div class="rotating-background" style="
@@ -218,6 +328,7 @@
         <div class="parallax-image" style="background-image: url('img/17.png');"></div>
     </div>
 
+
     <div class="container">
         <div class="row">
             <h3 class="text-center mb-4">وبلاگ سرزمین مادری</h3>
@@ -255,6 +366,7 @@
             ?>
         </div>
     </div>
+
 
 
 

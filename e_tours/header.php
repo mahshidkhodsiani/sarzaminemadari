@@ -32,7 +32,7 @@
                     <li><a class="dropdown-item" href="#">ارمنستان</a></li>
                     <li><a class="dropdown-item" href="#">گرجستان</a></li>
                     <li><a class="dropdown-item" href="#">چین</a></li>
-                    <li><a class="dropdown-item" href="#">تایلند</a></li>
+                    <li><a class="dropdown-item" href="../tours/tour_thailand">تایلند</a></li>
                     <li><a class="dropdown-item" href="#">روسیه</a></li>
                     <li><a class="dropdown-item" href="#">ژاپن</a></li>
                 </ul>

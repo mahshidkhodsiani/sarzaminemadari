@@ -106,8 +106,6 @@ textarea {
   }
 }
 
-
-
 /* دکمه منوی موبایل */
 .navbar-toggler {
   border: none;
@@ -152,3 +150,22 @@ textarea {
   height: 100%;
   width: 100%;
 }
+
+.destination-card {
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.destination-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.destination-card img {
+  transition: transform 0.3s ease;
+}
+
+.destination-card:hover img {
+  transform: scale(1.1);
+}
+/* /////////////////////// */
