@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="جزئیات تورهای گردشگری آژانس سرزمین مادری">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
+
 
 
     <?php
@@ -14,7 +16,7 @@
     include '../config.php';
     ?>
 
-   
+
 </head>
 
 <body>
@@ -26,7 +28,7 @@
         if (isset($_GET['tour'])) {
             $tour = mysqli_real_escape_string($conn, $_GET['tour']);
             $result = mysqli_query($conn, "SELECT * FROM tours WHERE title = '$tour'");
-            
+
             if ($row = mysqli_fetch_assoc($result)) {
         ?>
 
@@ -38,10 +40,10 @@
                                 <img src="<?= htmlspecialchars($row['tour_image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
                             </div>
                         </div>
-                        
+
                         <div class="tour-details-col">
                             <h1 class="tour-title"><?= htmlspecialchars($row['title']) ?></h1>
-                            
+
                             <div class="tour-meta">
                                 <div class="tour-meta-item">
                                     <i class="fas fa-map-marker-alt"></i>
@@ -56,11 +58,11 @@
                                     مدت تور: ۷ روز
                                 </div>
                             </div>
-                            
+
                             <div class="tour-description">
                                 <?= nl2br($row['description']) ?>
                             </div>
-                            
+
                             <div class="tour-info">
                                 <div class="info-row">
                                     <span class="info-label">کشور:</span>
@@ -79,7 +81,7 @@
                                     <span class="info-value"><?= htmlspecialchars($row['date_en']) ?></span>
                                 </div>
                             </div>
-                            
+
                             <div class="price-box">
                                 <span class="price-label">شروع قیمت از</span>
                                 <div class="price-value"><?= number_format($row['price']) ?> تومان</div>
@@ -87,7 +89,7 @@
                                     <i class="fas fa-shopping-cart"></i> رزرو تور
                                 </button>
                             </div>
-                            
+
                             <div class="gallery-thumbnails">
                                 <img src="<?= htmlspecialchars($row['tour_image']) ?>" class="thumbnail" alt="تور 1">
                                 <img src="https://via.placeholder.com/300x200?text=تور+۲" class="thumbnail" alt="تور 2">
@@ -110,6 +112,8 @@
 
     <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <?php include 'footer.php'; ?>
+
 </body>
 
 </html>

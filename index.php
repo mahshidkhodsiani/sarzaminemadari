@@ -7,6 +7,8 @@
     <title>آژانس مسافرتی سرزمین مادری</title>
 
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" href="img/logo.png">
+
 
     <?php
     include 'includes.php';
@@ -114,7 +116,7 @@
                 <hr>
             </div>
             <div class="col-md-2">
-                <a href="e_tours" class="btn btn-info">دیدن تمامی تورهای خارجی</a>
+                <a href="tours" class="btn btn-info">دیدن تمامی تورهای خارجی</a>
             </div>
         </div>
 

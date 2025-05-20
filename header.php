@@ -15,6 +15,7 @@
                 <ul class="dropdown-menu dropdown-menu-end text-end">
                     <li><a class="dropdown-item" href="#">مشهد</a></li>
                     <li><a class="dropdown-item" href="#">کیش</a></li>
+                    <li><a class="dropdown-item" href="#">قشم</a></li>
                 </ul>
             </li>
 
@@ -24,25 +25,63 @@
                     سفر خارجی
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
-                    <li><a class="dropdown-item" href="#">ترکیه</a></li>
-                    <li><a class="dropdown-item" href="#">دبی</a></li>
+                    <li><a class="dropdown-item" href="#">اروپا</a></li>
+                    <li><a class="dropdown-item" href="#">کیش</a></li>
+                    <li><a class="dropdown-item" href="#">استانبول</a></li>
+                    <li><a class="dropdown-item" href="#">سواحل ترکیه</a></li>
+                    <li><a class="dropdown-item" href="#">ارمنستان</a></li>
+                    <li><a class="dropdown-item" href="#">گرجستان</a></li>
+                    <li><a class="dropdown-item" href="#">چین</a></li>
+                    <li><a class="dropdown-item" href="#">تایلند</a></li>
+                    <li><a class="dropdown-item" href="#">روسیه</a></li>
+                    <li><a class="dropdown-item" href="#">ژاپن</a></li>
                 </ul>
             </li>
 
-            <!-- بقیه منوها -->
+
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
                     رزرو هتل و هواپیما و قطار
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
-                    <li><a class="dropdown-item" href="#">هتل</a></li>
-                    <li><a class="dropdown-item" href="#">هواپیما</a></li>
-                    <li><a class="dropdown-item" href="#">قطار</a></li>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                            پرواز
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">داخلی</a></li>
+                            <li><a class="dropdown-item" href="#">خارجی</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                            هتل
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">داخلی</a></li>
+                            <li><a class="dropdown-item" href="#">خارجی</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                            قطار بین المللی
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">داخلی</a></li>
+                            <li><a class="dropdown-item" href="#">خارجی</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
 
+
+
             <li class="nav-item">
-                <a class="nav-link text-dark" href="#">تورهای نمایشگاهی</a>
+                <a class="nav-link text-dark" href="e_tours">تورهای نمایشگاهی</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -50,8 +89,11 @@
                     خدمات ویزا
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
-                    <li><a class="dropdown-item" href="#">توریستی</a></li>
-                    <li><a class="dropdown-item" href="#">تجاری</a></li>
+                    <li><a class="dropdown-item" href="#">پیکاپ پاسپورت</a></li>
+                    <li><a class="dropdown-item" href="#">ویزای توریستی حوزه شنگن </a></li>
+                    <li><a class="dropdown-item" href="#">ویزای توریستی کانادا</a></li>
+                    <li><a class="dropdown-item" href="#">ویزای تک چین</a></li>
+                    <li><a class="dropdown-item" href="#">ویزای تک تایلند</a></li>
                 </ul>
             </li>
 
@@ -59,14 +101,66 @@
                 <a class="nav-link text-dark" href="#">صدور انلاین بیمه</a>
             </li>
 
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
-                    خدمات ویژه
+                    خدمات ویژه سرزمین مادری
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
-                    <li><a class="dropdown-item" href="#">VIP</a></li>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                            چین
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">تورلیدر, مترجم محلی</a></li>
+                            <li><a class="dropdown-item" href="#">قطار و پرواز بین شهری</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                            ترکیه
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">تورلیدر, مترجم محلی</a></li>
+                            <li><a class="dropdown-item" href="#">قطار و پرواز بین شهری</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                            هند
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">تورلیدر, مترجم محلی</a></li>
+                            <li><a class="dropdown-item" href="#">قطار و پرواز بین شهری</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                            حوزه شنگن
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">تورلیدر, مترجم محلی</a></li>
+                            <li><a class="dropdown-item" href="#">قطار و پرواز بین شهری</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                            امارات
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">تورلیدر, مترجم محلی</a></li>
+                            <li><a class="dropdown-item" href="#">قطار و پرواز بین شهری</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
+
+
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
@@ -74,6 +168,9 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
                     <li><a class="dropdown-item" href="#">درباره ما</a></li>
+                    <li><a class="dropdown-item" href="#">اخبار</a></li>
+                    <li><a class="dropdown-item" href="#">اطلاعیه ها</a></li>
+                    <li><a class="dropdown-item" href="#">مجله سرزمین مادری</a></li>
                 </ul>
             </li>
         </ul>
