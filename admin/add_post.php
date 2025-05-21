@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['all_data'])) {
+    header('Location: login.php');
+    exit;
+}
+
+$all_data = $_SESSION['all_data'];
+$id = $all_data['id'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -61,20 +74,6 @@
                                 <small class="text-muted">فرمت‌های مجاز: JPG, PNG, GIF - حداکثر حجم: 2MB</small>
                             </div>
 
-                            <!-- نویسنده -->
-                            <div class="mb-3">
-                                <label for="author_id" class="form-label">نویسنده *</label>
-                                <select class="form-control" id="author_id" name="author_id" required>
-                                    <option value="">-- انتخاب نویسنده --</option>
-                                    <?php
-                                    include "../config.php";
-                                    $authors = $conn->query("SELECT id, name FROM users WHERE role = 'author'");
-                                    while ($author = $authors->fetch_assoc()) {
-                                        echo "<option value='" . $author['id'] . "'>" . $author['name'] . "</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
 
                             <!-- وضعیت -->
                             <div class="mb-3">
@@ -109,8 +108,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <br>
 
-                            <button name="submit" class="btn btn-info mt-3 mb-3">ذخیره مقاله</button>
+                            <button name="submit" class="btn btn-info">ذخیره مقاله</button>
+                            <br>
                         </form>
                     </div>
                 </div>
@@ -145,7 +146,7 @@ if (isset($_POST['submit'])) {
     $title = $_POST['title'];
     $slug = $_POST['slug'];
     $content = $_POST['content'];
-    $author_id = $_POST['author_id'];
+    // $author_id = $_POST['author_id'];
     $status = $_POST['status'];
     $meta_title = $_POST['meta_title'] ?? '';
     $meta_description = $_POST['meta_description'] ?? '';
@@ -153,8 +154,10 @@ if (isset($_POST['submit'])) {
     $featured_image_path = '';
     $current_date = date('Y-m-d H:i:s');
 
+    var_dump($_POST);
+
     // اعتبارسنجی اولیه
-    if (empty($title) || empty($slug) || empty($content) || empty($author_id)) {
+    if (empty($title) || empty($slug) || empty($content)) {
         die("لطفا تمام فیلدهای الزامی را پر کنید");
     }
 
@@ -178,9 +181,11 @@ if (isset($_POST['submit'])) {
 
     // ذخیره اطلاعات مقاله در دیتابیس
     $sql = "INSERT INTO blog_posts 
-            (title, slug, content, featured_image, author_id, status, 
-             created_at, updated_at, meta_title, meta_description, meta_keywords) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            (title, slug, content, featured_image, status, 
+             created_at, updated_at, meta_title, meta_description, meta_keywords, author_id) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, $id)";
+
+
 
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
@@ -188,12 +193,11 @@ if (isset($_POST['submit'])) {
     }
 
     $stmt->bind_param(
-        "ssssissssss",
+        "ssssssssss",
         $title,
         $slug,
         $content,
         $featured_image_path,
-        $author_id,
         $status,
         $current_date,
         $current_date,
@@ -218,7 +222,7 @@ if (isset($_POST['submit'])) {
                     delay: 3000
                 }).toast('show');
                 setTimeout(function(){
-                    window.location.href = 'blog_posts.php';
+                    window.location.href = 'add_post';
                 }, 3000);
             });
         </script>";

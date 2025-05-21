@@ -104,35 +104,37 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="destination-card  rounded-4 p-0 h-100  overflow-hidden">
                     <div class="text-center p-3">
                         <i class="bi bi-luggage-fill"></i>
-                        <img src="img/20.png" alt="تور تایلند" class="img-fluid" style="height: 80px;">
+                        <img src="img/21.png" alt="تور تایلند" class="img-fluid" style="height: 80px;">
                     </div>
                     <div class="p-4 pt-0">
-                        <h3 class="fw-bold mb-3 text-center">تورهای تایلند</h3>
-                        <p class="text-muted text-center mb-4">تجربه‌ای فراموش‌نشدنی در سواحل بکر، معابد تاریخی و جزایر رویایی</p>
+                        <h3 class="fw-bold mb-3 text-center">تورهای ترکیه</h3>
+                        <p class="text-muted text-center mb-4">سفر به ترکیه؛ تلفیقی از فرهنگ غنی، طبیعت خیره‌کننده و خریدی هیجان‌انگیز.</p>
                         <div class="text-center">
                             <a href="tours/tour_thailand" class="btn btn-outline-dark btn-lg px-4 py-2 rounded-pill">
-                                <i class="bi bi-airplane me-2"></i>درباره تایلند
+                                <i class="bi bi-airplane me-2"></i>درباره ترکیه
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="destination-card  rounded-4 p-0 h-100  overflow-hidden">
                     <div class="text-center p-3">
                         <i class="bi bi-luggage-fill"></i>
-                        <img src="img/20.png" alt="تور تایلند" class="img-fluid" style="height: 80px;">
+                        <img src="img/22.png" alt="تور تایلند" class="img-fluid" style="height: 80px;">
                     </div>
                     <div class="p-4 pt-0">
-                        <h3 class="fw-bold mb-3 text-center">تورهای تایلند</h3>
-                        <p class="text-muted text-center mb-4">تجربه‌ای فراموش‌نشدنی در سواحل بکر، معابد تاریخی و جزایر رویایی</p>
+                        <h3 class="fw-bold mb-3 text-center">تورهای گرجستان</h3>
+                        <p class="text-muted text-center mb-4">سفر به گرجستان؛ آمیزه‌ای دل‌انگیز از طبیعت کوهستانی، شهرهای تاریخی و طعم ناب خوراکی‌های محلی.</p>
                         <div class="text-center">
                             <a href="tours/tour_thailand" class="btn btn-outline-dark btn-lg px-4 py-2 rounded-pill">
-                                <i class="bi bi-airplane me-2"></i>درباره تایلند
+                                <i class="bi bi-airplane me-2"></i>درباره گرجستان
                             </a>
                         </div>
                     </div>
@@ -310,6 +312,7 @@
                 <div class="col-md-6" style="margin-top: 200px;">
                     <h2>تورهای نمایشگاهی بین المللی</h2>
                     <p>برای اولین بار در ایران</p>
+                    <a href="e_tours" class="btn btn-outline-info">دیدن تمامی تورها</a>
                 </div>
 
                 <div class="col-md-6 d-flex align-items-center">
@@ -329,9 +332,12 @@
     </div>
 
 
+    <hr>
     <div class="container">
         <div class="row">
-            <h3 class="text-center mb-4">وبلاگ سرزمین مادری</h3>
+            <a href="blog" style="text-decoration: none;">
+                <h3 class="text-center mb-4">وبلاگ سرزمین مادری</h3>
+            </a>
 
             <?php
 
@@ -344,7 +350,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         ' . (!empty($row['featured_image']) ?
-                        '<img src="' . $row['featured_image'] . '" class="card-img-top" alt="' . $row['title'] . '" style="height: 200px; object-fit: cover;">' :
+                        '<img src="' . str_replace('../', '', $row['featured_image']) . '" class="card-img-top" alt="' . $row['title'] . '" style="height: 200px; object-fit: cover;">' :
                         '<div class="text-center py-5 bg-light">بدون تصویر</div>') . '
                         <div class="card-body">
                             <h5 class="card-title">' . $row['title'] . '</h5>
@@ -355,7 +361,8 @@
                             <a href="blog_post.php?slug=' . $row['slug'] . '" class="btn btn-outline-info btn-sm">مطالعه بیشتر</a>
                         </div>
                     </div>
-                </div>';
+                </div>
+                ';
                 }
             } else {
                 echo '<div class="col-12 text-center py-5">

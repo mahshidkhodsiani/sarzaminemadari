@@ -170,7 +170,7 @@
                     <li><a class="dropdown-item" href="#">درباره ما</a></li>
                     <li><a class="dropdown-item" href="#">اخبار</a></li>
                     <li><a class="dropdown-item" href="#">اطلاعیه ها</a></li>
-                    <li><a class="dropdown-item" href="../blog">مجله سرزمین مادری</a></li>
+                    <li><a class="dropdown-item" href="./">مجله سرزمین مادری</a></li>
                 </ul>
             </li>
         </ul>
