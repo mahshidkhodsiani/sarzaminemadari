@@ -83,6 +83,68 @@
 
 
 
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-2">
+                <h2 class="d-flex justify-center">تورهای نمایشگاهی</h2>
+            </div>
+            <div class="col-md-8">
+                <hr>
+            </div>
+            <div class="col-md-2">
+                <a href="e_tours" class="btn btn-info">دیدن تمامی تورهای نمایشگاهی</a>
+            </div>
+        </div>
+
+
+        <?php
+        // کویری برای دریافت 4 تور آخر به ترتیب نزولی (جدیدترین اول)
+        $exhibition = "SELECT * FROM exhibition_tours ORDER BY id DESC LIMIT 4";
+        $exhibition_result = $conn->query($exhibition);
+        ?>
+
+        <div class="row mt-2 g-3">
+            <?php
+            if ($exhibition_result->num_rows > 0) {
+                while ($exhibition_row = $exhibition_result->fetch_assoc()) {
+
+            ?>
+                    <div class="col-md-3 col-sm-6 col-6">
+                        <div class="card card-tours h-100">
+                            <!-- نمایش عکس تور از دیتابیس -->
+                            <img src="<?php echo str_replace('../', '', $exhibition_row['tour_image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($exhibition_row['title']); ?>">
+
+                            <div class="card-body tours">
+                                <h5 class="card-title"><?php echo htmlspecialchars($exhibition_row['title']); ?></h5>
+
+
+                                <p><i class="bi bi-cash-coin me-1"></i> شروع قیمت از <?= number_format($exhibition_row['price']) ?> تومان</p>
+
+                                <p class="card-text"><?php echo substr($exhibition_row['description'], 0, 100); ?>...</p>
+                                <br>
+                                <div class="d-flex justify-content-center mb-3">
+                                    <!-- لینک جزئیات با آیدی تور -->
+
+                                    <a href="e_tours/tour-details.php?tour=<?= $exhibition_row['title'] ?>" class="btn btn-warning w-100">دیدن تور</a>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <?php
+                }
+            } else {
+                // اگر توری وجود نداشت
+                echo '<div class="col-12 text-center"><p>تور نمایشگاهی موجود نیست</p></div>';
+            }
+            ?>
+        </div>
+    </div>
+
+
+
+
 
     <div class="container my-5">
         <div class="row g-4">
@@ -144,76 +206,6 @@
 
         </div>
     </div>
-
-    <style>
-
-    </style>
-
-
-
-
-
-
-
-    <div class="container my-5">
-        <div class="row">
-            <div class="col-md-2">
-                <h2 class="d-flex justify-center">تورهای نمایشگاهی</h2>
-            </div>
-            <div class="col-md-8">
-                <hr>
-            </div>
-            <div class="col-md-2">
-                <a href="e_tours" class="btn btn-info">دیدن تمامی تورهای نمایشگاهی</a>
-            </div>
-        </div>
-
-
-        <?php
-        // کویری برای دریافت 4 تور آخر به ترتیب نزولی (جدیدترین اول)
-        $exhibition = "SELECT * FROM exhibition_tours ORDER BY id DESC LIMIT 4";
-        $exhibition_result = $conn->query($exhibition);
-        ?>
-
-        <div class="row mt-2 g-3">
-            <?php
-            if ($exhibition_result->num_rows > 0) {
-                while ($exhibition_row = $exhibition_result->fetch_assoc()) {
-
-            ?>
-                    <div class="col-md-3 col-sm-6 col-6">
-                        <div class="card card-tours h-100">
-                            <!-- نمایش عکس تور از دیتابیس -->
-                            <img src="<?php echo str_replace('../', '', $exhibition_row['tour_image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($exhibition_row['title']); ?>">
-
-                            <div class="card-body tours">
-                                <h5 class="card-title"><?php echo htmlspecialchars($exhibition_row['title']); ?></h5>
-
-
-                                <p><i class="bi bi-cash-coin me-1"></i> شروع قیمت از <?= $exhibition_row['price'] ?> تومان</p>
-
-                                <p class="card-text"><?php echo substr($exhibition_row['description'], 0, 100); ?>...</p>
-                                <br>
-                                <div class="d-flex justify-content-center mb-3">
-                                    <!-- لینک جزئیات با آیدی تور -->
-
-                                    <a href="e_tours/tour-details.php?tour=<?= $exhibition_row['title'] ?>" class="btn btn-warning w-100">دیدن تور</a>
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            <?php
-                }
-            } else {
-                // اگر توری وجود نداشت
-                echo '<div class="col-12 text-center"><p>تور نمایشگاهی موجود نیست</p></div>';
-            }
-            ?>
-        </div>
-    </div>
-
 
 
 
