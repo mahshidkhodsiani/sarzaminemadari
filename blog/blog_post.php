@@ -19,7 +19,9 @@ if ($result->num_rows === 0) {
 }
 
 $row = $result->fetch_assoc();
-$image = !empty($row['featured_image']) ? str_replace('../', '', $row['featured_image']) : null;
+// $image = !empty($row['featured_image']) ? str_replace('../', '', $row['featured_image']) : null;
+
+// echo $image;
 ?>
 
 <!DOCTYPE html>
@@ -40,9 +42,9 @@ $image = !empty($row['featured_image']) ? str_replace('../', '', $row['featured_
         <h1 class="text-center mb-4"><?= htmlspecialchars($row['title']) ?></h1>
         <p class="text-muted text-center small"><?= date('Y/m/d', strtotime($row['created_at'])) ?></p>
 
-        <?php if ($image): ?>
+        <?php if ($row['featured_image']): ?>
             <div class="text-center mb-4">
-                <img src="<?= $image ?>" alt="<?= htmlspecialchars($row['title']) ?>" class="img-fluid rounded" style="max-height: 400px; object-fit: cover;">
+                <img src="<?= $row['featured_image'] ?>" alt="<?= htmlspecialchars($row['title']) ?>" class="img-fluid rounded" style="max-height: 400px; object-fit: cover;">
             </div>
         <?php endif; ?>
 

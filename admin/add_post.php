@@ -22,16 +22,13 @@ $id = $all_data['id'];
     <?php include 'includes.php'; ?>
     <link rel="stylesheet" href="styles.css">
 
-    <!-- TinyMCE Editor -->
-    <script src="https://cdn.tiny.cloud/1/o82a0iw3kwwxrgojc165lj0p1iv7gj6iqr7lebwcks7yfr71/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
-    <script>
-        tinymce.init({
-            selector: 'textarea#content',
-            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-        });
-    </script>
+    <link href="https://cdn.jsdelivr.net/npm/jodit/build/jodit.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jodit/build/jodit.min.js"></script>
+
+
+
+
 </head>
 
 <body>
@@ -62,10 +59,24 @@ $id = $all_data['id'];
                             </div>
 
                             <!-- محتوای مقاله -->
-                            <div class="mb-4">
+                            <!-- <div class="mb-4">
                                 <label for="content" class="form-label">محتوای مقاله *</label>
                                 <textarea id="content" name="content"></textarea>
-                            </div>
+                            </div> -->
+
+
+                            <textarea id="editor" name="content"></textarea>
+                            <script>
+                                const editor = new Jodit('#editor', {
+                                    removeButtons: ['source'],
+                                    language: 'fa',
+                                    height: 500,
+
+                                });
+                            </script>
+
+
+
 
                             <!-- تصویر شاخص -->
                             <div class="mb-3">
@@ -134,6 +145,13 @@ $id = $all_data['id'];
             });
         });
     </script>
+
+
+    <script>
+        $('form').submit(function() {
+            $('#editor').val(editor.getEditorValue()); // انتقال محتوا به textarea
+        });
+    </script>
 </body>
 
 </html>
@@ -146,67 +164,59 @@ if (isset($_POST['submit'])) {
     $title = $_POST['title'];
     $slug = $_POST['slug'];
     $content = $_POST['content'];
-    // $author_id = $_POST['author_id'];
     $status = $_POST['status'];
     $meta_title = $_POST['meta_title'] ?? '';
     $meta_description = $_POST['meta_description'] ?? '';
     $meta_keywords = $_POST['meta_keywords'] ?? '';
-    $featured_image_path = '';
     $current_date = date('Y-m-d H:i:s');
+    $author_id = 1; // یا آی‌دی کاربر فعلی
 
-    var_dump($_POST);
-
-    // اعتبارسنجی اولیه
-    if (empty($title) || empty($slug) || empty($content)) {
-        die("لطفا تمام فیلدهای الزامی را پر کنید");
-    }
-
-    // پردازش تصویر شاخص
-    if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] == UPLOAD_ERR_OK) {
-        $image = $_FILES['featured_image'];
-        $upload_dir = "../uploads/blog/";
-
-        if (!file_exists($upload_dir)) {
-            mkdir($upload_dir, 0755, true);
-        }
-
-        $file_extension = pathinfo($image['name'], PATHINFO_EXTENSION);
-        $file_name = uniqid() . '.' . $file_extension;
-        $featured_image_path = $upload_dir . $file_name;
-
-        if (!move_uploaded_file($image['tmp_name'], $featured_image_path)) {
-            die("خطا در آپلود تصویر شاخص");
-        }
-    }
-
-    // ذخیره اطلاعات مقاله در دیتابیس
-    $sql = "INSERT INTO blog_posts 
-            (title, slug, content, featured_image, status, 
-             created_at, updated_at, meta_title, meta_description, meta_keywords, author_id) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, $id)";
-
-
-
-    $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        die("خطا در آماده‌سازی query: " . $conn->error);
-    }
-
+    // ابتدا بدون تصویر، پست را ذخیره می‌کنیم تا id ایجاد شود
+    $stmt = $conn->prepare("INSERT INTO blog_posts 
+        (title, slug, content, status, created_at, updated_at, meta_title, meta_description, meta_keywords, author_id) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param(
-        "ssssssssss",
+        "sssssssssi",
         $title,
         $slug,
         $content,
-        $featured_image_path,
         $status,
         $current_date,
         $current_date,
         $meta_title,
         $meta_description,
-        $meta_keywords
+        $meta_keywords,
+        $author_id
     );
 
     if ($stmt->execute()) {
+        $post_id = $stmt->insert_id; // گرفتن ID پست برای ساخت مسیر تصویر
+
+        // بررسی وجود تصویر شاخص
+        if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK) {
+            $image = $_FILES['featured_image'];
+            $image_name = basename($image['name']);
+            $image_tmp = $image['tmp_name'];
+            $upload_dir = "../uploads/blog/$post_id/";
+
+            // اگر پوشه وجود نداشت، ایجاد شود
+            if (!file_exists($upload_dir)) {
+                mkdir($upload_dir, 0777, true);
+            }
+
+            $image_path = $upload_dir . $image_name;
+            $db_image_path = $image_path; // برای ذخیره در دیتابیس
+
+            if (move_uploaded_file($image_tmp, $image_path)) {
+                // آپدیت مسیر تصویر در دیتابیس
+                $stmt_update = $conn->prepare("UPDATE blog_posts SET featured_image = ? WHERE id = ?");
+                $stmt_update->bind_param("si", $db_image_path, $post_id);
+                $stmt_update->execute();
+            } else {
+                echo "خطا در آپلود تصویر.";
+            }
+        }
+
         echo "<div id='successToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; top: 20px; right: 20px; width: 300px; z-index: 1055;'>
             <div class='toast-header bg-success text-white'>
                 <strong class='mr-auto'>موفقیت</strong>
@@ -227,11 +237,6 @@ if (isset($_POST['submit'])) {
             });
         </script>";
     } else {
-        // اگر خطایی رخ داد، تصویر آپلود شده را پاک کنید
-        if (!empty($featured_image_path) && file_exists($featured_image_path)) {
-            unlink($featured_image_path);
-        }
-
         echo "<div id='errorToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; top: 20px; right: 20px; width: 300px; z-index: 1055;'>
             <div class='toast-header bg-danger text-white'>
                 <strong class='mr-auto'>خطا</strong>
@@ -249,8 +254,5 @@ if (isset($_POST['submit'])) {
             });
         </script>";
     }
-
-    $stmt->close();
-    $conn->close();
 }
 ?>

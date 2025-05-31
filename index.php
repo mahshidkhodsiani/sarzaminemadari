@@ -120,8 +120,7 @@
 
                                 <p><i class="bi bi-cash-coin me-1"></i> شروع قیمت از <?= number_format($exhibition_row['price']) ?> تومان</p>
 
-                                <p class="card-text"><?php echo substr($exhibition_row['description'], 0, 100); ?>...</p>
-                                <br>
+                              
                                 <div class="d-flex justify-content-center mb-3">
                                     <!-- لینک جزئیات با آیدی تور -->
 
@@ -159,7 +158,7 @@
                         <h3 class="fw-bold mb-3 text-center">تورهای تایلند</h3>
                         <p class="text-muted text-center mb-4">تجربه‌ای فراموش‌نشدنی در سواحل بکر، معابد تاریخی و جزایر رویایی</p>
                         <div class="text-center">
-                            <a href="tours/tour_thailand" class="btn btn-outline-dark btn-lg px-4 py-2 rounded-pill">
+                            <a href="tours/tour_thailand" class="btn btn-outline-dark px-4 py-2 rounded-pill">
                                 <i class="bi bi-airplane me-2"></i>درباره تایلند
                             </a>
                         </div>
@@ -177,7 +176,7 @@
                         <h3 class="fw-bold mb-3 text-center">تورهای ترکیه</h3>
                         <p class="text-muted text-center mb-4">سفر به ترکیه؛ تلفیقی از فرهنگ غنی، طبیعت خیره‌کننده و خریدی هیجان‌انگیز.</p>
                         <div class="text-center">
-                            <a href="tours/tour_thailand" class="btn btn-outline-dark btn-lg px-4 py-2 rounded-pill">
+                            <a href="tours/tour_thailand" class="btn btn-outline-dark px-4 py-2 rounded-pill">
                                 <i class="bi bi-airplane me-2"></i>درباره ترکیه
                             </a>
                         </div>
@@ -195,7 +194,7 @@
                         <h3 class="fw-bold mb-3 text-center">تورهای گرجستان</h3>
                         <p class="text-muted text-center mb-4">سفر به گرجستان؛ آمیزه‌ای دل‌انگیز از طبیعت کوهستانی، شهرهای تاریخی و طعم ناب خوراکی‌های محلی.</p>
                         <div class="text-center">
-                            <a href="tours/tour_thailand" class="btn btn-outline-dark btn-lg px-4 py-2 rounded-pill">
+                            <a href="tours/tour_thailand" class="btn btn-outline-dark px-4 py-2 rounded-pill">
                                 <i class="bi bi-airplane me-2"></i>درباره گرجستان
                             </a>
                         </div>
@@ -350,7 +349,7 @@
                             <p class="card-text">' . substr(strip_tags($row['content']), 0, 100) . '...</p>
                         </div>
                         <div class="card-footer bg-white">
-                            <a href="blog_post.php?slug=' . $row['slug'] . '" class="btn btn-outline-info btn-sm">مطالعه بیشتر</a>
+                            <a href="blog/blog_post?slug=' . $row['slug'] . '" class="btn btn-outline-info btn-sm">مطالعه بیشتر</a>
                         </div>
                     </div>
                 </div>

@@ -111,9 +111,28 @@
                                     <label for="category" class="form-label">دسته‌بندی *</label>
                                     <select class="form-control" id="category" name="category" required>
                                         <option value="">-- انتخاب کنید --</option>
-                                        <option value="پوشاک">پوشاک</option>
+                                        <!-- صنایع اصلی -->
+                                        <option value="پوشاک و مد">پوشاک و مد</option>
+                                        <option value="آرایشی و بهداشتی">آرایشی و بهداشتی</option>
                                         <option value="تجهیزات پزشکی">تجهیزات پزشکی</option>
-                                        <option value="الکترونیک">الکترونیک</option>
+                                        <option value="الکترونیک و فناوری">الکترونیک و فناوری</option>
+
+                                        <!-- نمایشگاه‌های تخصصی -->
+                                        <option value="صنایع غذایی">صنایع غذایی</option>
+                                        <option value="مبلمان و دکوراسیون">مبلمان و دکوراسیون</option>
+                                        <option value="خودرو و قطعات">خودرو و قطعات</option>
+                                        <option value="کشاورزی و صنایع وابسته">کشاورزی و صنایع وابسته</option>
+
+                                        <!-- نمایشگاه‌های بین‌المللی -->
+                                        <option value="نفت و گاز و پتروشیمی">نفت و گاز و پتروشیمی</option>
+                                        <option value="انرژی های تجدیدپذیر">انرژی های تجدیدپذیر</option>
+                                        <option value="گردشگری و هتلداری">گردشگری و هتلداری</option>
+
+                                        <!-- سایر دسته‌ها -->
+                                        <option value="کتاب و نشر">کتاب و نشر</option>
+                                        <option value="هنرهای تجسمی">هنرهای تجسمی</option>
+                                        <option value="صنایع دستی">صنایع دستی</option>
+                                        <option value="ورزش و تجهیزات ورزشی">ورزش و تجهیزات ورزشی</option>
                                         <option value="سایر">سایر</option>
                                     </select>
                                 </div>
@@ -270,10 +289,60 @@ if (isset($_POST['submit'])) {
             $update_stmt->execute();
             $update_stmt->close();
 
+
+
+
+            echo "<div id='successToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; top: 20px; right: 20px; width: 300px; z-index: 1055;'>
+                <div class='toast-header bg-success text-white'>
+                    <strong class='mr-auto'>Success</strong>
+                </div>
+                <div class='toast-body'>
+                با موفقیت انجام شد!
+                </div>
+                </div>
+                <script>
+                    $(document).ready(function(){
+                        $('#successToast').toast({
+                            autohide: true,
+                            delay: 4000
+                        }).toast('show');
+                        setTimeout(function(){
+                            window.location.href = 'exhibition_tours';
+                        }, 4000);
+                    });
+                </script>";
+
+
+
+
+
+
             echo "تور با موفقیت ذخیره شد! تصویر در مسیر: " . $final_image_path;
         } else {
             // اگر انتقال تصویر ناموفق بود، حداقل اطلاعات تور ذخیره شده است
             echo "تور ذخیره شد ولی خطا در انتقال تصویر به مسیر نهایی";
+
+
+
+            echo "<div id='errorToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; top: 20px; right: 20px; width: 300px; z-index: 1055;'>
+                <div class='toast-header bg-danger text-white'>
+                    <strong class='mr-auto'>Error</strong>
+                </div>
+                <div class='toast-body'>
+                    خطایی رخ داده، دوباره امتحان کنید!<br>Error: " . htmlspecialchars($stmt->error) . "
+                </div>
+                </div>
+                <script>
+                    $(document).ready(function(){
+                        $('#errorToast').toast({
+                            autohide: true,
+                            delay: 4000
+                        }).toast('show');
+                        setTimeout(function(){
+                            window.location.href = 'exhibition_tours';
+                        }, 4000);
+                    });
+                </script>";
         }
     } else {
         // اگر INSERT ناموفق بود، تصویر موقت را پاک کنید

@@ -3,130 +3,185 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>نمایش تور | آژانس سرزمین مادری</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="جزئیات تورهای گردشگری آژانس سرزمین مادری">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ادیتور پیشرفته</title>
+  <style>
+    .editor-container {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 800px;
+      margin: 20px auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      overflow: hidden;
+    }
 
+    .toolbar {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
 
-  <?php
-  include 'includes.php';
-  include '../config.php';
-  ?>
+    .toolbar button {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
 
+    .toolbar button:hover {
+      background: #e9e9e9;
+    }
 
+    .editor {
+      min-height: 300px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      outline: none;
+    }
+
+    .image-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      width: 80%;
+      max-width: 500px;
+    }
+  </style>
 </head>
 
 <body>
-
-  <?php include 'header.php'; ?>
-
-  <div class="tour-container">
-
-
-
-    <div class="tour-card">
-      <div class="tour-content">
-        <div class="row g-0">
-          <!-- تصویر تور -->
-          <div class="col-12">
-            <img src="../img/18.jpg" alt="تور تایلند" class="img-fluid rounded-top w-100">
-          </div>
-
-
-          سوالات متداول
-          • چند روز زمان برای سفر به تایلند کافی است؟
-          حداقل زمان مورد نیاز برای دیدن حداقل جاذبه های تایلند 7 روز است ولی پیشنهاد ما سفری حداقل 10 روزه و یا دو هفته ای به این کشور برای لذت حداکثری از این سفر است.
-          • ویزای تایلند چند روزه صادر میشود؟
-          ویزای تایلند در بازه زمانی یک هفته تا 10 روز به صورت ویزای الکترونیک (e-visa) صادر میشود.
-          • مدارک لازم برای ویزای تایلند
-          1. پاسپورت با حداقل 6 ماه مدت اعتبار ( توجه داشته باشید در زمان ورود به کشور تایلند بایستی تاریخ اعتبار پاسپورت حداقل 6 ماه تمام باشد.)
-          2. تمکن مالی به مبلغ 50 میلون تومان برای هر نفر (برای فرزندان زیر 18 سال یکی از والدین میتواند این تمکن را تامین کند، به عنوان مثال برای یک پدر و فرزند 100 میلیون تومان تمکن مالی مورد نیاز است)
-          3. فایل عکس چهره جدید بدون روتوش
-          4. اسکن شناسنامه و کارت ملی
-          5. بلیط هواپیما و رزرو هتل با مهر آژانس هواپیمایی صادر کننده
-          6. بیمه مسافرتی حداقل یک ماهه ( به دلیل هماهنگی با اکثر سفارت ها، حتی الامکان از بیمه سامان استفاده گردد.)
-          • آیا سفر تایلند سفر مناسبی برای خانواده است؟
-          حتما، برخلاف ذهنیت غالب، کشور تایلند برای سفر به صورت خانوادگی کاملا مناسب است و میتوانید از بازارهای دیدنی، جاذبه های طبیعی بسیار زیبا و مکان های گردشگری متنوع آن بهره ببرید.
-          • آیا سفر به تایلند تجربه جالبی برای کودکان خواهد بود؟
-          تجربیاتی نظیر مشاهده پارک کروکودیل ها، فیل سواری، انواع تفریحات آبی در محیطی کاملا امن و قایق سواری در بازار شناور بانگکوک قطعا برای هر کودکی تجربه ای جالب و به یاد ماندنی خواهد بود.
-
-          درباره تایلند
-          کشور تایلند در جنوب شرقی آسیا با پیشینه تاریخی و جاذبه های گردشگری بسیار زیاد شناخته میشود. این کشور که پیشتر با نام "سیام" شناخته میشده است، دارای سیستم حکمرانی مشروطه سلطنتی است و لذا پادشاه در این کشور دارای قدرت بسیار زیادی است. هرگونه توهین و اهانت به پادشاه این کشور میتواند عواقب حقوقی جدی داشته باشد لذا به مسافرین عزیز توصیه میکنیم از هرگونه اقدام در این خصوص حتی به شوخی به شدت اجتناب نمایند.
-          آب و هوای تایلند
-          این کشور یکی دارای آب و هوای گرم و استوایی است و میتوان گفت فقط 2 فصل در این کشور وجود دارد: فصل گرم و فصل گرمتر. در این کشور در هر لحظه بایستی احتمال بارش شدید باران را دهید و این اتفاق بسیار مرسوم و معمولی در این کشور است. از سایت زیر در تمامی روزهای سال میتوانید آب و هوای شهرهای مختلف تایلند را به دقت خوبی تخمین بزنید:
-
-
-          https://www.accuweather.com
-          بعد از ورود به این وبسایت با وارد کردن شهرهای مورد نظر خود نظیر بانگکوک (Bangkok) و یا پوکت (Phuket) و یا سایر شهرهای تایلند، در انتهای صفحه در قسمت 10-Day Weather Forecast آب و هوای شهر مورد نظر خود را در بازه زمانی 10 روزه بررسی نمایید.
-          امنیت در تایلند
-
-          اقتصاد تایلند به شدت به مسئله توریسم وابسته و به همین دلیل در امنیت و سلامت مسافرین ورودی به این کشور اهتمام ویژه ای شده است و امنیت برای مسافرین در این کشور در بیشترین حد ممکن تامین شده است و هیچگونه مشکلی در این خصوص تاکنون مشاهده نشده است. هرچند پیشنهاد میشود برای عدم یروز مشکل پیش از دریافت هرگونه کالا یا خدمات در این کشور از میزان دقیق مبلغ و شرایط کالا و خدمات اطلاع دقیق حاصل فرمایید. یکی از مشکلات جدی در معابد تایلند، آزادی عمل میمون ها در سرقت وسایل گردشگران است و به دلیل مقدس بودن این حیوان در افکار مردم تایلند، اجازه برخورد خشن با این حیوان داده نمیشود. لذا توصیه اکید میشود لوازم و وسایل قیمتی خود را پیش از حضور در این معابد به گونه ای قرار دهید که قابل دسترسی برای این حیوانات نباشد. (در صورتی که لوازمی از شما توسط این حیوانات سرقت شد معمولا با دادن چیزی مثل یک میوه یا خوراکی به آنان، کال
-          غذا و خوراک در تایلند
-
-          در تایلند به دلیل وجود رستوران های چند ملیتی و حتی ایرانی هیچ دغدغه ای در خصوص غذا و خوراک نخواهید داشت و تنوع انواع غذاهای ملل در کشور تایلند میتواند تجربه بینظیری در این خصوص برای شما فراهم آورد. همچنین رستوران های ایرانی زیادی در این کشور فعال هستند که به پیوست نام و مشخصات تماس تعدادی از آنها معرفی میشوند:
-
-
-          نام رستوران شهر آدرس آدرس سایت یا آدرس شبکه های اجتماعی شماره تماس
-          رستوران ترنج پوکت (Phuket) Sai Kor, Pa Tong, Amphoe Kathu, Phuket 83150, Thailand ------------------ +66 85 831 1906
-          Padiran Persian Cuisine
-          پوکت (Phuket) 204, 41 Soi La Diva, Pa Tong, Kathu District, Phuket 83150, Thailand -------------------- +66 89 005 8042
-
-          رستوران ایران کوچک
-          (Little Persian) پوکت (Phuket) 95 27 ซอย ใสยวน Rawai, Mueang Phuket District, Phuket 83000, Thailand foodpanda.co.th +66 82 060 3350
-          Persian House بانگکوک (Bangkok) 48/2-3 (Soi Wat Khak Pan Road Silom, Bangkok 105 persianhousebkk.com +66 2 635 2674
-          رستوران ایرانی فانوس بانگکوک (Bangkok) Sukhumvit Rd, Khlong Toei, Bangkok 10110, Thailand Instagram:
-          fanoos_resturant_thailand +66 802863766
-          رستوران محسن بانگکوک (Bangkok) Suriyawong, Bangrak 6 Soi Prachum (Silom) Silom Road, Silom Bangkok, Bangkok 10500 TH http://mohsen-restaurant.com/ +66 64 239 3616
-          رستوران ایرانی شمرون بانگکوک (Bangkok) 11,Top of Hillary, 43 Sukhumvit 11 Alley, Khlong Toei Nuea, Watthana, Bangkok 10110, Thailand ----------------------------- +66 92 756 6462
-
-          شهرهای توریستی تایلند
-          معروف ترین شهرهای توریستی تایلند در اینجا آورده شده است:
-          بانکوک (بانگکوک)
-          بانگکوک به عنوان پایتخت تایلند، شهری بدون خواب شناخته میشود و در 24 ساعت شبانه روز میتوانید تفریح و یا گشت و گذاری در این شهر بیابید. بازارهای این شهر نیز به طور تمام وقت فعال هستند و خصوصا در ایام شلوغ نظیر تعطیلات سال نو چینی و یا کریسمس این شهر لحظه ای خلوت نخواهد بود.
-          جاذبه های بانکوک
-          • بازار شناور
-          • بازار چاتوچاک
-          • بازار آسیاتک
-          • خیابان خائوسان
-          • باغ پروانه‌ها و حشرات زنده
-          • موزه مادام توسو
-          • مزرعه و باغ وحش تمساح‌ها
-          • باغ وحش کهن دوسیت
-          • میدان سیام بانکوک
-          • پارک لومفینی
-          این پارک به عنوان پارک مرکزی (central park) بانکوک شناخته میشود، بزرگترین پارک این کشور است. اسم این پارک از محل تولد بودا گرفته شده است. در مرکز این پارک دریاچه ای قرار دارد که میتواند انواع تفریحات آبی را در آن بیابید. دیدن این دریاچه در صورتی که سفر شما در بانکوک حداقل 3 روزه است پیشنهاد میشود.
-          پاتایا
-
-          پوکت
-
-          جزیره فی فی
-
-          جزیره ساموئی
-
-          جزیره کرابی
-
-
-
-
-        </div>
-      </div>
-
-
+  <div class="editor-container">
+    <div class="toolbar">
+      <button onclick="formatText('bold')"><b>B</b></button>
+      <button onclick="formatText('italic')"><i>I</i></button>
+      <button onclick="formatText('underline')"><u>U</u></button>
+      <button onclick="insertHeading()">عنوان</button>
+      <button onclick="createLink()">لینک</button>
+      <button onclick="showImageModal()">تصویر</button>
+      <button onclick="insertList('ul')">لیست نقطه‌ای</button>
+      <button onclick="insertList('ol')">لیست شماره‌ای</button>
+      <button onclick="alignText('right')">راست</button>
+      <button onclick="alignText('center')">وسط</button>
+      <button onclick="alignText('left')">چپ</button>
     </div>
 
-    <!-- Font Awesome for icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <?php include 'footer.php'; ?>
+    <div id="editor" class="editor" contenteditable="true"></div>
+    <textarea id="hiddenContent" name="content" style="display:none;"></textarea>
+  </div>
 
+  <div id="imageModal" class="image-modal">
+    <div class="modal-content">
+      <h3>درج تصویر</h3>
+      <input type="file" id="imageUpload" accept="image/*">
+      <p>یا آدرس تصویر:</p>
+      <input type="text" id="imageUrl" placeholder="https://example.com/image.jpg">
+      <button onclick="insertImage()">درج تصویر</button>
+      <button onclick="hideImageModal()">انصراف</button>
+    </div>
+  </div>
+
+  <script>
+    // ذخیره محتوا قبل از ارسال فرم
+    function prepareContent() {
+      document.getElementById('hiddenContent').value = document.getElementById('editor').innerHTML;
+      return true;
+    }
+
+    // فرمت‌دهی متن
+    function formatText(format) {
+      document.execCommand(format, false, null);
+      document.getElementById('editor').focus();
+    }
+
+    // درج عنوان
+    function insertHeading() {
+      const selection = window.getSelection();
+      if (selection.rangeCount) {
+        const range = selection.getRangeAt(0);
+        const heading = document.createElement('h2');
+        heading.textContent = range.toString();
+        range.deleteContents();
+        range.insertNode(heading);
+      }
+    }
+
+    // ایجاد لینک
+    function createLink() {
+      const url = prompt('آدرس لینک را وارد کنید:', 'http://');
+      if (url) {
+        document.execCommand('createLink', false, url);
+      }
+    }
+
+    // مدیریت پنجره تصویر
+    function showImageModal() {
+      document.getElementById('imageModal').style.display = 'flex';
+    }
+
+    function hideImageModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+
+    // درج تصویر
+    function insertImage() {
+      const urlInput = document.getElementById('imageUrl');
+      const fileInput = document.getElementById('imageUpload');
+
+      if (fileInput.files.length > 0) {
+        // آپلود تصویر (در اینجا باید کد آپلود به سرور را اضافه کنید)
+        alert('در حال توسعه: این بخش برای آپلود تصاویر به سرور نیاز دارد');
+      } else if (urlInput.value) {
+        const img = document.createElement('img');
+        img.src = urlInput.value;
+        img.style.maxWidth = '100%';
+        insertAtCursor(img);
+        hideImageModal();
+      } else {
+        alert('لطفاً یک تصویر انتخاب کنید یا آدرس آن را وارد نمایید');
+      }
+    }
+
+    // درج در محل کرسر
+    function insertAtCursor(node) {
+      const selection = window.getSelection();
+      if (selection.rangeCount) {
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+        range.insertNode(node);
+      } else {
+        document.getElementById('editor').appendChild(node);
+      }
+      document.getElementById('editor').focus();
+    }
+
+    // درج لیست
+    function insertList(type) {
+      document.execCommand(type === 'ul' ? 'insertUnorderedList' : 'insertOrderedList');
+    }
+
+    // تراز متن
+    function alignText(align) {
+      document.execCommand('justify' + align.charAt(0).toUpperCase() + align.slice(1));
+    }
+  </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-

@@ -111,9 +111,28 @@
                                     <label for="category" class="form-label">دسته‌بندی *</label>
                                     <select class="form-control" id="category" name="category" required>
                                         <option value="">-- انتخاب کنید --</option>
-                                        <option value="پوشاک">پوشاک</option>
+                                        <!-- صنایع اصلی -->
+                                        <option value="پوشاک و مد">پوشاک و مد</option>
+                                        <option value="آرایشی و بهداشتی">آرایشی و بهداشتی</option>
                                         <option value="تجهیزات پزشکی">تجهیزات پزشکی</option>
-                                        <option value="الکترونیک">الکترونیک</option>
+                                        <option value="الکترونیک و فناوری">الکترونیک و فناوری</option>
+
+                                        <!-- نمایشگاه‌های تخصصی -->
+                                        <option value="صنایع غذایی">صنایع غذایی</option>
+                                        <option value="مبلمان و دکوراسیون">مبلمان و دکوراسیون</option>
+                                        <option value="خودرو و قطعات">خودرو و قطعات</option>
+                                        <option value="کشاورزی و صنایع وابسته">کشاورزی و صنایع وابسته</option>
+
+                                        <!-- نمایشگاه‌های بین‌المللی -->
+                                        <option value="نفت و گاز و پتروشیمی">نفت و گاز و پتروشیمی</option>
+                                        <option value="انرژی های تجدیدپذیر">انرژی های تجدیدپذیر</option>
+                                        <option value="گردشگری و هتلداری">گردشگری و هتلداری</option>
+
+                                        <!-- سایر دسته‌ها -->
+                                        <option value="کتاب و نشر">کتاب و نشر</option>
+                                        <option value="هنرهای تجسمی">هنرهای تجسمی</option>
+                                        <option value="صنایع دستی">صنایع دستی</option>
+                                        <option value="ورزش و تجهیزات ورزشی">ورزش و تجهیزات ورزشی</option>
                                         <option value="سایر">سایر</option>
                                     </select>
                                 </div>

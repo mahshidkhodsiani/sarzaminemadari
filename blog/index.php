@@ -37,12 +37,12 @@ $result = $conn->query("SELECT * FROM blog_posts ORDER BY created_at DESC LIMIT 
             <?php
             $i = 0;
             while ($row = $result->fetch_assoc()):
-                $image = !empty($row['featured_image']) ? str_replace('../', '', $row['featured_image']) : null;
+                // $image = !empty($row['featured_image']) ? str_replace('../', '', $row['featured_image']) : null;
             ?>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 shadow-sm">
-                        <?php if ($image): ?>
-                            <img src="<?= $image ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>" style="height: 200px; object-fit: cover;">
+                        <?php if ($row['featured_image']): ?>
+                            <img src="<?= $row['featured_image'] ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>" style="height: 200px; object-fit: cover;">
                         <?php else: ?>
                             <div class="text-center py-5 bg-light">بدون تصویر</div>
                         <?php endif; ?>
@@ -52,7 +52,7 @@ $result = $conn->query("SELECT * FROM blog_posts ORDER BY created_at DESC LIMIT 
                             <p class="card-text"><?= mb_substr(strip_tags($row['content']), 0, 100) ?>...</p>
                         </div>
                         <div class="card-footer bg-white">
-                            <a href="blog_post.php?slug=<?= urlencode($row['slug']) ?>" class="btn btn-outline-info btn-sm">مطالعه بیشتر</a>
+                            <a href="blog_post?slug=<?= urlencode($row['slug']) ?>" class="btn btn-outline-info btn-sm">مطالعه بیشتر</a>
                         </div>
                     </div>
                 </div>

@@ -22,8 +22,21 @@ textarea {
   font-family: "Farhang", sans-serif;
 }
 
+
+.card-tours .card-img-top {
+  height: 180px; /* ارتفاع ثابت برای تمام تصاویر */
+  object-fit: cover; /* تضمین می‌کند تصویر بدون تغییر نسبت پر شود */
+}
+
+.card-tours .card-body {
+  flex: 1; /* باعث می‌شود بدنه کارت فضای باقیمانده را پر کند */
+}
+
 /* افکت hover برای کاردها */
 .card-tours {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   border-radius: 10px;
   overflow: hidden;

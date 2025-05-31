@@ -1,208 +1,280 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['all_data'])) {
+    header('Location: login.php');
+    exit;
+}
+
+$all_data = $_SESSION['all_data'];
+$id = $all_data['id'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
-    <title>نمایش تور | آژانس سرزمین مادری</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="جزئیات تورهای گردشگری آژانس سرزمین مادری">
+    <title>پنل مدیریت - افزودن مقاله جدید</title>
+
+    <?php include 'includes.php'; ?>
     <link rel="stylesheet" href="styles.css">
 
 
-    <?php
-    include 'includes.php';
-    include '../config.php';
-    ?>
+    <link href="https://cdn.jsdelivr.net/npm/jodit/build/jodit.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jodit/build/jodit.min.js"></script>
+
+
 
 
 </head>
 
 <body>
 
-    <?php include 'header.php'; ?>
+    <div class="container-fluid">
+        <div class="row">
+            <?php include 'sidebar.php'; ?>
 
-    <div class="tour-container">
-
-
-
-        <div class="tour-card border rounded shadow-sm mb-4 p-3 bg-white">
-            <div class="tour-content">
-                <div class="row g-0">
-                    <!-- تصویر تور -->
-                    <div class="col-12 mb-3">
-                        <img src="../img/18.jpg" alt="تور تایلند" class="img-fluid rounded w-100">
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4">
+                <div class="card shadow">
+                    <div class="card-header bg-info text-white">
+                        افزودن مقاله جدید
                     </div>
+                    <div class="card-body">
+                        <form enctype="multipart/form-data" action="" method="POST">
+                            <!-- عنوان مقاله -->
+                            <div class="mb-3">
+                                <label for="title" class="form-label">عنوان مقاله *</label>
+                                <input type="text" class="form-control" id="title" name="title" required>
+                            </div>
+
+                            <!-- slug -->
+                            <div class="mb-3">
+                                <label for="slug" class="form-label">Slug (نامک) *</label>
+                                <input type="text" class="form-control" id="slug" name="slug" required>
+                                <small class="text-muted">این فیلد به صورت خودکار از عنوان مقاله ایجاد می‌شود</small>
+                            </div>
+
+                            <!-- محتوای مقاله -->
+                            <!-- <div class="mb-4">
+                                <label for="content" class="form-label">محتوای مقاله *</label>
+                                <textarea id="content" name="content"></textarea>
+                            </div> -->
+
+
+                            <textarea id="editor" name="content"></textarea>
+                            <script>
+                                const editor = new Jodit('#editor', {
+                                    removeButtons: ['source'],
+                                    language: 'fa',
+                                    height: 500,
+
+                                });
+                            </script>
 
 
 
 
-                    <!-- سوالات متداول -->
-                    <div class="mb-5">
-                        <h3 class="mb-4 text-primary">سوالات متداول</h3>
+                            <!-- تصویر شاخص -->
+                            <div class="mb-3">
+                                <label for="featured_image" class="form-label">تصویر شاخص</label>
+                                <input class="form-control" type="file" id="featured_image" name="featured_image" accept="image/*">
+                                <small class="text-muted">فرمت‌های مجاز: JPG, PNG, GIF - حداکثر حجم: 2MB</small>
+                            </div>
 
-                        <div class="accordion" id="faqAccordion">
-                            <!-- سوال 1 -->
-                            <div class="accordion-item mb-3 border rounded">
-                                <h4 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                        چند روز زمان برای سفر به تایلند کافی است؟
-                                    </button>
-                                </h4>
-                                <div id="faq1" class="accordion-collapse collapse">
-                                    <div class="accordion-body">
-                                        حداقل زمان مورد نیاز برای دیدن حداقل جاذبه‌های تایلند 7 روز است ولی پیشنهاد ما سفری حداقل 10 روزه یا دو هفته‌ای به این کشور برای لذت حداکثری از این سفر است.
+
+                            <!-- وضعیت -->
+                            <div class="mb-3">
+                                <label for="status" class="form-label">وضعیت انتشار *</label>
+                                <select class="form-control" id="status" name="status" required>
+                                    <option value="published">منتشر شده</option>
+                                    <option value="draft">پیش‌نویس</option>
+                                    <option value="pending">در انتظار بررسی</option>
+                                </select>
+                            </div>
+
+                            <!-- متا تگ‌ها -->
+                            <div class="card mt-4 mb-4">
+                                <div class="card-header bg-light">
+                                    تنظیمات سئو
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="meta_title" class="form-label">عنوان متا</label>
+                                        <input type="text" class="form-control" id="meta_title" name="meta_title">
+                                        <small class="text-muted">حداکثر 60 کاراکتر</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="meta_description" class="form-label">توضیحات متا</label>
+                                        <textarea class="form-control" id="meta_description" name="meta_description" rows="2"></textarea>
+                                        <small class="text-muted">حداکثر 160 کاراکتر</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="meta_keywords" class="form-label">کلمات کلیدی متا</label>
+                                        <input type="text" class="form-control" id="meta_keywords" name="meta_keywords">
+                                        <small class="text-muted">کلمات را با کاما جدا کنید</small>
                                     </div>
                                 </div>
                             </div>
+                            <br>
 
-                            <!-- سوال 2 -->
-                            <div class="accordion-item mb-3 border rounded">
-                                <h4 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                        ویزای تایلند چند روزه صادر می‌شود؟
-                                    </button>
-                                </h4>
-                                <div id="faq2" class="accordion-collapse collapse">
-                                    <div class="accordion-body">
-                                        ویزای تایلند در بازه زمانی یک هفته تا 10 روز به صورت ویزای الکترونیک (e-visa) صادر می‌شود.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- سوال 3 -->
-                            <div class="accordion-item mb-3 border rounded">
-                                <h4 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                        مدارک لازم برای ویزای تایلند چیست؟
-                                    </button>
-                                </h4>
-                                <div id="faq3" class="accordion-collapse collapse">
-                                    <div class="accordion-body">
-                                        <ol class="list-group list-group-numbered">
-                                            <li class="list-group-item border-0">پاسپورت با حداقل 6 ماه مدت اعتبار</li>
-                                            <li class="list-group-item border-0">تمکن مالی به مبلغ 50 میلیون تومان برای هر نفر</li>
-                                            <li class="list-group-item border-0">فایل عکس چهره جدید بدون روتوش</li>
-                                            <li class="list-group-item border-0">اسکن شناسنامه و کارت ملی</li>
-                                            <li class="list-group-item border-0">بلیط هواپیما و رزرو هتل با مهر آژانس</li>
-                                            <li class="list-group-item border-0">بیمه مسافرتی حداقل یک ماهه</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- سوال 4 -->
-                            <div class="accordion-item mb-3 border rounded">
-                                <h4 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                        آیا سفر تایلند مناسب برای خانواده است؟
-                                    </button>
-                                </h4>
-                                <div id="faq4" class="accordion-collapse collapse">
-                                    <div class="accordion-body">
-                                        بله، برخلاف ذهنیت غالب، کشور تایلند برای سفر به صورت خانوادگی کاملاً مناسب است و می‌توانید از بازارهای دیدنی، جاذبه‌های طبیعی بسیار زیبا و مکان‌های گردشگری متنوع آن بهره ببرید.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- سوال 5 -->
-                            <div class="accordion-item mb-3 border rounded">
-                                <h4 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
-                                        آیا سفر به تایلند برای کودکان جالب است؟
-                                    </button>
-                                </h4>
-                                <div id="faq5" class="accordion-collapse collapse">
-                                    <div class="accordion-body">
-                                        تجربیاتی نظیر مشاهده پارک کروکودیل‌ها، فیل سواری، انواع تفریحات آبی در محیطی کاملاً امن و قایق‌سواری در بازار شناور بانکوک قطعاً برای هر کودکی تجربه‌ای جالب و به یاد ماندنی خواهد بود.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                    <!-- درباره تایلند -->
-                    <div class="col-12 mb-4">
-                        <h5 class="fw-bold">درباره تایلند</h5>
-                        <p>تایلند در جنوب شرق آسیا واقع شده و پیش‌تر با نام سیام شناخته می‌شد. این کشور دارای نظام مشروطه سلطنتی است و احترام به پادشاه بسیار جدی گرفته می‌شود.</p>
-                    </div>
-
-                    <!-- آب و هوای تایلند -->
-                    <div class="col-12 mb-4">
-                        <h5 class="fw-bold">آب و هوای تایلند</h5>
-                        <p>تایلند دارای آب و هوای گرم و استوایی است. می‌توانید از طریق سایت زیر آب‌و‌هوا را بررسی کنید:</p>
-                        <p><a href="https://www.accuweather.com" target="_blank">www.accuweather.com</a></p>
-                    </div>
-
-                    <!-- امنیت -->
-                    <div class="col-12 mb-4">
-                        <h5 class="fw-bold">امنیت در تایلند</h5>
-                        <p>امنیت گردشگران به‌شدت مورد توجه است. فقط مراقب میمون‌ها در معابد باشید؛ وسایل قیمتی را در دسترس قرار ندهید.</p>
-                    </div>
-
-                    <!-- غذا و رستوران‌های ایرانی -->
-                    <div class="col-12 mb-4">
-                        <h5 class="fw-bold">غذا و رستوران‌های ایرانی در تایلند</h5>
-                        <p>تنوع غذایی بالا وجود دارد. برخی رستوران‌های ایرانی محبوب:</p>
-                        <ul>
-                            <li><strong>رستوران ترنج</strong> - پوکت | 📞 +66 85 831 1906</li>
-                            <li><strong>Padiran Persian Cuisine</strong> - پوکت | 📞 +66 89 005 8042</li>
-                            <li><strong>Little Persian</strong> - پوکت | foodpanda.co.th | 📞 +66 82 060 3350</li>
-                            <li><strong>Persian House</strong> - بانکوک | persianhousebkk.com | 📞 +66 2 635 2674</li>
-                            <li><strong>فانوس</strong> - بانکوک | Instagram: fanoos_resturant_thailand | 📞 +66 802863766</li>
-                            <li><strong>رستوران محسن</strong> - بانکوک | mohsen-restaurant.com | 📞 +66 64 239 3616</li>
-                            <li><strong>شمرون</strong> - بانکوک | 📞 +66 92 756 6462</li>
-                        </ul>
-                    </div>
-
-                    <!-- شهرهای توریستی -->
-                    <div class="col-12 mb-4">
-                        <h5 class="fw-bold">شهرهای توریستی معروف</h5>
-                        <ul>
-                            <li>بانکوک (پایتخت – شهر بدون خواب)</li>
-                            <li>پاتایا</li>
-                            <li>پوکت</li>
-                            <li>جزیره فی فی</li>
-                            <li>جزیره سامویی</li>
-                            <li>جزیره کرابی</li>
-                        </ul>
-                    </div>
-
-                    <!-- جاذبه های بانکوک -->
-                    <div class="col-12 mb-4">
-                        <h5 class="fw-bold">جاذبه‌های بانکوک</h5>
-                        <ul>
-                            <li>بازار شناور</li>
-                            <li>بازار چاتوچاک</li>
-                            <li>بازار آسیاتک</li>
-                            <li>خیابان خائوسان</li>
-                            <li>باغ پروانه‌ها و حشرات</li>
-                            <li>موزه مادام توسو</li>
-                            <li>باغ وحش تمساح‌ها</li>
-                            <li>باغ‌وحش کهن دوسیت</li>
-                            <li>میدان سیام</li>
-                            <li>پارک لومفینی (مرکزی‌ترین پارک بانکوک)</li>
-                        </ul>
+                            <button name="submit" class="btn btn-info">ذخیره مقاله</button>
+                            <br>
+                        </form>
                     </div>
                 </div>
-            </div>
-
-
+            </main>
         </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // ایجاد خودکار slug از عنوان
+            $('#title').on('input', function() {
+                const title = $(this).val();
+                const slug = title.replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, '')
+                    .replace(/\s+/g, '-')
+                    .toLowerCase();
+                $('#slug').val(slug);
+            });
+        });
+    </script>
 
 
-
-
-        <a href="../request_form" class="btn btn-outline-info">جهت مشاوره و رزور کلیک کنید</a>
-
-
-
-        <!-- Font Awesome for icons -->
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-        <?php include 'footer.php'; ?>
-
+    <script>
+        $('form').submit(function() {
+            $('#editor').val(editor.getEditorValue()); // انتقال محتوا به textarea
+        });
+    </script>
 </body>
 
 </html>
+
+<?php
+include "../config.php";
+
+if (isset($_POST['submit'])) {
+    // دریافت مقادیر از فرم
+    $title = $_POST['title'];
+    $slug = $_POST['slug'];
+    $content = $_POST['content'];
+
+    var_dump($content);
+    // $content = htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
+    // $content = $conn->real_escape_string($content);
+    $status = $_POST['status'];
+    $meta_title = $_POST['meta_title'] ?? '';
+    $meta_description = $_POST['meta_description'] ?? '';
+    $meta_keywords = $_POST['meta_keywords'] ?? '';
+    $featured_image_path = '';
+    $current_date = date('Y-m-d H:i:s');
+
+    // اعتبارسنجی اولیه
+    if (empty($title) || empty($slug) || empty($content)) {
+        die("لطفا تمام فیلدهای الزامی را پر کنید");
+    }
+
+    // ذخیره اطلاعات مقاله در دیتابیس
+    $sql = "INSERT INTO blog_posts 
+            (title, slug, content, featured_image, status, 
+             created_at, updated_at, meta_title, meta_description, meta_keywords, author_id) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, $id)";
+
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("خطا در آماده‌سازی query: " . $conn->error);
+    }
+
+    // پردازش تصویر شاخص
+    if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] == UPLOAD_ERR_OK) {
+        $image = $_FILES['featured_image'];
+        $upload_dir = "../uploads/blog/";
+
+        if (!file_exists($upload_dir)) {
+            mkdir($upload_dir, 0755, true);
+        }
+
+        $file_extension = pathinfo($image['name'], PATHINFO_EXTENSION);
+        $file_name = uniqid() . '.' . $file_extension;
+        $temp_path = $upload_dir . $file_name;
+
+        if (move_uploaded_file($image['tmp_name'], $temp_path)) {
+            $featured_image_path = $temp_path;
+        }
+    }
+
+    // بعد از اجرای کوئری و گرفتن ID پست، پوشه ایجاد شده و تصویر منتقل می‌شود
+    if ($stmt->bind_param("ssssssssss", $title, $slug, $content, $featured_image_path, $status, $current_date, $current_date, $meta_title, $meta_description, $meta_keywords) && $stmt->execute()) {
+        $post_id = $stmt->insert_id;
+
+        // اگر تصویر آپلود شده بود، آن را به پوشه با ID پست منتقل می‌کنیم
+        if (!empty($featured_image_path)) {
+            $new_upload_dir = "../uploads/blog/" . $post_id . "/";
+            if (!file_exists($new_upload_dir)) {
+                mkdir($new_upload_dir, 0755, true);
+            }
+
+            $new_path = $new_upload_dir . $file_name;
+            rename($featured_image_path, $new_path);
+
+            // آپدیت مسیر تصویر در دیتابیس
+            $update_sql = "UPDATE blog_posts SET featured_image = ? WHERE id = ?";
+            $update_stmt = $conn->prepare($update_sql);
+            $update_stmt->bind_param("si", $new_path, $post_id);
+            $update_stmt->execute();
+            $update_stmt->close();
+        }
+
+        echo "<div id='successToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; top: 20px; right: 20px; width: 300px; z-index: 1055;'>
+            <div class='toast-header bg-success text-white'>
+                <strong class='mr-auto'>موفقیت</strong>
+            </div>
+            <div class='toast-body'>
+                مقاله با موفقیت ذخیره شد!
+            </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $('#successToast').toast({
+                    autohide: true,
+                    delay: 3000
+                }).toast('show');
+                setTimeout(function(){
+                    window.location.href = 'add_post';
+                }, 3000);
+            });
+        </script>";
+    } else {
+        // اگر خطایی رخ داد، تصویر آپلود شده را پاک کنید
+        if (!empty($featured_image_path) && file_exists($featured_image_path)) {
+            unlink($featured_image_path);
+        }
+
+        echo "<div id='errorToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; top: 20px; right: 20px; width: 300px; z-index: 1055;'>
+            <div class='toast-header bg-danger text-white'>
+                <strong class='mr-auto'>خطا</strong>
+            </div>
+            <div class='toast-body'>
+                خطایی در ذخیره مقاله رخ داد!<br>Error: " . htmlspecialchars($stmt->error) . "
+            </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $('#errorToast').toast({
+                    autohide: true,
+                    delay: 3000
+                }).toast('show');
+            });
+        </script>";
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+?>
