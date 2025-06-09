@@ -22,7 +22,6 @@ textarea {
   font-family: "Farhang", sans-serif;
 }
 
-
 .card-tours .card-img-top {
   height: 180px; /* ارتفاع ثابت برای تمام تصاویر */
   object-fit: cover; /* تضمین می‌کند تصویر بدون تغییر نسبت پر شود */
@@ -150,7 +149,7 @@ textarea {
 }
 
 .parallax-container {
-  height: 300px; /* ارتفاع دلخواه */
+  height: 150px; /* ارتفاع دلخواه */
   overflow: hidden;
   position: relative;
 }

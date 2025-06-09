@@ -20,8 +20,6 @@
         <?php
         if (isset($_GET['tour'])) {
 
-            var_dump($_GET['tour']);
-            // دریافت و decode کردن پارامتر تور
             $encoded_tour = $_GET['tour'];
             $tour = urldecode($encoded_tour);
 
@@ -40,7 +38,7 @@
                             <div class="tour-header">
                                 <img src="<?= htmlspecialchars(str_replace('../', '', $row['tour_image'])) ?>"
                                     alt="<?= htmlspecialchars($row['title']) ?>"
-                                    class="tour-main-image">
+                                    class="tour-main-image img-fluid">
                             </div>
                         </div>
 

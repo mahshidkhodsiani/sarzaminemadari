@@ -36,11 +36,14 @@ $row = $result->fetch_assoc();
 
 <body>
 
-    <?php include 'header.php'; ?>
+    <?php
+    include 'header.php';
+    include '../PersianCalendar.php';
+    ?>
 
     <div class="container py-5">
         <h1 class="text-center mb-4"><?= htmlspecialchars($row['title']) ?></h1>
-        <p class="text-muted text-center small"><?= date('Y/m/d', strtotime($row['created_at'])) ?></p>
+        <p class="text-muted text-center small"><?= mds_date('Y/m/d', strtotime($row['created_at'])) ?></p>
 
         <?php if ($row['featured_image']): ?>
             <div class="text-center mb-4">

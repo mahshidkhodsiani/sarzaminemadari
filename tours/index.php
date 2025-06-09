@@ -3,13 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>تورهای نمایشگاهی | آژانس سرزمین مادری</title>
+    <title>تورهای خارجی | آژانس سرزمین مادری</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="../css/styles.css">
 
-
+    <link rel="stylesheet" href="styles.css"> 
+    
     <?php
     include 'includes.php';
     include '../config.php';
@@ -76,7 +75,6 @@
     $result = $stmt->get_result();
     ?>
 
-
 </head>
 
 <body>
@@ -84,9 +82,8 @@
     <?php include 'header.php'; ?>
 
     <div class="container py-5">
-        <h1 class="text-center mb-5">تورهای نمایشگاهی</h1>
+        <h1 class="text-center mb-5">تورهای خارجی</h1>
 
-        <!-- فرم جستجو -->
         <div class="search-box">
             <form method="GET" action="">
                 <div class="row">
@@ -118,7 +115,6 @@
             </form>
         </div>
 
-        <!-- نمایش تورها -->
         <div class="row">
             <?php if ($result->num_rows > 0): ?>
                 <?php while ($row = $result->fetch_assoc()): ?>
@@ -132,8 +128,6 @@
                             <p><strong>تاریخ شمسی:</strong> <?= htmlspecialchars($row['date_fa']) ?></p>
                             <p><strong>قیمت:</strong> <?= number_format($row['price']) ?> تومان</p>
                             <a href="tour-details.php?tour=<?= $row['title']?>" class="btn btn-warning w-100">دیدن تور</a>
-                            
-                            
                         </div>
                     </div>
                 <?php endwhile; ?>
@@ -144,8 +138,6 @@
             <?php endif; ?>
         </div>
 
-
-        <!-- صفحه‌بندی -->
         <?php if ($total_pages > 1): ?>
             <nav aria-label="Page navigation">
                 <ul class="pagination">
@@ -199,6 +191,9 @@
     </div>
 
     <?php include 'footer.php'; ?>
+
+
+
 </body>
 
 </html>

@@ -6,16 +6,14 @@
     <title>نمایش تور | آژانس سرزمین مادری</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="جزئیات تورهای گردشگری آژانس سرزمین مادری">
+
+
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="../css/styles.css">
-
-
 
     <?php
     include 'includes.php';
     include '../config.php';
     ?>
-
 
 </head>
 
@@ -26,19 +24,20 @@
     <div class="tour-container">
         <?php
         if (isset($_GET['tour'])) {
-            $tour = mysqli_real_escape_string($conn, $_GET['tour']);
-            $result = mysqli_query($conn, "SELECT * FROM tours WHERE title = '$tour'");
+            // استفاده از prepared statements برای جلوگیری از SQL Injection
+            $stmt = $conn->prepare("SELECT * FROM tours WHERE title = ?");
+            $stmt->bind_param("s", $_GET['tour']);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-            if ($row = mysqli_fetch_assoc($result)) {
+            if ($row = $result->fetch_assoc()) {
         ?>
 
-                <div class="tour-card">
+                <div class="tour-card custom-card-style">
                     <div class="tour-content">
                         <div class="tour-image-col">
                             <span class="tour-badge">پیشنهاد ویژه</span>
-                            <div class="tour-header">
-                                <img src="<?= htmlspecialchars($row['tour_image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
-                            </div>
+                            <img src="<?= htmlspecialchars($row['tour_image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>" class="img-fluid">
                         </div>
 
                         <div class="tour-details-col">
@@ -92,9 +91,9 @@
 
                             <div class="gallery-thumbnails">
                                 <img src="<?= htmlspecialchars($row['tour_image']) ?>" class="thumbnail" alt="تور 1">
-                                <img src="https://via.placeholder.com/300x200?text=تور+۲" class="thumbnail" alt="تور 2">
-                                <img src="https://via.placeholder.com/300x200?text=تور+۳" class="thumbnail" alt="تور 3">
-                                <img src="https://via.placeholder.com/300x200?text=تور+۴" class="thumbnail" alt="تور 4">
+                                <img src="https://via.placeholder.com/300x200?text=تصویر+۲" class="thumbnail" alt="تور 2">
+                                <img src="https://via.placeholder.com/300x200?text=تصویر+۳" class="thumbnail" alt="تور 3">
+                                <img src="https://via.placeholder.com/300x200?text=تصویر+۴" class="thumbnail" alt="تور 4">
                             </div>
                         </div>
                     </div>
@@ -110,9 +109,9 @@
         ?>
     </div>
 
-    <!-- Font Awesome for icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <?php include 'footer.php'; ?>
+
+
 
 </body>
 

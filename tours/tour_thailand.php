@@ -6,29 +6,106 @@
     <title>نمایش تور | آژانس سرزمین مادری</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="جزئیات تورهای گردشگری آژانس سرزمین مادری">
+
+
     <link rel="stylesheet" href="styles.css">
-
-
-    <?php
-    include 'includes.php';
-    include '../config.php';
-    ?>
-
 
 </head>
 
 <body>
 
-    <?php include 'header.php'; ?>
+    <?php
+    // این شامل‌ها بهتره در ابتدای body یا حتی head باشن اگر خروجی HTML تولید نمی‌کنن
+    include 'includes.php';
+    include '../config.php';
+    include 'header.php'; // هدر هم بهتره همینجا باشه
+    ?>
 
-    <div class="tour-container">
+    <div class="tour-container container-fluid">
+        <?php
+        // فرض می‌کنیم که هنوز این بخش برای نمایش جزئیات تور از دیتابیس استفاده میشه
+        if (isset($_GET['tour'])) {
+            $tour = mysqli_real_escape_string($conn, $_GET['tour']);
+            $result = mysqli_query($conn, "SELECT * FROM tours WHERE title = '$tour'");
 
+            if ($row = mysqli_fetch_assoc($result)) {
+        ?>
+                <div class="tour-card custom-card-style">
+                    <div class="row g-0 flex-row-reverse">
+                        <div class="col-lg-6 col-md-12 tour-image-col p-0">
+                            <span class="tour-badge">پیشنهاد ویژه</span>
+                            <img src="<?= htmlspecialchars($row['tour_image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>" class="img-fluid custom-image-style">
+                        </div>
 
+                        <div class="col-lg-6 col-md-12 tour-details-col p-4">
+                            <h1 class="tour-title"><?= htmlspecialchars($row['title']) ?></h1>
 
-        <div class="tour-card">
-            <div class="tour-content">
+                            <div class="tour-meta d-flex flex-wrap mb-4">
+                                <div class="tour-meta-item d-flex align-items-center me-3">
+                                    <i class="fas fa-map-marker-alt ms-2"></i>
+                                    <?= htmlspecialchars($row['country_fa']) ?> - <?= htmlspecialchars($row['city_fa']) ?>
+                                </div>
+                                <div class="tour-meta-item d-flex align-items-center me-3">
+                                    <i class="far fa-calendar-alt ms-2"></i>
+                                    <?= htmlspecialchars($row['date_fa']) ?>
+                                </div>
+                                <div class="tour-meta-item d-flex align-items-center me-3">
+                                    <i class="fas fa-clock ms-2"></i>
+                                    مدت تور: ۷ روز
+                                </div>
+                            </div>
+
+                            <div class="tour-description mb-4">
+                                <?= nl2br($row['description']) ?>
+                            </div>
+
+                            <div class="tour-info p-3 mb-4 rounded">
+                                <div class="info-row d-flex justify-content-between py-2">
+                                    <span class="info-label">کشور:</span>
+                                    <span class="info-value"><?= htmlspecialchars($row['country_fa']) ?> (<?= htmlspecialchars($row['country_en']) ?>)</span>
+                                </div>
+                                <div class="info-row d-flex justify-content-between py-2">
+                                    <span class="info-label">شهر:</span>
+                                    <span class="info-value"><?= htmlspecialchars($row['city_fa']) ?> (<?= htmlspecialchars($row['city_en']) ?>)</span>
+                                </div>
+                                <div class="info-row d-flex justify-content-between py-2">
+                                    <span class="info-label">تاریخ شمسی:</span>
+                                    <span class="info-value"><?= htmlspecialchars($row['date_fa']) ?></span>
+                                </div>
+                                <div class="info-row d-flex justify-content-between py-2 border-0">
+                                    <span class="info-label">تاریخ میلادی:</span>
+                                    <span class="info-value"><?= htmlspecialchars($row['date_en']) ?></span>
+                                </div>
+                            </div>
+
+                            <div class="price-box p-4 text-center rounded">
+                                <span class="price-label d-block mb-2">شروع قیمت از</span>
+                                <div class="price-value mb-3"><?= number_format($row['price']) ?> تومان</div>
+                                <button class="btn btn-book">
+                                    <i class="fas fa-shopping-cart ms-2"></i> رزرو تور
+                                </button>
+                            </div>
+
+                            <div class="gallery-thumbnails d-flex mt-3 overflow-auto pb-2">
+                                <img src="<?= htmlspecialchars($row['tour_image']) ?>" class="thumbnail me-2" alt="تور 1">
+                                <img src="https://via.placeholder.com/300x200?text=تور+۲" class="thumbnail me-2" alt="تور 2">
+                                <img src="https://via.placeholder.com/300x200?text=تور+۳" class="thumbnail me-2" alt="تور 3">
+                                <img src="https://via.placeholder.com/300x200?text=تور+۴" class="thumbnail me-2" alt="تور 4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            } else {
+                echo '<div class="alert alert-danger text-center mt-5 py-3">تور مورد نظر پیدا نشد.</div>';
+            }
+        } else {
+            // این بخش جدید اطلاعات ثابت رو از HTML شما می‌گیره
+            // اگر از این بخش به عنوان یک صفحه مجزا (مثلاً سوالات متداول) استفاده می‌کنید، خوبه.
+            // در غیر این صورت، این بخش رو حذف کنید و از کد PHP بالا برای نمایش جزئیات تور استفاده کنید.
+            ?>
+            <div class="tour-card custom-card-style">
                 <div class="row g-0">
-                    <!-- تصویر تور -->
                     <div class="col-12">
                         <img src="../img/18.jpg" alt="تور تایلند" class="img-fluid rounded-top w-100">
                     </div>
@@ -191,14 +268,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        <?php } ?>
 
     </div>
 
-    <!-- Font Awesome for icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <?php include 'footer.php'; ?>
 
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 </body>
 
 </html>

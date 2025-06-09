@@ -81,7 +81,7 @@
 
 
             <li class="nav-item">
-                <a class="nav-link text-dark" href="./e_tours">تورهای نمایشگاهی</a>
+                <a class="nav-link text-dark" href="../e_tours">تورهای نمایشگاهی</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -176,3 +176,19 @@
         </ul>
     </div>
 </nav>
+
+<script>
+    // مثال ساده از JavaScript برای زیرمنوهای تو در تو (ممکن است نیاز به تنظیمات بیشتری داشته باشد)
+// این کد باید در یک فایل JS جداگانه یا در انتهای body بعد از bootstrap.bundle.min.js قرار گیرد
+document.addEventListener("DOMContentLoaded", function(){
+    document.querySelectorAll('.dropdown-submenu > a').forEach(function(element){
+        element.addEventListener('click', function(e){
+            let submenu = this.nextElementSibling;
+            if(submenu && submenu.classList.contains('dropdown-menu')){
+                e.preventDefault();
+                submenu.classList.toggle('show');
+            }
+        });
+    });
+});
+</script>

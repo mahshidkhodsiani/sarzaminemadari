@@ -84,17 +84,28 @@
 
 
     <div class="container my-5">
-        <div class="row">
-            <div class="col-md-2">
-                <h2 class="d-flex justify-center">تورهای نمایشگاهی</h2>
+        <div class="row align-items-center my-3">
+            <!-- فقط در دسکتاپ -->
+            <div class="d-none d-md-flex col-md-2 justify-content-center">
+                <h2 class="h5 mb-0">تورهای نمایشگاهی</h2>
             </div>
-            <div class="col-md-8">
+
+            <div class="d-none d-md-block col-md-8">
                 <hr>
             </div>
-            <div class="col-md-2">
-                <a href="e_tours" class="btn btn-info">دیدن تمامی تورهای نمایشگاهی</a>
+
+            <div class="d-none d-md-flex col-md-2 justify-content-center">
+                <a href="e_tours" class="btn btn-info">مشاهده تمامی تورهای نمایشگاهی</a>
+            </div>
+
+            <!-- فقط در موبایل -->
+            <div class="d-flex d-md-none col-12 justify-content-between align-items-center px-3">
+                <h2 class="h6 mb-0">تورهای نمایشگاهی</h2>
+                <a href="e_tours" class="btn btn-sm btn-info">مشاهده تمامی تورهای نمایشگاهی</a>
             </div>
         </div>
+
+
 
 
         <?php
@@ -120,7 +131,7 @@
 
                                 <p><i class="bi bi-cash-coin me-1"></i> شروع قیمت از <?= number_format($exhibition_row['price']) ?> تومان</p>
 
-                              
+
                                 <div class="d-flex justify-content-center mb-3">
                                     <!-- لینک جزئیات با آیدی تور -->
 
@@ -209,15 +220,28 @@
 
 
     <div class="container my-5">
-        <div class="row">
-            <div class="col-md-2">
-                <h2 class="d-flex justify-center">تورهای خارجی</h2>
+
+
+
+
+        <div class="row align-items-center my-3">
+            <!-- فقط در دسکتاپ -->
+            <div class="d-none d-md-flex col-md-2 justify-content-center">
+                <h2 class="h5 mb-0">تورهای خارجی</h2>
             </div>
-            <div class="col-md-8">
+
+            <div class="d-none d-md-block col-md-8">
                 <hr>
             </div>
-            <div class="col-md-2">
-                <a href="tours" class="btn btn-info">دیدن تمامی تورهای خارجی</a>
+
+            <div class="d-none d-md-flex col-md-2 justify-content-center">
+                <a href="tours" class="btn btn-info">مشاهده تمامی تورهای خارجی</a>
+            </div>
+
+            <!-- فقط در موبایل -->
+            <div class="d-flex d-md-none col-12 justify-content-between align-items-center px-3">
+                <h2 class="h6 mb-0">تورهای خارجی</h2>
+                <a href="tours" class="btn btn-sm btn-info">مشاهده تمامی تورهای خارجی</a>
             </div>
         </div>
 

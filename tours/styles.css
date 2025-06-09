@@ -1,3 +1,4 @@
+/* --- فونت‌ها --- */
 @font-face {
   font-family: "Farhang";
   src: url("../fonts/FarhangFamily/Farhang2-Medium.ttf") format("truetype"),
@@ -18,47 +19,17 @@ p,
 a,
 button,
 input,
-textarea {
-  font-family: "Farhang", sans-serif;
+textarea,
+table,
+th,
+td,
+li,
+ol,
+ul {
+  font-family: "Farhang", sans-serif !important;
 }
 
-.tour-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 20px;
-  transition: transform 0.3s;
-  height: 100%;
-}
-
-.tour-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.tour-img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.pagination {
-  justify-content: center;
-}
-
-.search-box {
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 30px;
-}
-
-.date-inputs {
-  display: flex;
-  gap: 10px;
-}
-
+/* --- متغیرهای اصلی (Root Variables) --- */
 :root {
   --primary-color: #2c3e50;
   --secondary-color: #3498db;
@@ -71,50 +42,48 @@ textarea {
   --transition: all 0.3s ease;
 }
 
+/* --- استایل‌های عمومی بدنه (Body General Styles) --- */
 body {
   background-color: var(--light-bg);
-  font-family: "Vazirmatn", sans-serif;
   color: var(--dark-text);
   line-height: 1.8;
+  overflow-x: hidden;
+  direction: rtl;
+  text-align: right;
 }
 
+/* --- استایل‌های مربوط به کانتینر تور (Tour Container Styles) --- */
 .tour-container {
-  margin: 40px auto;
   max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 15px;
+  box-sizing: border-box;
 }
 
-.tour-card {
+/* --- استایل‌های کارت تور سفارشی (Custom Tour Card Styles) --- */
+/* این استایل‌ها برای صفحه tour-details.php هستند */
+.custom-card-style {
   background: #fff;
   border-radius: var(--border-radius);
   overflow: hidden;
   box-shadow: var(--box-shadow);
   transition: var(--transition);
+  margin-bottom: 20px;
+  border: none;
 }
 
-.tour-card:hover {
+.custom-card-style:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
-.tour-content {
-  display: flex;
-  flex-wrap: wrap;
-}
-
+/* --- استایل‌های ستون تصویر (Tour Image Column) --- */
+/* این استایل‌ها برای صفحه tour-details.php هستند */
 .tour-image-col {
-  flex: 0 0 50%;
-  max-width: 50%;
-  padding: 0;
   position: relative;
 }
 
-.tour-details-col {
-  flex: 0 0 50%;
-  max-width: 50%;
-  padding: 30px;
-}
-
-.tour-header img {
+.custom-image-style {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -126,7 +95,7 @@ body {
 .tour-badge {
   position: absolute;
   top: 20px;
-  left: 20px;
+  right: 20px;
   background: var(--accent-color);
   color: white;
   padding: 8px 20px;
@@ -135,6 +104,12 @@ body {
   font-weight: bold;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 2;
+}
+
+/* --- استایل‌های ستون جزئیات (Tour Details Column) --- */
+/* این استایل‌ها برای صفحه tour-details.php هستند */
+.tour-details-col {
+  box-sizing: border-box;
 }
 
 .tour-title {
@@ -158,22 +133,15 @@ body {
 }
 
 .tour-meta {
-  display: flex;
-  flex-wrap: wrap;
   margin-bottom: 25px;
 }
 
 .tour-meta-item {
-  display: flex;
-  align-items: center;
-  margin-left: 20px;
-  margin-bottom: 10px;
   color: var(--light-text);
   font-size: 15px;
 }
 
 .tour-meta-item i {
-  margin-left: 8px;
   color: var(--secondary-color);
   font-size: 18px;
 }
@@ -182,6 +150,9 @@ body {
   font-size: 16px;
   margin: 25px 0;
   line-height: 1.9;
+  text-align: right;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .tour-info {
@@ -192,8 +163,6 @@ body {
 }
 
 .info-row {
-  display: flex;
-  justify-content: space-between;
   padding: 12px 0;
   border-bottom: 1px dashed #e0e0e0;
 }
@@ -212,6 +181,8 @@ body {
   font-weight: 500;
 }
 
+/* --- استایل‌های جعبه قیمت (Price Box) --- */
+/* این استایل‌ها برای صفحه tour-details.php هستند */
 .price-box {
   background: linear-gradient(135deg, var(--secondary-color), #2980b9);
   color: white;
@@ -251,11 +222,14 @@ body {
   color: var(--primary-color);
 }
 
+/* --- استایل‌های گالری بندانگشتی (Gallery Thumbnails) --- */
+/* این استایل‌ها برای صفحه tour-details.php هستند */
 .gallery-thumbnails {
   display: flex;
   margin-top: 15px;
   overflow-x: auto;
   padding-bottom: 10px;
+  justify-content: flex-end;
 }
 
 .thumbnail {
@@ -267,6 +241,7 @@ body {
   object-fit: cover;
   border: 2px solid transparent;
   transition: var(--transition);
+  flex-shrink: 0;
 }
 
 .thumbnail:hover {
@@ -274,34 +249,439 @@ body {
   transform: scale(1.05);
 }
 
-/* Responsive styles */
-@media (max-width: 992px) {
+/* --- استایل‌های مربوط به فرم جستجو و صفحه‌بندی --- */
+.search-box {
+  background: #fff; /* تغییر پس‌زمینه به سفید */
+  padding: 30px; /* افزایش پدینگ */
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow); /* استفاده از سایه عمومی */
+  margin-bottom: 40px; /* افزایش فاصله پایین */
+  text-align: right;
+}
+
+.search-box .form-label {
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.search-box .form-control {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  font-size: 15px;
+}
+
+.search-box .btn {
+  margin-top: 20px;
+  min-width: 120px;
+  font-weight: bold;
+  border-radius: 30px;
+  padding: 10px 20px;
+  transition: var(--transition);
+}
+
+.search-box .btn-primary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: white;
+}
+
+.search-box .btn-primary:hover {
+  background-color: #2980b9; /* کمی تیره‌تر */
+  border-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+.search-box .btn-secondary {
+  background-color: #bdc3c7;
+  border-color: #bdc3c7;
+  color: var(--dark-text);
+  margin-right: 10px; /* فاصله از دکمه جستجو */
+}
+
+.search-box .btn-secondary:hover {
+  background-color: #95a5a6;
+  border-color: #95a5a6;
+  transform: translateY(-2px);
+}
+
+/* --- استایل‌های کارت تورهای نمایشگاهی (E-Tours Card Styles) --- */
+.tour-card {
+  background: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px; /* اضافه کردن پدینگ داخلی برای محتوا */
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* برای اینکه کارت‌ها هم‌ارتفاع باشند */
+  text-align: right; /* متن داخل کارت‌ها راست‌چین باشد */
+}
+
+.tour-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.tour-card .tour-img {
+  width: 100%;
+  height: 200px; /* ارتفاع ثابت برای تصاویر */
+  object-fit: cover; /* حفظ نسبت ابعاد و پوشاندن فضا */
+  border-radius: var(--border-radius); /* گرد کردن گوشه‌های تصویر */
+  margin-bottom: 15px;
+}
+
+.tour-card h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.tour-card p {
+  font-size: 15px;
+  color: var(--dark-text);
+  margin-bottom: 8px;
+  flex-grow: 1; /* برای اینکه پاراگراف‌ها فضای موجود رو پر کنن */
+}
+
+.tour-card p strong {
+  color: var(--secondary-color);
+}
+
+.tour-card .btn-warning {
+  background-color: #f39c12; /* رنگ نارنجی جذاب */
+  border-color: #f39c12;
+  color: white;
+  font-weight: bold;
+  border-radius: 25px; /* گرد کردن دکمه */
+  padding: 10px 15px;
+  transition: var(--transition);
+  margin-top: 15px; /* فاصله از متن بالای دکمه */
+}
+
+.tour-card .btn-warning:hover {
+  background-color: #e67e22; /* کمی تیره‌تر در هاور */
+  border-color: #e67e22;
+  transform: translateY(-2px);
+}
+
+/* --- استایل‌های صفحه‌بندی (Pagination Styles) --- */
+.pagination {
+  justify-content: center; /* وسط‌چین کردن صفحه‌بندی */
+  margin-top: 50px; /* فاصله از بالا */
+  padding-bottom: 30px; /* فاصله از پایین صفحه */
+}
+
+.page-item .page-link {
+  border-radius: 8px; /* گرد کردن گوشه‌های دکمه‌های صفحه‌بندی */
+  margin: 0 5px; /* فاصله بین دکمه‌ها */
+  color: var(--dark-text);
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 10px 18px;
+  font-weight: bold;
+  transition: var(--transition);
+}
+
+.page-item.active .page-link {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: white;
+}
+
+.page-item .page-link:hover {
+  background-color: var(--light-bg);
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.page-item.active .page-link:hover {
+  /* برای دکمه فعال در هاور */
+  background-color: #2980b9; /* کمی تیره‌تر */
+  border-color: #2980b9;
+}
+
+.page-item.disabled .page-link {
+  color: var(--light-text);
+  background-color: #f1f1f1;
+  border-color: #eee;
+  cursor: not-allowed;
+}
+
+/* --- استایل‌های Navbar (همانند قبل) --- */
+.navbar {
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand img {
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
+.navbar-toggler {
+  border: none;
+  outline: none !important;
+  padding: 0.25rem 0.75rem;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.navbar-nav {
+  flex-direction: row-reverse;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.nav-item {
+  margin-left: 1.5rem;
+}
+
+.nav-link {
+  font-weight: bold;
+  padding: 0.5rem 0 !important;
+}
+
+.nav-link:hover {
+  color: var(--secondary-color) !important;
+}
+
+.dropdown-menu {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 10px 0;
+  min-width: 180px;
+  border: none;
+  text-align: right;
+  right: 0 !important;
+  left: auto !important;
+}
+
+.dropdown-item {
+  padding: 10px 20px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: var(--light-bg);
+  color: var(--secondary-color);
+}
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  right: 100%;
+  margin-top: -1px;
+  margin-right: 0;
+  border-radius: var(--border-radius);
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+  display: block;
+}
+
+.dropdown-toggle::after {
+  display: inline-block;
+  margin-right: 0.255em;
+  margin-left: 0;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid transparent;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0.3em solid transparent;
+  border-left: 0.3em solid;
+}
+
+/* --- استایل‌های ریسپانسیو (Responsive Styles) --- */
+@media (max-width: 991.98px) {
   .tour-image-col,
   .tour-details-col {
-    flex: 0 0 100%;
+    width: 100%;
     max-width: 100%;
   }
 
-  .tour-header img {
+  .custom-image-style {
     border-radius: var(--border-radius) var(--border-radius) 0 0;
-    min-height: 300px;
+    min-height: 250px;
   }
-}
 
-@media (max-width: 576px) {
+  .tour-badge {
+    top: 15px;
+    right: 15px;
+  }
+
   .tour-title {
     font-size: 26px;
+    padding-bottom: 10px;
   }
 
-  .tour-details-col {
+  .tour-title::after {
+    width: 60px;
+  }
+
+  .tour-meta {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .tour-meta-item {
+    margin-right: 0;
+    margin-left: auto;
+    padding-left: 10px;
+  }
+
+  .tour-description {
+    margin: 20px 0;
+    text-align: right;
+  }
+
+  .tour-info {
+    margin-top: 20px;
+    padding: 15px;
+  }
+
+  .info-row {
+    text-align: right;
+  }
+
+  .price-box {
+    margin-top: 20px;
     padding: 20px;
   }
 
   .price-value {
     font-size: 28px;
   }
+
+  .btn-book {
+    padding: 10px 25px;
+    font-size: 15px;
+  }
+
+  .gallery-thumbnails {
+    justify-content: flex-start;
+  }
+
+  .thumbnail {
+    margin-right: 8px;
+    margin-left: 0;
+  }
+
+  /* --- استایل‌های Navbar در موبایل --- */
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .nav-item {
+    width: 100%;
+    text-align: right;
+    margin-left: 0;
+    margin-bottom: 5px;
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem !important;
+  }
+
+  .dropdown-menu {
+    position: static !important;
+    display: none;
+    float: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    margin-top: 0;
+    padding-left: 10px;
+  }
+
+  .dropdown-menu.show {
+    display: block;
+  }
+
+  .dropdown-submenu > .dropdown-menu {
+    right: auto;
+    left: auto;
+  }
+
+  .dropdown-toggle::after {
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-left: 0.3em solid transparent;
+    border-bottom: none;
+    transform: rotate(0deg);
+  }
+
+  /* --- استایل‌های ریسپانسیو برای کارت‌های نمایشگاهی در موبایل --- */
+  .tour-card {
+    padding: 15px;
+  }
+
+  .tour-card .tour-img {
+    height: 180px;
+  }
+
+  .tour-card h3 {
+    font-size: 18px;
+  }
+
+  .tour-card p {
+    font-size: 14px;
+  }
+
+  .tour-card .btn-warning {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
 }
 
+@media (max-width: 767.98px) {
+  .tour-details-col {
+    padding: 15px;
+  }
 
+  /* فرم جستجو در موبایل */
+  .search-box {
+    padding: 20px;
+  }
+}
 
+@media (max-width: 575.98px) {
+  .tour-title {
+    font-size: 22px;
+  }
 
+  .price-value {
+    font-size: 24px;
+  }
+
+  .tour-meta-item {
+    font-size: 14px;
+  }
+
+  .btn-book {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  /* فرم جستجو در موبایل کوچکتر */
+  .search-box .btn {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  .search-box .btn-secondary {
+    margin-bottom: 0;
+  }
+}

@@ -1,280 +1,507 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['all_data'])) {
-    header('Location: login.php');
-    exit;
+/* --- فونت‌ها --- */
+@font-face {
+  font-family: "Farhang";
+  src: url("../fonts/FarhangFamily/Farhang2-Medium.ttf") format("truetype"),
+    url("../fonts/woff/Farhang2-Medium.woff") format("woff"),
+    url("../fonts/Farhang.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
-$all_data = $_SESSION['all_data'];
-$id = $all_data['id'];
-
-?>
-
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>پنل مدیریت - افزودن مقاله جدید</title>
-
-    <?php include 'includes.php'; ?>
-    <link rel="stylesheet" href="styles.css">
-
-
-    <link href="https://cdn.jsdelivr.net/npm/jodit/build/jodit.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/jodit/build/jodit.min.js"></script>
-
-
-
-
-</head>
-
-<body>
-
-    <div class="container-fluid">
-        <div class="row">
-            <?php include 'sidebar.php'; ?>
-
-            <!-- Main Content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4">
-                <div class="card shadow">
-                    <div class="card-header bg-info text-white">
-                        افزودن مقاله جدید
-                    </div>
-                    <div class="card-body">
-                        <form enctype="multipart/form-data" action="" method="POST">
-                            <!-- عنوان مقاله -->
-                            <div class="mb-3">
-                                <label for="title" class="form-label">عنوان مقاله *</label>
-                                <input type="text" class="form-control" id="title" name="title" required>
-                            </div>
-
-                            <!-- slug -->
-                            <div class="mb-3">
-                                <label for="slug" class="form-label">Slug (نامک) *</label>
-                                <input type="text" class="form-control" id="slug" name="slug" required>
-                                <small class="text-muted">این فیلد به صورت خودکار از عنوان مقاله ایجاد می‌شود</small>
-                            </div>
-
-                            <!-- محتوای مقاله -->
-                            <!-- <div class="mb-4">
-                                <label for="content" class="form-label">محتوای مقاله *</label>
-                                <textarea id="content" name="content"></textarea>
-                            </div> -->
-
-
-                            <textarea id="editor" name="content"></textarea>
-                            <script>
-                                const editor = new Jodit('#editor', {
-                                    removeButtons: ['source'],
-                                    language: 'fa',
-                                    height: 500,
-
-                                });
-                            </script>
-
-
-
-
-                            <!-- تصویر شاخص -->
-                            <div class="mb-3">
-                                <label for="featured_image" class="form-label">تصویر شاخص</label>
-                                <input class="form-control" type="file" id="featured_image" name="featured_image" accept="image/*">
-                                <small class="text-muted">فرمت‌های مجاز: JPG, PNG, GIF - حداکثر حجم: 2MB</small>
-                            </div>
-
-
-                            <!-- وضعیت -->
-                            <div class="mb-3">
-                                <label for="status" class="form-label">وضعیت انتشار *</label>
-                                <select class="form-control" id="status" name="status" required>
-                                    <option value="published">منتشر شده</option>
-                                    <option value="draft">پیش‌نویس</option>
-                                    <option value="pending">در انتظار بررسی</option>
-                                </select>
-                            </div>
-
-                            <!-- متا تگ‌ها -->
-                            <div class="card mt-4 mb-4">
-                                <div class="card-header bg-light">
-                                    تنظیمات سئو
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <label for="meta_title" class="form-label">عنوان متا</label>
-                                        <input type="text" class="form-control" id="meta_title" name="meta_title">
-                                        <small class="text-muted">حداکثر 60 کاراکتر</small>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="meta_description" class="form-label">توضیحات متا</label>
-                                        <textarea class="form-control" id="meta_description" name="meta_description" rows="2"></textarea>
-                                        <small class="text-muted">حداکثر 160 کاراکتر</small>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="meta_keywords" class="form-label">کلمات کلیدی متا</label>
-                                        <input type="text" class="form-control" id="meta_keywords" name="meta_keywords">
-                                        <small class="text-muted">کلمات را با کاما جدا کنید</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-
-                            <button name="submit" class="btn btn-info">ذخیره مقاله</button>
-                            <br>
-                        </form>
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            // ایجاد خودکار slug از عنوان
-            $('#title').on('input', function() {
-                const title = $(this).val();
-                const slug = title.replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, '')
-                    .replace(/\s+/g, '-')
-                    .toLowerCase();
-                $('#slug').val(slug);
-            });
-        });
-    </script>
-
-
-    <script>
-        $('form').submit(function() {
-            $('#editor').val(editor.getEditorValue()); // انتقال محتوا به textarea
-        });
-    </script>
-</body>
-
-</html>
-
-<?php
-include "../config.php";
-
-if (isset($_POST['submit'])) {
-    // دریافت مقادیر از فرم
-    $title = $_POST['title'];
-    $slug = $_POST['slug'];
-    $content = $_POST['content'];
-
-    var_dump($content);
-    // $content = htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
-    // $content = $conn->real_escape_string($content);
-    $status = $_POST['status'];
-    $meta_title = $_POST['meta_title'] ?? '';
-    $meta_description = $_POST['meta_description'] ?? '';
-    $meta_keywords = $_POST['meta_keywords'] ?? '';
-    $featured_image_path = '';
-    $current_date = date('Y-m-d H:i:s');
-
-    // اعتبارسنجی اولیه
-    if (empty($title) || empty($slug) || empty($content)) {
-        die("لطفا تمام فیلدهای الزامی را پر کنید");
-    }
-
-    // ذخیره اطلاعات مقاله در دیتابیس
-    $sql = "INSERT INTO blog_posts 
-            (title, slug, content, featured_image, status, 
-             created_at, updated_at, meta_title, meta_description, meta_keywords, author_id) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, $id)";
-
-    $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        die("خطا در آماده‌سازی query: " . $conn->error);
-    }
-
-    // پردازش تصویر شاخص
-    if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] == UPLOAD_ERR_OK) {
-        $image = $_FILES['featured_image'];
-        $upload_dir = "../uploads/blog/";
-
-        if (!file_exists($upload_dir)) {
-            mkdir($upload_dir, 0755, true);
-        }
-
-        $file_extension = pathinfo($image['name'], PATHINFO_EXTENSION);
-        $file_name = uniqid() . '.' . $file_extension;
-        $temp_path = $upload_dir . $file_name;
-
-        if (move_uploaded_file($image['tmp_name'], $temp_path)) {
-            $featured_image_path = $temp_path;
-        }
-    }
-
-    // بعد از اجرای کوئری و گرفتن ID پست، پوشه ایجاد شده و تصویر منتقل می‌شود
-    if ($stmt->bind_param("ssssssssss", $title, $slug, $content, $featured_image_path, $status, $current_date, $current_date, $meta_title, $meta_description, $meta_keywords) && $stmt->execute()) {
-        $post_id = $stmt->insert_id;
-
-        // اگر تصویر آپلود شده بود، آن را به پوشه با ID پست منتقل می‌کنیم
-        if (!empty($featured_image_path)) {
-            $new_upload_dir = "../uploads/blog/" . $post_id . "/";
-            if (!file_exists($new_upload_dir)) {
-                mkdir($new_upload_dir, 0755, true);
-            }
-
-            $new_path = $new_upload_dir . $file_name;
-            rename($featured_image_path, $new_path);
-
-            // آپدیت مسیر تصویر در دیتابیس
-            $update_sql = "UPDATE blog_posts SET featured_image = ? WHERE id = ?";
-            $update_stmt = $conn->prepare($update_sql);
-            $update_stmt->bind_param("si", $new_path, $post_id);
-            $update_stmt->execute();
-            $update_stmt->close();
-        }
-
-        echo "<div id='successToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; top: 20px; right: 20px; width: 300px; z-index: 1055;'>
-            <div class='toast-header bg-success text-white'>
-                <strong class='mr-auto'>موفقیت</strong>
-            </div>
-            <div class='toast-body'>
-                مقاله با موفقیت ذخیره شد!
-            </div>
-        </div>
-        <script>
-            $(document).ready(function(){
-                $('#successToast').toast({
-                    autohide: true,
-                    delay: 3000
-                }).toast('show');
-                setTimeout(function(){
-                    window.location.href = 'add_post';
-                }, 3000);
-            });
-        </script>";
-    } else {
-        // اگر خطایی رخ داد، تصویر آپلود شده را پاک کنید
-        if (!empty($featured_image_path) && file_exists($featured_image_path)) {
-            unlink($featured_image_path);
-        }
-
-        echo "<div id='errorToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; top: 20px; right: 20px; width: 300px; z-index: 1055;'>
-            <div class='toast-header bg-danger text-white'>
-                <strong class='mr-auto'>خطا</strong>
-            </div>
-            <div class='toast-body'>
-                خطایی در ذخیره مقاله رخ داد!<br>Error: " . htmlspecialchars($stmt->error) . "
-            </div>
-        </div>
-        <script>
-            $(document).ready(function(){
-                $('#errorToast').toast({
-                    autohide: true,
-                    delay: 3000
-                }).toast('show');
-            });
-        </script>";
-    }
-
-    $stmt->close();
-    $conn->close();
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button,
+input,
+textarea,
+table,
+th,
+td,
+li,
+ol,
+ul {
+  font-family: "Farhang", sans-serif !important; /* !important برای اطمینان از اعمال فونت بعد از بوت استرپ */
 }
-?>
+
+/* --- متغیرهای اصلی (Root Variables) --- */
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --accent-color: #e74c3c;
+  --light-bg: #f8f9fa;
+  --dark-text: #2c3e50;
+  --light-text: #7f8c8d;
+  --border-radius: 12px;
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+/* --- استایل‌های عمومی بدنه (Body General Styles) --- */
+body {
+  background-color: var(--light-bg);
+  color: var(--dark-text);
+  line-height: 1.8;
+  overflow-x: hidden; /* جلوگیری از اسکرول افقی در کل صفحه */
+  direction: rtl; /* تنظیم جهت راست به چپ برای کل صفحه */
+  text-align: right; /* متن‌ها به طور پیش‌فرض راست‌چین باشند */
+}
+
+/* --- استایل‌های مربوط به کانتینر تور (Tour Container Styles) --- */
+.tour-container {
+  max-width: 1200px; /* حداکثر عرض کانتینر */
+  margin: 40px auto; /* فاصله از بالا و پایین و وسط‌چین کردن افقی */
+  padding: 0 15px; /* اضافه کردن پدینگ به کانتینر اصلی */
+  box-sizing: border-box;
+}
+
+/* --- استایل‌های کارت تور سفارشی (Custom Tour Card Styles) --- */
+.custom-card-style {
+  background: #fff;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  margin-bottom: 20px;
+  border: none;
+}
+
+.custom-card-style:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* --- استایل‌های ستون تصویر (Tour Image Column) --- */
+.tour-image-col {
+  position: relative;
+}
+
+.custom-image-style {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 400px;
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.tour-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--accent-color);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+/* --- استایل‌های ستون جزئیات (Tour Details Column) --- */
+.tour-details-col {
+  box-sizing: border-box;
+}
+
+.tour-title {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.tour-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  height: 4px;
+  background: var(--secondary-color);
+  border-radius: 2px;
+}
+
+.tour-meta {
+  margin-bottom: 25px;
+}
+
+.tour-meta-item {
+  color: var(--light-text);
+  font-size: 15px;
+}
+
+.tour-meta-item i {
+  color: var(--secondary-color);
+  font-size: 18px;
+}
+
+.tour-description {
+  font-size: 16px;
+  margin: 25px 0;
+  line-height: 1.9;
+  text-align: right;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.tour-info {
+  background: var(--light-bg);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.info-row {
+  padding: 12px 0;
+  border-bottom: 1px dashed #e0e0e0;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.info-value {
+  color: var(--dark-text);
+  font-weight: 500;
+}
+
+/* --- استایل‌های جعبه قیمت (Price Box) --- */
+.price-box {
+  background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+  color: white;
+  padding: 25px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin-top: 30px;
+}
+
+.price-label {
+  font-size: 16px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.price-value {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.btn-book {
+  background: white;
+  color: var(--secondary-color);
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-book:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  color: var(--primary-color);
+}
+
+/* --- استایل‌های گالری بندانگشتی (Gallery Thumbnails) --- */
+.gallery-thumbnails {
+  display: flex;
+  margin-top: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  justify-content: flex-end;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 60px;
+  border-radius: 6px;
+  margin-left: 10px;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid transparent;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.thumbnail:hover {
+  border-color: var(--secondary-color);
+  transform: scale(1.05);
+}
+
+/* --- استایل‌های متفرقه (از CSS قبلی شما) --- */
+.pagination {
+  justify-content: center;
+}
+
+.search-box {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.date-inputs {
+  display: flex;
+  gap: 10px;
+}
+
+/* --- استایل‌های جدید برای Navbar --- */
+.navbar {
+  padding: 1rem 0; /* فاصله از بالا و پایین نوار ناوبری */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* یک سایه کوچک برای زیبایی */
+}
+
+.navbar-brand img {
+  margin-right: 0; /* برای RTL */
+  margin-left: 1rem; /* فاصله لوگو از منو */
+}
+
+.navbar-toggler {
+  border: none; /* حذف حاشیه دکمه تاگل */
+  outline: none !important; /* حذف خط دور دکمه هنگام فوکوس */
+  padding: 0.25rem 0.75rem; /* پدینگ استاندارد بوت‌استرپ */
+}
+
+.navbar-toggler:focus {
+  box-shadow: none; /* حذف سایه فوکوس */
+}
+
+.navbar-nav {
+  flex-direction: row-reverse; /* آیتم‌های ناوبار از راست به چپ چیده شوند */
+  width: 100%; /* برای اینکه justify-content-end کار کنه */
+  justify-content: flex-start; /* آیتم‌ها در دسکتاپ به سمت راست (شروع) تراز شوند */
+}
+
+.nav-item {
+  margin-left: 1.5rem; /* فاصله بین آیتم‌های اصلی ناوبار در دسکتاپ */
+}
+
+.nav-link {
+  font-weight: bold;
+  padding: 0.5rem 0 !important; /* پدینگ برای لینک‌ها */
+  /* !important برای override کردن پدینگ پیش‌فرض بوت‌استرپ */
+}
+
+.nav-link:hover {
+  color: var(--secondary-color) !important;
+}
+
+/* استایل دهی برای زیرمنوهای (Dropdown) اصلی */
+.dropdown-menu {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 10px 0;
+  min-width: 180px; /* حداقل عرض برای زیرمنو */
+  border: none;
+  text-align: right; /* متن‌های زیرمنو راست‌چین باشند */
+  right: 0 !important; /* برای RTL، از راست شروع شود */
+  left: auto !important; /* از چپ خودکار شود */
+}
+
+.dropdown-item {
+  padding: 10px 20px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: var(--light-bg);
+  color: var(--secondary-color);
+}
+
+/* استایل دهی برای زیرمنوهای تو در تو (Submenu Dropdowns) */
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  right: 100%; /* زیرمنو در سمت چپ آیتم والد باز شود (برای RTL) */
+  margin-top: -1px;
+  margin-right: 0;
+  border-radius: var(--border-radius);
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+  display: block;
+}
+
+/* آیکون فلش برای زیرمنوها در RTL */
+.dropdown-toggle::after {
+  display: inline-block;
+  margin-right: 0.255em; /* فاصله فلش از متن در RTL */
+  margin-left: 0;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid transparent;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0.3em solid transparent;
+  border-left: 0.3em solid; /* فلش به سمت چپ باشد */
+}
+
+/* --- استایل‌های ریسپانسیو (Responsive Styles) --- */
+@media (max-width: 991.98px) {
+  /* برای موبایل و تبلت (lg breakpoint) */
+  .tour-image-col,
+  .tour-details-col {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .custom-image-style {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    min-height: 250px;
+  }
+
+  .tour-badge {
+    top: 15px;
+    right: 15px;
+  }
+
+  .tour-title {
+    font-size: 26px;
+    padding-bottom: 10px;
+  }
+
+  .tour-title::after {
+    width: 60px;
+  }
+
+  .tour-meta {
+    flex-direction: column;
+    align-items: flex-end; /* برای RTL */
+  }
+
+  .tour-meta-item {
+    margin-right: 0;
+    margin-left: auto; /* برای راست‌چین کردن خود آیتم در کادر والد */
+    padding-left: 10px; /* فضای کافی از سمت چپ برای متن */
+  }
+
+  .tour-description {
+    margin: 20px 0;
+    text-align: right;
+  }
+
+  .tour-info {
+    margin-top: 20px;
+    padding: 15px;
+  }
+
+  .info-row {
+    text-align: right;
+  }
+
+  .price-box {
+    margin-top: 20px;
+    padding: 20px;
+  }
+
+  .price-value {
+    font-size: 28px;
+  }
+
+  .btn-book {
+    padding: 10px 25px;
+    font-size: 15px;
+  }
+
+  .gallery-thumbnails {
+    justify-content: flex-start;
+  }
+
+  .thumbnail {
+    margin-right: 8px;
+    margin-left: 0;
+  }
+
+  /* --- استایل‌های Navbar در موبایل --- */
+  .navbar-nav {
+    flex-direction: column; /* آیتم‌های منو زیر هم قرار بگیرند */
+    align-items: flex-end; /* آیتم‌ها به سمت راست تراز شوند */
+    width: 100%; /* برای اینکه align-items کار کنه */
+    margin-top: 1rem;
+  }
+
+  .nav-item {
+    width: 100%; /* هر آیتم کل عرض را بگیرد */
+    text-align: right; /* متن آیتم‌ها راست‌چین شود */
+    margin-left: 0;
+    margin-bottom: 5px; /* فاصله بین آیتم‌ها */
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem !important; /* افزایش پدینگ برای لینک‌ها در موبایل */
+  }
+
+  /* زیرمنوهای تو در تو در موبایل */
+  .dropdown-menu {
+    position: static !important; /* زیرمنو دیگر شناور نباشد */
+    display: none; /* به طور پیش‌فرض مخفی باشد */
+    float: none; /* شناور نباشد */
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    margin-top: 0;
+    padding-left: 10px; /* کمی تورفتگی برای آیتم‌های زیرمنو */
+  }
+
+  .dropdown-menu.show {
+    display: block; /* هنگام باز شدن نمایش داده شود */
+  }
+
+  .dropdown-submenu > .dropdown-menu {
+    right: auto; /* تنظیمات راست و چپ را خنثی کن */
+    left: auto;
+  }
+
+  /* فلش برای زیرمنوهای تاگل در موبایل */
+  .dropdown-toggle::after {
+    border-top: 0.3em solid; /* فلش رو به پایین باشد */
+    border-right: 0.3em solid transparent;
+    border-left: 0.3em solid transparent;
+    border-bottom: none;
+    transform: rotate(0deg); /* اطمینان از جهت درست فلش */
+  }
+}
+
+@media (max-width: 767.98px) {
+  .tour-details-col {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .tour-title {
+    font-size: 22px;
+  }
+
+  .price-value {
+    font-size: 24px;
+  }
+
+  .tour-meta-item {
+    font-size: 14px;
+  }
+
+  .btn-book {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
