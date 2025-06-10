@@ -29,14 +29,15 @@
             $stmt->execute();
             $result = $stmt->get_result();
 
-            if ($row = $result->fetch_assoc()) {
-        ?>
+            if ($row = $result->fetch_assoc()) { ?>
+
                 <div class="tour-card">
                     <div class="tour-content">
                         <div class="tour-image-col">
                             <span class="tour-badge">پیشنهاد ویژه</span>
                             <div class="tour-header">
-                                <img src="<?= htmlspecialchars(str_replace('../', '', $row['tour_image'])) ?>"
+                                <img
+                                    src="<?= $row['tour_image'] ?>"
                                     alt="<?= htmlspecialchars($row['title']) ?>"
                                     class="tour-main-image img-fluid">
                             </div>
@@ -61,7 +62,7 @@
                             </div>
 
                             <div class="tour-description">
-                                <?= nl2br(htmlspecialchars($row['description'])) ?>
+                                <?= nl2br($row['description']) ?>
                             </div>
 
                             <div class="tour-info">
@@ -86,9 +87,10 @@
                             <div class="price-box">
                                 <span class="price-label">شروع قیمت از</span>
                                 <div class="price-value"><?= number_format($row['price']) ?> تومان</div>
-                                <button class="btn-book">
+                                <a class="btn-book" style="text-decoration: none;"
+                                    href="../request_form.php?tour_id=<?= urlencode($row['id']) ?>">
                                     <i class="fas fa-shopping-cart"></i> رزرو تور
-                                </button>
+                                </a>
                             </div>
 
                             <div class="gallery-thumbnails">

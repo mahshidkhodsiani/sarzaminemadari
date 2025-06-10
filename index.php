@@ -83,29 +83,32 @@
 
 
 
+
+
+
+
+
+
+
+
+
     <div class="container my-5">
-        <div class="row align-items-center my-3">
-            <!-- فقط در دسکتاپ -->
-            <div class="d-none d-md-flex col-md-2 justify-content-center">
-                <h2 class="h5 mb-0">تورهای نمایشگاهی</h2>
+
+        <div class="row align-items-center my-4">
+            <div class="d-none d-md-flex col-12 align-items-center justify-content-center position-relative">
+                <h2 class="section-title mb-0 text-nowrap">تورهای نمایشگاهی</h2>
+                <div class="section-divider-inline flex-grow-1 mx-3"></div> <a href="e_tours" class="btn btn-outline-darkblue text-nowrap">
+                    <i class="fas fa-arrow-left me-2"></i> مشاهده تمامی تورهای نمایشگاهی
+                </a>
             </div>
 
-            <div class="d-none d-md-block col-md-8">
-                <hr>
-            </div>
-
-            <div class="d-none d-md-flex col-md-2 justify-content-center">
-                <a href="e_tours" class="btn btn-info">مشاهده تمامی تورهای نمایشگاهی</a>
-            </div>
-
-            <!-- فقط در موبایل -->
-            <div class="d-flex d-md-none col-12 justify-content-between align-items-center px-3">
-                <h2 class="h6 mb-0">تورهای نمایشگاهی</h2>
-                <a href="e_tours" class="btn btn-sm btn-info">مشاهده تمامی تورهای نمایشگاهی</a>
+            <div class="d-flex d-md-none col-12 justify-content-between align-items-center px-3 py-2">
+                <h2 class="h5 mb-0 text-dark fw-bold">تورهای نمایشگاهی</h2>
+                <a href="e_tours" class="btn btn-outline-darkblue btn-sm">
+                    مشاهده همه <i class="fas fa-arrow-left ms-1"></i>
+                </a>
             </div>
         </div>
-
-
 
 
         <?php
@@ -135,7 +138,7 @@
                                 <div class="d-flex justify-content-center mb-3">
                                     <!-- لینک جزئیات با آیدی تور -->
 
-                                    <a href="e_tours/tour-details.php?tour=<?= $exhibition_row['title'] ?>" class="btn btn-warning w-100">دیدن تور</a>
+                                    <a href="e_tours/tour-details.php?tour=<?= $exhibition_row['title'] ?>" class="btn btn-warning w-100 rounded-pill">دیدن تور</a>
 
 
                                 </div>
@@ -156,11 +159,14 @@
 
 
 
+
+
+
     <div class="container my-5">
         <div class="row g-4">
             <!-- تورهای تایلند -->
             <div class="col-md-4">
-                <div class="destination-card  rounded-4 p-0 h-100  overflow-hidden">
+                <div class="destination-card  rounded-4 p-0 h-100  overflow-hidden" style="background-color: #cbcfd7;">
                     <div class="text-center p-3">
                         <i class="bi bi-luggage-fill"></i>
                         <img src="img/20.png" alt="تور تایلند" class="img-fluid" style="height: 80px;">
@@ -178,7 +184,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="destination-card  rounded-4 p-0 h-100  overflow-hidden">
+                <div class="destination-card  rounded-4 p-0 h-100  overflow-hidden" style="background-color: #cbcfd7;">
                     <div class="text-center p-3">
                         <i class="bi bi-luggage-fill"></i>
                         <img src="img/21.png" alt="تور تایلند" class="img-fluid" style="height: 80px;">
@@ -196,7 +202,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="destination-card  rounded-4 p-0 h-100  overflow-hidden">
+                <div class="destination-card  rounded-4 p-0 h-100  overflow-hidden" style="background-color: #cbcfd7;">
                     <div class="text-center p-3">
                         <i class="bi bi-luggage-fill"></i>
                         <img src="img/22.png" alt="تور تایلند" class="img-fluid" style="height: 80px;">
@@ -216,82 +222,6 @@
 
         </div>
     </div>
-
-
-
-    <div class="container my-5">
-
-
-
-
-        <div class="row align-items-center my-3">
-            <!-- فقط در دسکتاپ -->
-            <div class="d-none d-md-flex col-md-2 justify-content-center">
-                <h2 class="h5 mb-0">تورهای خارجی</h2>
-            </div>
-
-            <div class="d-none d-md-block col-md-8">
-                <hr>
-            </div>
-
-            <div class="d-none d-md-flex col-md-2 justify-content-center">
-                <a href="tours" class="btn btn-info">مشاهده تمامی تورهای خارجی</a>
-            </div>
-
-            <!-- فقط در موبایل -->
-            <div class="d-flex d-md-none col-12 justify-content-between align-items-center px-3">
-                <h2 class="h6 mb-0">تورهای خارجی</h2>
-                <a href="tours" class="btn btn-sm btn-info">مشاهده تمامی تورهای خارجی</a>
-            </div>
-        </div>
-
-
-        <?php
-        // کویری برای دریافت 4 تور آخر به ترتیب نزولی (جدیدترین اول)
-        $exhibition = "SELECT * FROM tours ORDER BY id DESC LIMIT 4";
-        $tours = $conn->query($exhibition);
-        ?>
-
-        <div class="row mt-2 g-3">
-            <?php
-            if ($tours->num_rows > 0) {
-                while ($tours_row = $tours->fetch_assoc()) {
-
-            ?>
-                    <div class="col-md-3 col-sm-6 col-6">
-                        <div class="card card-tours h-100">
-                            <!-- نمایش عکس تور از دیتابیس -->
-                            <img src="<?php echo str_replace('../', '', $tours_row['tour_image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($tours_row['title']); ?>">
-
-                            <div class="card-body tours">
-                                <h5 class="card-title"><?php echo htmlspecialchars($tours_row['title']); ?></h5>
-
-
-                                <p><i class="bi bi-cash-coin me-1"></i> شروع قیمت از <?= $tours_row['price'] ?> تومان</p>
-
-                                <p class="card-text"><?php echo substr($tours_row['description'], 0, 100); ?>...</p>
-                                <br>
-                                <div class="d-flex justify-content-center mb-3">
-                                    <!-- لینک جزئیات با آیدی تور -->
-
-                                    <a href="tours/tour-details.php?tour=<?= $tours_row['title'] ?>" class="btn btn-warning w-100">دیدن تور</a>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            <?php
-                }
-            } else {
-                // اگر توری وجود نداشت
-                echo '<div class="col-12 text-center"><p>تور نمایشگاهی موجود نیست</p></div>';
-            }
-            ?>
-        </div>
-    </div>
-
-
-
 
 
 
@@ -341,9 +271,79 @@
 
 
 
+    <div class="container my-5">
+
+
+
+        <div class="row align-items-center my-4">
+            <div class="d-none d-md-flex col-12 align-items-center justify-content-center position-relative">
+                <h2 class="section-title mb-0 text-nowrap">تورهای خارجی</h2>
+                <div class="section-divider-inline flex-grow-1 mx-3"></div> <a href="tours" class="btn btn-outline-darkblue text-nowrap">
+                    <i class="fas fa-arrow-left me-2"></i> مشاهده تمامی تورهای خارجی
+                </a>
+            </div>
+
+            <div class="d-flex d-md-none col-12 justify-content-between align-items-center px-3 py-2">
+                <h2 class="h5 mb-0 text-dark fw-bold">تورهای خارجی</h2>
+                <a href="tours" class="btn btn-outline-darkblue btn-sm">
+                    مشاهده همه <i class="fas fa-arrow-left ms-1"></i>
+                </a>
+            </div>
+        </div>
+
+
+
+
+
+        <?php
+        // کویری برای دریافت 4 تور آخر به ترتیب نزولی (جدیدترین اول)
+        $exhibition = "SELECT * FROM tours ORDER BY id DESC LIMIT 4";
+        $tours = $conn->query($exhibition);
+        ?>
+
+        <div class="row mt-2 g-3">
+            <?php
+            if ($tours->num_rows > 0) {
+                while ($tours_row = $tours->fetch_assoc()) {
+
+            ?>
+                    <div class="col-md-3 col-sm-6 col-6">
+                        <div class="card card-tours h-100">
+                            <!-- نمایش عکس تور از دیتابیس -->
+                            <img src="<?php echo str_replace('../', '', $tours_row['tour_image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($tours_row['title']); ?>">
+
+                            <div class="card-body tours">
+                                <h5 class="card-title"><?php echo htmlspecialchars($tours_row['title']); ?></h5>
+
+
+                                <p><i class="bi bi-cash-coin me-1"></i> شروع قیمت از <?= $tours_row['price'] ?> تومان</p>
+
+                                <p class="card-text"><?php echo substr($tours_row['description'], 0, 100); ?>...</p>
+                                <br>
+                                <div class="d-flex justify-content-center mb-3">
+                                    <!-- لینک جزئیات با آیدی تور -->
+
+                                    <a href="tours/tour-details.php?tour=<?= $tours_row['title'] ?>" class="btn btn-warning w-100 rounded-pill">دیدن تور</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <?php
+                }
+            } else {
+                // اگر توری وجود نداشت
+                echo '<div class="col-12 text-center"><p>تور نمایشگاهی موجود نیست</p></div>';
+            }
+            ?>
+        </div>
+    </div>
+
+
+
 
     <div class="parallax-container">
-        <div class="parallax-image" style="background-image: url('img/17.png');"></div>
+        <div class="parallax-image" style="background-image: url('img/24.jpg');"></div>
     </div>
 
 
