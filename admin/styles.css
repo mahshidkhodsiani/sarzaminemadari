@@ -89,6 +89,68 @@ textarea {
   display: none;
 }
 
+
+
+/* requests.php specific styles */
+
+/* Basic table styling (if not already present) */
+.request-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.request-table th,
+.request-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: right; /* For RTL */
+}
+
+.request-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Hover effect for clickable rows */
+.request-table tbody tr:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+/* Status colors */
+.status-0 {
+    color: #fff; /* White text for contrast */
+    background-color: #dc3545; /* Red for rejected */
+    font-weight: bold;
+    text-align: center; /* Center the text in the cell */
+}
+
+.status-1 {
+    color: #fff; /* White text for contrast */
+    background-color: #28a745; /* Green for confirmed */
+    font-weight: bold;
+    text-align: center;
+}
+
+.status-2 {
+    color: #343a40; /* Darker text for contrast */
+    background-color: #ffc107; /* Yellow for pending (warning color) */
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Optional: improve modal responsiveness */
+@media (max-width: 991.98px) {
+    .modal-lg-custom {
+        max-width: 90%;
+    }
+}
+
+
+
+
+
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(100%);
@@ -110,4 +172,42 @@ textarea {
   .sidebar-overlay {
     display: block;
   }
+}
+
+.request-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.request-table th,
+.request-table td {
+  padding: 12px;
+  text-align: right;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.request-table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.request-table tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.status-pending {
+  color: #ffc107;
+}
+
+.status-confirmed {
+  color: #28a745;
+}
+
+.status-rejected {
+  color: #dc3545;
+}
+
+.modal-lg-custom {
+  max-width: 800px;
 }

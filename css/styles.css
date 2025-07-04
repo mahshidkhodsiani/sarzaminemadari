@@ -33,6 +33,7 @@ textarea {
 
 /* افکت hover برای کاردها */
 .card-tours {
+  border-radius: 20px !important;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -255,6 +256,4 @@ textarea {
   }
 }
 
-
 /* ////////////////////////// */
-

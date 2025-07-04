@@ -35,45 +35,7 @@ $stmt->close();
     <link rel="stylesheet" href="styles.css">
     <link type="text/css" rel="stylesheet" href="css/persianDatepicker.css" />
 
-    <style>
-        .request-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
 
-        .request-table th,
-        .request-table td {
-            padding: 12px;
-            text-align: right;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .request-table th {
-            background-color: #f8f9fa;
-            font-weight: bold;
-        }
-
-        .request-table tr:hover {
-            background-color: #f1f1f1;
-            cursor: pointer;
-        }
-
-        .status-pending {
-            color: #ffc107;
-        }
-
-        .status-confirmed {
-            color: #28a745;
-        }
-
-        .status-rejected {
-            color: #dc3545;
-        }
-
-        .modal-lg-custom {
-            max-width: 800px;
-        }
-    </style>
 </head>
 
 <body>
@@ -106,9 +68,10 @@ $stmt->close();
                                         <th>نام متقاضی</th>
                                         <th>تلفن</th>
                                         <th>تور</th>
+                                        <th>کشور</th>
+                                        <th>شهر</th>
                                         <th>تعداد مسافران</th>
                                         <th>تاریخ درخواست</th>
-                                        <th>وضعیت</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -120,25 +83,12 @@ $stmt->close();
                                             <td><?= htmlspecialchars($request['name']) ?></td>
                                             <td><?= htmlspecialchars($request['phone']) ?></td>
                                             <td><?= htmlspecialchars($request['tour_title'] ?? 'نامشخص') ?></td>
+                                            <td><?= htmlspecialchars($request['country']) ?></td>
+                                            <td><?= htmlspecialchars($request['city']) ?></td>
+
                                             <td><?= htmlspecialchars($request['passengers']) ?></td>
                                             <td><?= htmlspecialchars($request['request_date']) ?></td>
-                                            <td class="status-<?= htmlspecialchars($request['status']) ?>">
-                                                <?php
-                                                switch ($request['status']) {
-                                                    case 'pending':
-                                                        echo 'در انتظار';
-                                                        break;
-                                                    case 'confirmed':
-                                                        echo 'تایید شده';
-                                                        break;
-                                                    case 'rejected':
-                                                        echo 'رد شده';
-                                                        break;
-                                                    default:
-                                                        echo 'نامشخص';
-                                                }
-                                                ?>
-                                            </td>
+
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -166,15 +116,7 @@ $stmt->close();
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" onclick="updateRequestStatus('confirmed')">
-                        <i class="bi bi-check-circle"></i> تایید درخواست
-                    </button>
-                    <button type="button" class="btn btn-danger" onclick="updateRequestStatus('rejected')">
-                        <i class="bi bi-x-circle"></i> رد درخواست
-                    </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -226,54 +168,7 @@ $stmt->close();
                 });
         }
 
-        // به‌روزرسانی وضعیت درخواست
-        function updateRequestStatus(newStatus) {
-            if (!window.currentRequestId) return;
 
-            fetch('update_request_status.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: `id=${window.currentRequestId}&status=${newStatus}`
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // نمایش پیام موفقیت
-                        const toastHTML = `
-                        <div class="toast align-items-center text-white bg-success border-0 show" 
-                             style="position: fixed; top: 20px; right: 20px; z-index: 1060;">
-                            <div class="d-flex">
-                                <div class="toast-body">
-                                    <i class="bi bi-check-circle-fill me-2"></i>
-                                    وضعیت درخواست با موفقیت به‌روزرسانی شد.
-                                </div>
-                                <button type="button" class="btn-close btn-close-white me-2 m-auto" 
-                                        data-bs-dismiss="toast" aria-label="Close"></button>
-                            </div>
-                        </div>
-                    `;
-
-                        const toastContainer = document.createElement('div');
-                        toastContainer.innerHTML = toastHTML;
-                        document.body.appendChild(toastContainer);
-
-                        // بستن مدال پس از 2 ثانیه
-                        setTimeout(() => {
-                            const modal = bootstrap.Modal.getInstance(document.getElementById('requestModal'));
-                            modal.hide();
-                            // رفرش صفحه برای نمایش تغییرات
-                            window.location.reload();
-                        }, 2000);
-                    } else {
-                        alert('خطا در به‌روزرسانی وضعیت: ' + data.error);
-                    }
-                })
-                .catch(error => {
-                    alert('خطا در ارتباط با سرور: ' + error);
-                });
-        }
 
         // بستن سایدبار هنگام تغییر سایز صفحه
         window.addEventListener('resize', function() {

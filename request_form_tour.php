@@ -21,14 +21,23 @@
     include 'includes.php';
     include 'config.php';
 
+    // دریافت اطلاعات تور از دیتابیس بر اساس tour_id
+    $tour_id = isset($_GET['tour_id']) ? $_GET['tour_id'] : '';
     $tour_data = null;
+
+    if ($tour_id) {
+        $stmt = $conn->prepare("SELECT * FROM exhibition_tours WHERE id = ?");
+        $stmt->bind_param("s", $tour_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $tour_data = $result->fetch_assoc();
+        $stmt->close();
+    }
 
     // پردازش فرم
     $name = $_POST['name'] ?? '';
     $phone = $_POST['phone'] ?? '';
-    $country = $_POST['country'] ?? '';
-    $city = $_POST['city'] ?? '';
-    $post_tour_id = NULL;
+    $post_tour_id = $_POST['tour_id'] ?? '';
     $passengers = $_POST['passengers'] ?? 1;
     $notes = $_POST['notes'] ?? '';
 
@@ -43,11 +52,8 @@
         if (empty($phone)) {
             $errors[] = 'شماره تلفن الزامی است.';
         }
-        if (empty($country)) {
-            $errors[] = 'انتخاب کشور مقصد الزامی است.';
-        }
-        if (empty($city)) {
-            $errors[] = 'انتخاب شهر مقصد الزامی است.';
+        if (empty($post_tour_id)) {
+            $errors[] = 'شناسه تور الزامی است.';
         }
         if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = 'فرمت ایمیل نامعتبر است.';
@@ -59,14 +65,14 @@
         if (empty($errors)) {
             // ذخیره در دیتابیس
             $stmt = $conn->prepare("INSERT INTO tour_requests 
-                                   (name, phone, country, city, tour_id, passengers, notes, request_date) 
-                                   VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-            $stmt->bind_param("sssssis", $name, $phone, $country, $city, $post_tour_id, $passengers, $notes);
+                                   (name, phone, tour_id, passengers, notes, request_date) 
+                                   VALUES (?, ?, ?, ?, ?, ?, NOW())");
+            $stmt->bind_param("sssis", $name, $phone, $post_tour_id, $passengers, $notes);
 
             if ($stmt->execute()) {
                 $success = true;
                 // پاک کردن فیلدها پس از ثبت موفق
-                $name = $phone = $email = $country = $city = $notes = '';
+                $name = $phone = $email = $notes = '';
                 $passengers = 1;
             } else {
                 $errors[] = 'خطا در ثبت درخواست: ' . $conn->error;
@@ -143,39 +149,7 @@
                                     </div>
                                 </div>
 
-                           
-
-                                <!-- انتخاب کشور -->
-                                <div class="mb-3">
-                                    <label for="country" class="form-label">کشور مقصد <span class="text-danger">*</span></label>
-                                    <select class="form-select" id="country" name="country" required>
-                                        <option value="" selected disabled>-- انتخاب کشور --</option>
-                                        <option value="اروپا" <?php echo ($country === 'اروپا') ? 'selected' : ''; ?>>اروپا</option>
-                                        <option value="ترکیه" <?php echo ($country === 'ترکیه') ? 'selected' : ''; ?>>ترکیه</option>
-                                        <option value="ارمنستان" <?php echo ($country === 'ارمنستان') ? 'selected' : ''; ?>>ارمنستان</option>
-                                        <option value="گرجستان" <?php echo ($country === 'گرجستان') ? 'selected' : ''; ?>>گرجستان</option>
-                                        <option value="چین" <?php echo ($country === 'چین') ? 'selected' : ''; ?>>چین</option>
-                                        <option value="تایلند" <?php echo ($country === 'تایلند') ? 'selected' : ''; ?>>تایلند</option>
-                                        <option value="روسیه" <?php echo ($country === 'روسیه') ? 'selected' : ''; ?>>روسیه</option>
-                                        <option value="ژاپن" <?php echo ($country === 'ژاپن') ? 'selected' : ''; ?>>ژاپن</option>
-                                        <option value="ایران" <?php echo ($country === 'ایران') ? 'selected' : ''; ?>>ایران</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        لطفا کشور مقصد را انتخاب کنید.
-                                    </div>
-                                </div>
-
-                                <!-- انتخاب شهر (وابسته به کشور) -->
-                                <div class="mb-3">
-                                    <label for="city" class="form-label">شهر مقصد <span class="text-danger">*</span></label>
-                                    <select class="form-select" id="city" name="city" required disabled>
-                                        <option value="" selected disabled>-- ابتدا کشور را انتخاب کنید --</option>
-                                        <!-- گزینه‌های شهرها با JavaScript پر می‌شوند -->
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        لطفا شهر مقصد را انتخاب کنید.
-                                    </div>
-                                </div>
+                          
 
                                 <div class="mb-3">
                                     <label for="passengers" class="form-label">تعداد مسافران</label>
@@ -227,72 +201,6 @@
                     }, false)
                 })
         })();
-
-        // شهرهای مربوط به هر کشور
-        const citiesByCountry = {
-            'اروپا': ['پاریس', 'رم', 'بارسلونا', 'آمستردام', 'برلین'],
-            'ترکیه': ['استانبول', 'آنتالیا', 'ازمیر', 'بدروم', 'کوش آداسی'],
-            'ارمنستان': ['ایروان', 'گیومری', 'وانادزور'],
-            'گرجستان': ['تفلیس', 'باتومی', 'کوتائیسی'],
-            'چین': ['پکن', 'شانگهای', 'گوانگژو'],
-            'تایلند': ['بانکوک', 'پوکت', 'چیانگ مای'],
-            'روسیه': ['مسکو', 'سن پترزبورگ', 'سوچی'],
-            'ژاپن': ['توکیو', 'کیوتو', 'اوساکا'],
-            'ایران': ['مشهد', 'قشم', 'کیش', 'تهران', 'اصفهان', 'شیراز']
-        };
-
-        // مدیریت تغییر کشور و پر کردن شهرهای مربوطه
-        document.getElementById('country').addEventListener('change', function() {
-            const country = this.value;
-            const citySelect = document.getElementById('city');
-            
-            // پاک کردن گزینه‌های قبلی
-            citySelect.innerHTML = '';
-            
-            if (country) {
-                // فعال کردن انتخاب شهر
-                citySelect.disabled = false;
-                
-                // اضافه کردن گزینه پیش‌فرض
-                const defaultOption = document.createElement('option');
-                defaultOption.value = '';
-                defaultOption.textContent = '-- انتخاب شهر --';
-                defaultOption.selected = true;
-                defaultOption.disabled = true;
-                citySelect.appendChild(defaultOption);
-                
-                // اضافه کردن شهرهای مربوط به کشور انتخاب شده
-                citiesByCountry[country].forEach(city => {
-                    const option = document.createElement('option');
-                    option.value = city;
-                    option.textContent = city;
-                    
-                    // اگر قبلا انتخاب شده بود، انتخاب شود
-                    if (city === '<?php echo htmlspecialchars($city); ?>') {
-                        option.selected = true;
-                    }
-                    
-                    citySelect.appendChild(option);
-                });
-            } else {
-                // غیرفعال کردن انتخاب شهر اگر کشوری انتخاب نشده
-                citySelect.disabled = true;
-                const defaultOption = document.createElement('option');
-                defaultOption.value = '';
-                defaultOption.textContent = '-- ابتدا کشور را انتخاب کنید --';
-                defaultOption.selected = true;
-                defaultOption.disabled = true;
-                citySelect.appendChild(defaultOption);
-            }
-        });
-
-        // اگر کشور از قبل انتخاب شده بود، شهرهای آن را بارگذاری کن
-        document.addEventListener('DOMContentLoaded', function() {
-            const selectedCountry = '<?php echo htmlspecialchars($country); ?>';
-            if (selectedCountry) {
-                document.getElementById('country').dispatchEvent(new Event('change'));
-            }
-        });
 
         <?php if ($success): ?>
             // نمایش مدال موفقیت و هدایت به صفحه تورها

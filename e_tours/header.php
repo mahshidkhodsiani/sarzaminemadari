@@ -26,7 +26,6 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
                     <li><a class="dropdown-item" href="#">اروپا</a></li>
-                    <li><a class="dropdown-item" href="#">کیش</a></li>
                     <li><a class="dropdown-item" href="#">استانبول</a></li>
                     <li><a class="dropdown-item" href="#">سواحل ترکیه</a></li>
                     <li><a class="dropdown-item" href="#">ارمنستان</a></li>
@@ -71,8 +70,10 @@
                             <span class="dropdown-arrow"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">داخلی</a></li>
-                            <li><a class="dropdown-item" href="#">خارجی</a></li>
+                            <li><a class="dropdown-item" href="#">چین</a></li>
+                            <li><a class="dropdown-item" href="#">هند</a></li>
+                            <li><a class="dropdown-item" href="#">حوزه شنگن</a></li>
+                            <li><a class="dropdown-item" href="#">ترکیه</a></li>
                         </ul>
                     </li>
                 </ul>

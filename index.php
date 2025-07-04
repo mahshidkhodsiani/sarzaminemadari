@@ -84,14 +84,6 @@
 
 
 
-
-
-
-
-
-
-
-
     <div class="container my-5">
 
         <div class="row align-items-center my-4">

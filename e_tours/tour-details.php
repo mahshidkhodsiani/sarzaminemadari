@@ -88,7 +88,7 @@
                                 <span class="price-label">شروع قیمت از</span>
                                 <div class="price-value"><?= number_format($row['price']) ?> تومان</div>
                                 <a class="btn-book" style="text-decoration: none;"
-                                    href="../request_form.php?tour_id=<?= urlencode($row['id']) ?>">
+                                    href="../request_form_tour?tour_id=<?= urlencode($row['id']) ?>">
                                     <i class="fas fa-shopping-cart"></i> رزرو تور
                                 </a>
                             </div>

@@ -458,8 +458,8 @@ body {
   min-width: 180px;
   border: none;
   text-align: right;
-  right: 0 !important;
-  left: auto !important;
+  /* right: 0 !important; */
+  /* left: auto !important; */
 }
 
 .dropdown-item {

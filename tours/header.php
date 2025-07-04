@@ -26,7 +26,6 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
                     <li><a class="dropdown-item" href="#">اروپا</a></li>
-                    <li><a class="dropdown-item" href="#">کیش</a></li>
                     <li><a class="dropdown-item" href="#">استانبول</a></li>
                     <li><a class="dropdown-item" href="#">سواحل ترکیه</a></li>
                     <li><a class="dropdown-item" href="#">ارمنستان</a></li>
@@ -71,8 +70,10 @@
                             <span class="dropdown-arrow"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">داخلی</a></li>
-                            <li><a class="dropdown-item" href="#">خارجی</a></li>
+                            <li><a class="dropdown-item" href="#">چین</a></li>
+                            <li><a class="dropdown-item" href="#">هند</a></li>
+                            <li><a class="dropdown-item" href="#">حوزه شنگن</a></li>
+                            <li><a class="dropdown-item" href="#">ترکیه</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -179,16 +180,16 @@
 
 <script>
     // مثال ساده از JavaScript برای زیرمنوهای تو در تو (ممکن است نیاز به تنظیمات بیشتری داشته باشد)
-// این کد باید در یک فایل JS جداگانه یا در انتهای body بعد از bootstrap.bundle.min.js قرار گیرد
-document.addEventListener("DOMContentLoaded", function(){
-    document.querySelectorAll('.dropdown-submenu > a').forEach(function(element){
-        element.addEventListener('click', function(e){
-            let submenu = this.nextElementSibling;
-            if(submenu && submenu.classList.contains('dropdown-menu')){
-                e.preventDefault();
-                submenu.classList.toggle('show');
-            }
+    // این کد باید در یک فایل JS جداگانه یا در انتهای body بعد از bootstrap.bundle.min.js قرار گیرد
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('.dropdown-submenu > a').forEach(function(element) {
+            element.addEventListener('click', function(e) {
+                let submenu = this.nextElementSibling;
+                if (submenu && submenu.classList.contains('dropdown-menu')) {
+                    e.preventDefault();
+                    submenu.classList.toggle('show');
+                }
+            });
         });
     });
-});
 </script>
