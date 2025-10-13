@@ -27,7 +27,9 @@
 
         <div class="row mt-4">
             <div class="col text-center">
-                <p class="text-muted mb-0">© تمامی حقوق این سایت متعلق به آژانس سرزمین مادری می‌باشد.</p>
+                <p>
+                    © تمامی حقوق این سایت متعلق به آژانس سرزمین مادری می‌باشد.| طراحی سایت توسط <a href="https://www.moonshid.ir/" class="text-decoration-none">Moonshid.ir</a>
+                </p>
             </div>
         </div>
     </div>

@@ -55,7 +55,6 @@ $all_data = $_SESSION['all_data'];
                 </div>
 
 
-                <input type="text" id="input1" />
                 <span id="span1"></span>
             </main>
         </div>
