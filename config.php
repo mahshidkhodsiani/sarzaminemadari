@@ -15,10 +15,10 @@ if ($conn->connect_error) {
 
 
 
-// $servername = '89.42.211.172'; 
-// $username = 'vkwpsaop_admin'; 
-// $password = 'k.YX4yxO(j7['; 
-// $dbname = 'vkwpsaop_db'; 
+// $servername = '89.32.250.180'; 
+// $username = 'litpupyo_admin'; 
+// $password = 'V6YT?tbR%[FO'; 
+// $dbname = 'litpupyo_sarzamin'; 
 
 // $cfg['Lang'] = 'fa';
 // $cfg['Charset'] = 'utf8mb4';
