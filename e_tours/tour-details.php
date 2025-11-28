@@ -18,14 +18,14 @@
 
     <div class="tour-container">
         <?php
-        if (isset($_GET['tour'])) {
+        // تغییر کلیدی: بررسی پارامتر 'id'
+        if (isset($_GET['id'])) {
 
-            $encoded_tour = $_GET['tour'];
-            $tour = urldecode($encoded_tour);
+            $tour_id = (int)$_GET['id']; // تبدیل به عدد صحیح برای امنیت بیشتر
 
-            // استفاده از prepared statement برای جلوگیری از SQL Injection
-            $stmt = $conn->prepare("SELECT * FROM exhibition_tours WHERE title = ?");
-            $stmt->bind_param("s", $tour);
+            // استفاده از prepared statement برای جستجوی بر اساس ID
+            $stmt = $conn->prepare("SELECT * FROM exhibition_tours WHERE id = ?");
+            $stmt->bind_param("i", $tour_id); // 'i' به معنای عدد صحیح (Integer)
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -110,18 +110,18 @@
         <?php
             } else {
                 echo '<div class="alert alert-danger text-center mt-5 py-3">
-                        تور مورد نظر پیدا نشد. <a href="tours.php">بازگشت به صفحه تورها</a>
+                        تور مورد نظر پیدا نشد. <a href="index.php">بازگشت به صفحه تورها</a>
                       </div>';
             }
         } else {
+            // اصلاح پیام خطا
             echo '<div class="alert alert-warning text-center mt-5 py-3">
-                    شناسه تور ارسال نشده است. <a href="tours.php">مشاهده تورهای موجود</a>
+                    شناسه (ID) تور ارسال نشده است. <a href="index.php">مشاهده تورهای موجود</a>
                   </div>';
         }
         ?>
     </div>
 
-    <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     <?php include "footer.php"; ?>

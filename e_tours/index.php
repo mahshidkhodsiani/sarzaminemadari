@@ -86,7 +86,6 @@
     <div class="container py-5">
         <h1 class="text-center mb-5">تورهای نمایشگاهی</h1>
 
-        <!-- فرم جستجو -->
         <div class="search-box">
             <form method="GET" action="">
                 <div class="row">
@@ -118,7 +117,6 @@
             </form>
         </div>
 
-        <!-- نمایش تورها -->
         <div class="row">
             <?php if ($result->num_rows > 0): ?>
                 <?php while ($row = $result->fetch_assoc()): ?>
@@ -131,8 +129,8 @@
                             <p><strong>تاریخ میلادی:</strong> <?= htmlspecialchars($row['date_en']) ?></p>
                             <p><strong>تاریخ شمسی:</strong> <?= htmlspecialchars($row['date_fa']) ?></p>
                             <p><strong>قیمت:</strong> <?= number_format($row['price']) ?> تومان</p>
-                            <a href="tour-details.php?tour=<?= $row['title']?>" class="btn btn-warning w-100">دیدن تور</a>
                             
+                            <a href="tour-details.php?id=<?= $row['id']?>" class="btn btn-warning w-100">دیدن تور</a>
                             
                         </div>
                     </div>
@@ -145,7 +143,6 @@
         </div>
 
 
-        <!-- صفحه‌بندی -->
         <?php if ($total_pages > 1): ?>
             <nav aria-label="Page navigation">
                 <ul class="pagination">

@@ -257,3 +257,150 @@ textarea {
 }
 
 /* ////////////////////////// */
+/* درباره ما در صفحه اصلی */
+
+.about-section {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 25px;
+    
+    overflow: hidden;
+    padding: 40px;
+    margin: 40px 0;
+    animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.image-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    height: 100%;
+    
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    border-radius: 20px;
+}
+
+.image-wrapper:hover img {
+    transform: scale(1.08);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.7), rgba(118, 75, 162, 0.7));
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.image-wrapper:hover .image-overlay {
+    opacity: 1;
+}
+
+.overlay-icon {
+    color: white;
+    font-size: 60px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.content-wrapper {
+    padding: 20px;
+}
+
+.content-wrapper h3 {
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.content-wrapper h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+}
+
+.content-wrapper p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 20px;
+    text-align: justify;
+    animation: fadeIn 1s ease 0.3s both;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.feature-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 5px;
+    
+    transition: transform 0.3s ease;
+}
+
+.feature-badge:hover {
+    transform: translateY(-3px);
+}
+
+.features-container {
+    margin-top: 25px;
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        padding: 25px;
+    }
+    .content-wrapper h3 {
+        font-size: 24px;
+    }
+    .image-wrapper {
+        margin-bottom: 30px;
+        height: 300px;
+    }
+}
+/* ///////////////////////////// */

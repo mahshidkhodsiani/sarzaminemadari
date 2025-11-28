@@ -1,7 +1,6 @@
-<!-- Bottom Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a href="./">
-        <img src="img/logo.png" width="70px" height="70px">
+    <a href="../">
+        <img src="../img/logo.png" width="70px" height="70px">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -11,20 +10,20 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link text-dark">
-                    بلیط
+                <a href="ticket" class="nav-link text-dark">
+                    <i class="bi bi-ticket"></i> بلیط
                 </a>
             </li>
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
-                    هتل
+                    <i class="bi bi-building"></i> هتل
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
 
                     <li class="dropdown-submenu">
                         <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                            داخلی
+                            <i class="bi bi-house-door"></i> داخلی
                             <span class="dropdown-arrow"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -36,7 +35,7 @@
 
                     <li class="dropdown-submenu">
                         <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                            خارجی
+                            <i class="bi bi-globe"></i> خارجی
                             <span class="dropdown-arrow"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -50,16 +49,14 @@
                 </ul>
             </li>
 
-
-
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
-                    تورها
+                    <i class="bi bi-compass"></i> تورها
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
                     <li class="dropdown-submenu">
                         <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                            داخلی
+                            <i class="bi bi-house-door"></i> داخلی
                             <span class="dropdown-arrow"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -71,7 +68,7 @@
 
                     <li class="dropdown-submenu">
                         <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                            خارجی
+                            <i class="bi bi-globe"></i> خارجی
                             <span class="dropdown-arrow"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -167,22 +164,22 @@
                 </ul>
             </li>
 
-
             <li class="nav-item">
-                <a class="nav-link text-dark" href="e_tours">تورهای نمایشگاهی</a>
+                <a class="nav-link text-dark" href="e_tours">
+                    <i class="bi bi-calendar-event"></i> تورهای نمایشگاهی
+                </a>
             </li>
-
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
-                    خدمات
+                    <i class="bi bi-gear"></i> خدمات
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
-                    <li><a class="dropdown-item" href="#">ویزا</a></li>
-                    <li><a class="dropdown-item" href="#">بیمه </a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-journal-text"></i> ویزا</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-shield-check"></i> بیمه </a></li>
                     <li class="dropdown-submenu">
                         <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                            خدمات vip
+                            <i class="bi bi-star"></i> خدمات vip
                             <span class="dropdown-arrow"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -195,13 +192,13 @@
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
-                    سرزمین ما
+                    <i class="bi bi-map"></i> سرزمین ما
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
-                    <li><a class="dropdown-item" href="blog">مجله</a></li>
-                    <li><a class="dropdown-item" href="#">درباره ما</a></li>
-                    <li><a class="dropdown-item" href="#">اخبار</a></li>
-                    <li><a class="dropdown-item" href="#">اطلاعیه ها</a></li>
+                    <li><a class="dropdown-item" href="blog"><i class="bi bi-book"></i> مجله</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-people"></i> درباره ما</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-newspaper"></i> اخبار</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-bell"></i> اطلاعیه ها</a></li>
                 </ul>
             </li>
 
@@ -245,5 +242,11 @@
     /* فاصله بین آیتم‌های داخل dropdown */
     .dropdown-menu .dropdown-item {
         padding: 10px 20px;
+    }
+
+    /* استایل آیکون‌ها */
+    .navbar-nav .nav-link i,
+    .dropdown-menu .dropdown-item i {
+        margin-left: 8px; /* فاصله بین آیکون و متن */
     }
 </style>
