@@ -83,7 +83,7 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="image-wrapper">
-                    <img src="img/10.jpg" class="img-fluid" alt="تصویر توضیحی">
+                    <img src="img/26.png" class="img-fluid" alt="تصویر توضیحی">
                     <div class="image-overlay">
                         <i class="fas fa-plane-departure overlay-icon"></i>
                     </div>
