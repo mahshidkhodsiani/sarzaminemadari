@@ -63,10 +63,10 @@
         }
 
         if (empty($errors)) {
-            // ذخیره در دیتابیس
+            // ثبت درخواست به همراه تاریخ
             $stmt = $conn->prepare("INSERT INTO tour_requests 
-                                   (name, phone, tour_id, passengers, notes, request_date) 
-                                   VALUES (?, ?, ?, ?, ?, ?, NOW())");
+                       (name, phone, tour_id, passengers, notes, request_date) 
+                       VALUES (?, ?, ?, ?, ?, NOW())");
             $stmt->bind_param("sssis", $name, $phone, $post_tour_id, $passengers, $notes);
 
             if ($stmt->execute()) {
@@ -101,68 +101,85 @@
 
                         <div class="card-body p-4 p-md-5">
                             <?php if (!empty($errors)): ?>
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <h6 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i>خطا در تکمیل فرم:</h6>
-                                    <ul class="mb-0 ps-3">
-                                        <?php foreach ($errors as $error): ?>
-                                            <li><?php echo htmlspecialchars($error); ?></li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <h6 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i>خطا در تکمیل
+                                    فرم:</h6>
+                                <ul class="mb-0 ps-3">
+                                    <?php foreach ($errors as $error): ?>
+                                    <li><?php echo htmlspecialchars($error); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
                             <?php endif; ?>
 
                             <?php if ($success): ?>
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <h6 class="alert-heading"><i class="fas fa-check-circle me-2"></i>ثبت موفقیت‌آمیز!</h6>
-                                    <p class="mb-0">درخواست شما با موفقیت ثبت شد. به زودی با شما تماس خواهیم گرفت.</p>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <h6 class="alert-heading"><i class="fas fa-check-circle me-2"></i>ثبت موفقیت‌آمیز!</h6>
+                                <p class="mb-0">درخواست شما با موفقیت ثبت شد. به زودی با شما تماس خواهیم گرفت.</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
                             <?php endif; ?>
 
                             <?php if ($tour_data): ?>
-                                <div class="alert alert-info mb-4">
-                                    <h6 class="fw-bold">تور انتخاب شده:</h6>
-                                    <p class="mb-1"><i class="fas fa-map-marked-alt me-2"></i> <strong><?php echo htmlspecialchars($tour_data['title']); ?></strong></p>
-                                    <p class="mb-1"><i class="fas fa-location-dot me-2"></i> مقصد: <?php echo htmlspecialchars($tour_data['country_fa']); ?> - <?php echo htmlspecialchars($tour_data['city_fa']); ?></p>
-                                    <p class="mb-1"><i class="far fa-calendar-alt me-2"></i> تاریخ: <?php echo htmlspecialchars($tour_data['date_fa']); ?></p>
-                                    <p class="mb-0"><i class="fas fa-tag me-2"></i> قیمت: <?php echo number_format($tour_data['price']); ?> تومان</p>
-                                </div>
+                            <div class="alert alert-info mb-4">
+                                <h6 class="fw-bold">تور انتخاب شده:</h6>
+                                <p class="mb-1"><i class="fas fa-map-marked-alt me-2"></i>
+                                    <strong><?php echo htmlspecialchars($tour_data['title']); ?></strong>
+                                </p>
+                                <p class="mb-1"><i class="fas fa-location-dot me-2"></i> مقصد:
+                                    <?php echo htmlspecialchars($tour_data['country_fa']); ?> -
+                                    <?php echo htmlspecialchars($tour_data['city_fa']); ?></p>
+                                <p class="mb-1"><i class="far fa-calendar-alt me-2"></i> تاریخ:
+                                    <?php echo htmlspecialchars($tour_data['date_fa']); ?></p>
+                                <p class="mb-0"><i class="fas fa-tag me-2"></i> قیمت:
+                                    <?php echo number_format($tour_data['price']); ?> تومان</p>
+                            </div>
                             <?php endif; ?>
 
                             <form method="post" action="" class="needs-validation" novalidate>
                                 <input type="hidden" name="tour_id" value="<?php echo htmlspecialchars($tour_id); ?>">
 
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">نام و نام خانوادگی <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>" placeholder="نام کامل خود را وارد کنید" required>
+                                    <label for="name" class="form-label">نام و نام خانوادگی <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        value="<?php echo htmlspecialchars($name); ?>"
+                                        placeholder="نام کامل خود را وارد کنید" required>
                                     <div class="invalid-feedback">
                                         لطفا نام و نام خانوادگی خود را وارد کنید.
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="phone" class="form-label">شماره تماس <span class="text-danger">*</span></label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" value="<?php echo htmlspecialchars($phone); ?>" placeholder="مثال: 09121234567" pattern="09[0-9]{9}" title="شماره تماس باید با 09 شروع شده و 11 رقم باشد" required>
+                                    <label for="phone" class="form-label">شماره تماس <span
+                                            class="text-danger">*</span></label>
+                                    <input type="tel" class="form-control" id="phone" name="phone"
+                                        value="<?php echo htmlspecialchars($phone); ?>" placeholder="مثال: 09121234567"
+                                        pattern="09[0-9]{9}" title="شماره تماس باید با 09 شروع شده و 11 رقم باشد"
+                                        required>
                                     <div class="invalid-feedback">
                                         لطفا شماره تماس معتبر خود را وارد کنید. (مثال: 09121234567)
                                     </div>
                                 </div>
 
-                          
-
                                 <div class="mb-3">
                                     <label for="passengers" class="form-label">تعداد مسافران</label>
                                     <select class="form-select" id="passengers" name="passengers">
                                         <?php for ($i = 1; $i <= 10; $i++): ?>
-                                            <option value="<?php echo $i; ?>" <?php echo ($i == $passengers) ? 'selected' : ''; ?>><?php echo $i; ?> نفر</option>
+                                        <option value="<?php echo $i; ?>"
+                                            <?php echo ($i == $passengers) ? 'selected' : ''; ?>><?php echo $i; ?> نفر
+                                        </option>
                                         <?php endfor; ?>
                                     </select>
                                 </div>
 
                                 <div class="mb-4">
                                     <label for="notes" class="form-label">توضیحات اضافی</label>
-                                    <textarea class="form-control" id="notes" name="notes" rows="4" placeholder="در صورت نیاز، جزئیات بیشتری را وارد کنید..."><?php echo htmlspecialchars($notes); ?></textarea>
+                                    <textarea class="form-control" id="notes" name="notes" rows="4"
+                                        placeholder="در صورت نیاز، جزئیات بیشتری را وارد کنید..."><?php echo htmlspecialchars($notes); ?></textarea>
                                 </div>
 
                                 <div class="d-grid gap-2">
@@ -184,58 +201,52 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // اعتبارسنجی فرم
-        (function() {
-            'use strict'
+    (function() {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })();
 
-            var forms = document.querySelectorAll('.needs-validation')
+    <?php if ($success): ?>
+    document.addEventListener('DOMContentLoaded', function() {
+        var toastEl = document.createElement('div');
+        toastEl.className = 'toast align-items-center text-white bg-success border-0';
+        toastEl.style.position = 'fixed';
+        toastEl.style.top = '20px';
+        toastEl.style.right = '20px';
+        toastEl.style.zIndex = '1060';
 
-            Array.prototype.slice.call(forms)
-                .forEach(function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })();
+        toastEl.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="fas fa-check-circle me-2"></i> درخواست شما با موفقیت ثبت شد!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        `;
 
-        <?php if ($success): ?>
-            // نمایش مدال موفقیت و هدایت به صفحه تورها
-            document.addEventListener('DOMContentLoaded', function() {
-                // ایجاد مدال موفقیت
-                var toastEl = document.createElement('div');
-                toastEl.className = 'toast align-items-center text-white bg-success border-0';
-                toastEl.style.position = 'fixed';
-                toastEl.style.top = '20px';
-                toastEl.style.right = '20px';
-                toastEl.style.zIndex = '1060';
+        document.body.appendChild(toastEl);
 
-                toastEl.innerHTML = `
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            <i class="fas fa-check-circle me-2"></i> درخواست شما با موفقیت ثبت شد!
-                        </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                `;
+        var toast = new bootstrap.Toast(toastEl, {
+            autohide: true,
+            delay: 3000
+        });
+        toast.show();
 
-                document.body.appendChild(toastEl);
-
-                var toast = new bootstrap.Toast(toastEl, {
-                    autohide: true,
-                    delay: 3000
-                });
-                toast.show();
-
-                // هدایت به صفحه تورها پس از 3 ثانیه
-                setTimeout(function() {
-                    window.location.href = 'e_tours';
-                }, 3000);
-            });
-        <?php endif; ?>
+        setTimeout(function() {
+            window.location.href = 'e_tours';
+        }, 3000);
+    });
+    <?php endif; ?>
     </script>
 </body>
 

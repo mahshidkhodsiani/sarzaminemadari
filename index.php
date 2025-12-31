@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="آژانس مسافرتی سرزمین مادری | ارائه بهترین تورهای داخلی و خارجی با قیمت مناسب و خدمات اختصاصی - تور تایلند، تور اروپا، تورهای داخلی ایران| اولین ارائه دهنده تورهای نمایشگاهی">
-    <meta name="keywords" content="تور مسافرتی, تور تایلند, تور اروپا, تور داخلی, آژانس مسافرتی, سفر ارزان, تور لحظه آخری, تورهای نمایشگاهی">
+    <meta name="description"
+        content="آژانس مسافرتی سرزمین مادری | ارائه بهترین تورهای داخلی و خارجی با قیمت مناسب و خدمات اختصاصی - تور تایلند، تور اروپا، تورهای داخلی ایران| اولین ارائه دهنده تورهای نمایشگاهی">
+    <meta name="keywords"
+        content="تور مسافرتی, تور تایلند, تور اروپا, تور داخلی, آژانس مسافرتی, سفر ارزان, تور لحظه آخری, تورهای نمایشگاهی">
     <meta name="author" content="آژانس مسافرتی سرزمین مادری">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="آژانس مسافرتی سرزمین مادری - تخصصی ترین خدمات مسافرتی">
@@ -25,23 +27,23 @@
 
 
     <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "TravelAgency",
-            "name": "آژانس مسافرتی سرزمین مادری",
-            "description": "ارائه دهنده تورهای مسافرتی داخلی و خارجی و نمایشگاهی با کیفیت عالی",
-            "url": "https://www.sarzaminemadari.com",
-            "logo": "https://www.sarzaminemadari.com/img/logo.png",
-            "telephone": "+982122345678",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "اصفهان- خیابان مشتاق دوم- خیابان بازارچه- ابتدای کوچه نوروز- پلاک 2 ",
-                "addressLocality": "اصفهان",
-                "addressRegion": "اصفهان",
-                "addressCountry": "IR"
-            },
-            "openingHours": "Mo,Tu,We,Th,Fr,Sa 09:00-18:00"
-        }
+    {
+        "@context": "https://schema.org",
+        "@type": "TravelAgency",
+        "name": "آژانس مسافرتی سرزمین مادری",
+        "description": "ارائه دهنده تورهای مسافرتی داخلی و خارجی و نمایشگاهی با کیفیت عالی",
+        "url": "https://www.sarzaminemadari.com",
+        "logo": "https://www.sarzaminemadari.com/img/logo.png",
+        "telephone": "+982122345678",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "اصفهان- خیابان مشتاق دوم- خیابان بازارچه- ابتدای کوچه نوروز- پلاک 2 ",
+            "addressLocality": "اصفهان",
+            "addressRegion": "اصفهان",
+            "addressCountry": "IR"
+        },
+        "openingHours": "Mo,Tu,We,Th,Fr,Sa 09:00-18:00"
+    }
     </script>
 
     <link rel="stylesheet" href="css/styles.css">
@@ -78,45 +80,50 @@
     </div>
 
 
-<div class="container mt-4">
-    <div class="about-section">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <div class="image-wrapper">
-                    <img src="img/26.png" class="img-fluid" alt="تصویر توضیحی">
-                    <div class="image-overlay">
-                        <i class="fas fa-plane-departure overlay-icon"></i>
+    <div class="container mt-4">
+        <div class="about-section">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="image-wrapper">
+                        <img src="img/26.png" class="img-fluid" alt="تصویر توضیحی">
+                        <div class="image-overlay">
+                            <i class="fas fa-plane-departure overlay-icon"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="content-wrapper">
-                    <h3><i class="fas fa-map-marked-alt" style="color: #667eea; margin-left: 10px;"></i>درباره آژانس سرزمین مادری</h3>
-                    <p>
-                        آژانس مسافرتی سرزمین مادری با هدف ارائه بهترین و باکیفیت‌ترین خدمات سفر، از جمله تورهای داخلی و خارجی، تورهای لحظه آخری و به ویژه تورهای تخصصی نمایشگاهی تأسیس شده است. ما متعهد به خلق تجربه‌های به‌یادماندنی و آسان برای مسافران خود هستیم.
-                    </p>
-                    <p>
-                        برای کسب اطلاعات بیشتر و دیدن جدیدترین پیشنهادها، با ما همراه باشید. ما همیشه بهترین گزینه‌ها را با مناسب‌ترین قیمت برای شما آماده می‌کنیم تا سفری آسوده و خاطره‌انگیز داشته باشید.
-                    </p>
-                    
-                    <div class="features-container">
-                        <span class="feature-badge">
-                            <i class="fas fa-check-circle"></i> تورهای داخلی و خارجی
-                        </span>
-                        <span class="feature-badge">
-                            <i class="fas fa-clock"></i> تورهای لحظه آخری
-                        </span>
-                        <span class="feature-badge">
-                            <i class="fas fa-building"></i> تورهای نمایشگاهی
-                        </span>
+                <div class="col-md-6">
+                    <div class="content-wrapper">
+                        <h3><i class="fas fa-map-marked-alt" style="color: #667eea; margin-left: 10px;"></i>درباره آژانس
+                            سرزمین مادری</h3>
+                        <p>
+                            آژانس مسافرتی سرزمین مادری با هدف ارائه بهترین و باکیفیت‌ترین خدمات سفر، از جمله تورهای
+                            داخلی و خارجی، تورهای لحظه آخری و به ویژه تورهای تخصصی نمایشگاهی تأسیس شده است. ما متعهد به
+                            خلق تجربه‌های به‌یادماندنی و آسان برای مسافران خود هستیم.
+                        </p>
+                        <p>
+                            برای کسب اطلاعات بیشتر و دیدن جدیدترین پیشنهادها، با ما همراه باشید. ما همیشه بهترین
+                            گزینه‌ها را با مناسب‌ترین قیمت برای شما آماده می‌کنیم تا سفری آسوده و خاطره‌انگیز داشته
+                            باشید.
+                        </p>
+
+                        <div class="features-container">
+                            <span class="feature-badge">
+                                <i class="fas fa-check-circle"></i> تورهای داخلی و خارجی
+                            </span>
+                            <span class="feature-badge">
+                                <i class="fas fa-clock"></i> تورهای لحظه آخری
+                            </span>
+                            <span class="feature-badge">
+                                <i class="fas fa-building"></i> تورهای نمایشگاهی
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-    
+
 
     <div class="container my-5">
 
@@ -158,37 +165,42 @@
                 while ($tour_row = $tour_result->fetch_assoc()) {
 
             ?>
-                    <div class="col-md-3 col-sm-6 col-6">
-                        <div class="card card-tours h-100">
-                            <img src="<?php echo str_replace('../', '', $tour_row['tour_image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($tour_row['title']); ?>">
+            <div class="col-md-3 col-sm-6 col-6">
+                <div class="card card-tours h-100">
+                    <img src="<?php echo str_replace('../', '', $tour_row['tour_image']); ?>" class="card-img-top"
+                        alt="<?php echo htmlspecialchars($tour_row['title']); ?>">
 
-                            <div class="card-body tours">
-                                <h5 class="card-title"><?php echo htmlspecialchars($tour_row['title']); ?></h5>
+                    <div class="card-body tours">
+                        <h5 class="card-title"><?php echo htmlspecialchars($tour_row['title']); ?></h5>
 
-                                <p class="card-text small text-muted">
-                                    <i class="fas fa-check-circle me-1 text-success"></i> شامل حمل‌و‌نقل، اقامت و خدمات تور
-                                </p>
+                        <p class="card-text small text-muted">
+                            <i class="fas fa-check-circle me-1 text-success"></i> شامل حمل‌و‌نقل، اقامت و خدمات تور
+                        </p>
 
-                                <p class="h6 mb-0 text-danger">
-                                    <i class="bi bi-cash-coin me-1"></i> شروع قیمت از <?= number_format($tour_row['price']) ?> تومان
-                                </p>
-
-
-                                <div class="d-flex justify-content-center mt-3">
-                                    <a href="tours/tour-details.php?tour=<?= $tour_row['title'] ?>" class="btn btn-warning w-100 rounded-pill">دیدن تور</a>
+                        <p class="h6 mb-0 text-danger">
+                            <i class="bi bi-cash-coin me-1"></i> شروع قیمت از <?= number_format($tour_row['price']) ?>
+                            تومان
+                        </p>
 
 
-                                </div>
-                            </div>
+                        <div class="d-flex justify-content-center mt-3">
+
+                            <a href="tours/tour-details.php?id=<?= $tour_row['id'] ?>"
+                                class="btn btn-warning w-100 rounded-pill">دیدن تور</a>
+
+
+
                         </div>
                     </div>
-                <?php
+                </div>
+            </div>
+            <?php
                 }
                 // --- کارت مشاهده همه (باکس چهارم) ---
                 // این کارت ثابت در آخرین جایگاه قرار می‌گیرد
                 ?>
-                <div class="col-md-3 col-sm-6 col-6">
-                    <div class="card card-tours view-all-card h-100 p-3 text-white" style="
+            <div class="col-md-3 col-sm-6 col-6">
+                <div class="card card-tours view-all-card h-100 p-3 text-white" style="
                         background-image: linear-gradient(rgba(123, 67, 151, 0.7), rgba(220, 36, 48, 0.7)), url('<?php echo $last_tour_image; ?>');
                         background-size: cover;
                         background-position: center;
@@ -198,14 +210,15 @@
                         justify-content: center; /* اضافه شده برای قرارگیری عمودی */
                         align-items: center; /* اضافه شده برای قرارگیری عمودی */
                     ">
-                        <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
-                            <h5 class="card-title mt-5 fw-bold">همه تورهای ویژه</h5>
-                            <a href="tours" class="btn btn-light rounded-pill mt-3 mb-5" style="font-weight: bold; padding: 10px 25px;">
-                                <i class="fas fa-arrow-left me-2"></i> مشاهده
-                            </a>
-                        </div>
+                    <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+                        <h5 class="card-title mt-5 fw-bold">همه تورهای ویژه</h5>
+                        <a href="tours" class="btn btn-light rounded-pill mt-3 mb-5"
+                            style="font-weight: bold; padding: 10px 25px;">
+                            <i class="fas fa-arrow-left me-2"></i> مشاهده
+                        </a>
                     </div>
                 </div>
+            </div>
             <?php
             } else {
                 // اگر توری وجود نداشت
@@ -255,37 +268,40 @@
                 while ($exhibition_row = $exhibition_result->fetch_assoc()) {
 
             ?>
-                    <div class="col-md-3 col-sm-6 col-6">
-                        <div class="card card-tours h-100">
-                            <img src="<?php echo str_replace('../', '', $exhibition_row['tour_image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($exhibition_row['title']); ?>">
+            <div class="col-md-3 col-sm-6 col-6">
+                <div class="card card-tours h-100">
+                    <img src="<?php echo str_replace('../', '', $exhibition_row['tour_image']); ?>" class="card-img-top"
+                        alt="<?php echo htmlspecialchars($exhibition_row['title']); ?>">
 
-                            <div class="card-body tours">
-                                <h5 class="card-title"><?php echo htmlspecialchars($exhibition_row['title']); ?></h5>
+                    <div class="card-body tours">
+                        <h5 class="card-title"><?php echo htmlspecialchars($exhibition_row['title']); ?></h5>
 
-                                <p class="card-text small text-muted">
-                                    <i class="fas fa-check-circle me-1 text-success"></i> شامل حمل‌و‌نقل، اقامت و خدمات تور
-                                </p>
+                        <p class="card-text small text-muted">
+                            <i class="fas fa-check-circle me-1 text-success"></i> شامل حمل‌و‌نقل، اقامت و خدمات تور
+                        </p>
 
-                                <p class="h6 mb-0 text-danger">
-                                    <i class="bi bi-cash-coin me-1"></i> شروع قیمت از <?= number_format($exhibition_row['price']) ?> تومان
-                                </p>
-
-
-                                <div class="d-flex justify-content-center mt-3">
-                                    <a href="e_tours/tour-details.php?tour=<?= $exhibition_row['title'] ?>" class="btn btn-warning w-100 rounded-pill">دیدن تور</a>
+                        <p class="h6 mb-0 text-danger">
+                            <i class="bi bi-cash-coin me-1"></i> شروع قیمت از
+                            <?= number_format($exhibition_row['price']) ?> تومان
+                        </p>
 
 
-                                </div>
-                            </div>
+                        <div class="d-flex justify-content-center mt-3">
+
+                            <a href="e_tours/tour-details.php?id=<?= $exhibition_row['id'] ?>"
+                                class="btn btn-warning w-100 rounded-pill">دیدن تور</a>
+
                         </div>
                     </div>
-                <?php
+                </div>
+            </div>
+            <?php
                 }
                 // --- کارت مشاهده همه (باکس چهارم) ---
                 // این کارت ثابت در آخرین جایگاه قرار می‌گیرد
                 ?>
-                <div class="col-md-3 col-sm-6 col-6">
-                    <div class="card card-tours view-all-card h-100 p-3 text-white" style="
+            <div class="col-md-3 col-sm-6 col-6">
+                <div class="card card-tours view-all-card h-100 p-3 text-white" style="
                         background-image: linear-gradient(rgba(123, 67, 151, 0.7), rgba(220, 36, 48, 0.7)), url('<?php echo $last_exhibition_image; ?>');
                         background-size: cover;
                         background-position: center;
@@ -295,14 +311,15 @@
                         justify-content: center; /* اضافه شده برای قرارگیری عمودی */
                         align-items: center; /* اضافه شده برای قرارگیری عمودی */
                     ">
-                        <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
-                            <h5 class="card-title mt-5 fw-bold">همه تورهای نمایشگاهی</h5>
-                            <a href="e_tours" class="btn btn-light rounded-pill mt-3 mb-5" style="font-weight: bold; padding: 10px 25px;">
-                                <i class="fas fa-arrow-left me-2"></i> مشاهده
-                            </a>
-                        </div>
+                    <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+                        <h5 class="card-title mt-5 fw-bold">همه تورهای نمایشگاهی</h5>
+                        <a href="e_tours" class="btn btn-light rounded-pill mt-3 mb-5"
+                            style="font-weight: bold; padding: 10px 25px;">
+                            <i class="fas fa-arrow-left me-2"></i> مشاهده
+                        </a>
                     </div>
                 </div>
+            </div>
             <?php
             } else {
                 // اگر توری وجود نداشت
@@ -316,19 +333,19 @@
         <h3>سایر خدمات</h3>
         <div class="row">
             <div class="col-md-3 col-3">
-                <img src="img/13.png" style="max-width: 100%; max-width: 100%; border-radius: 50%;" alt="خدمات ۱">
+                <img src="img/27.webp" style="max-width: 100%; max-width: 100%; border-radius: 50%;" alt="خدمات ۱">
                 <p class="text-center">رزرو هتل</p>
             </div>
             <div class="col-md-3 col-3">
-                <img src="img/13.png" style="max-width: 100%; max-width: 100%; border-radius: 50%;" alt="خدمات ۲">
+                <img src="img/28.webp" style="max-width: 100%; max-width: 100%; border-radius: 50%;" alt="خدمات ۲">
                 <p class="text-center">اخذ ویزا</p>
             </div>
             <div class="col-md-3 col-3">
-                <img src="img/13.png" style="max-width: 100%; max-width: 100%; border-radius: 50%;" alt="خدمات ۳">
+                <img src="img/29.webp" style="max-width: 100%; max-width: 100%; border-radius: 50%;" alt="خدمات ۳">
                 <p class="text-center">بیمه مسافرتی</p>
             </div>
             <div class="col-md-3 col-3">
-                <img src="img/13.png" style="max-width: 100%; max-width: 100%; border-radius: 50%;" alt="خدمات ۴">
+                <img src="img/30.webp" style="max-width: 100%; max-width: 100%; border-radius: 50%;" alt="خدمات ۴">
                 <p class="text-center">تورهای داخلی</p>
             </div>
         </div>
