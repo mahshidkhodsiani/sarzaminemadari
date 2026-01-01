@@ -7,13 +7,10 @@ if (isset($_POST['submit'])) {
     $description = $_POST['description'];
     $country_fa = $_POST['country_fa'];
     $city_fa = $_POST['city_fa'];
-    $country_en = $_POST['country_en']; // اضافه شد
-    $city_en = $_POST['city_en'];       // اضافه شد
+    $country_en = $_POST['country_en'];
+    $city_en = $_POST['city_en'];
     $category = $_POST['category'];
     $price = $_POST['price'];
-    $type = $_POST['type'];
-    
-    // فیلدهای تاریخ مطابق جدول tours
     $start_date_en = $_POST['start_date_en'];
     $end_date_en = $_POST['end_date_en'];
     $start_date_fa = $_POST['start_date_fa'];
@@ -26,23 +23,19 @@ if (isset($_POST['submit'])) {
 
     // ایجاد Slug
     $slug = str_replace(' ', '-', $title);
-    $slug = preg_replace('/[^A-Za-z0-9\-]/', '', $slug);
-    $slug = strtolower($slug);
 
-    // ۱. ثبت اطلاعات در جدول tours
-    $sql = "INSERT INTO tours (title, slug, description, country_fa, city_fa, country_en, city_en, category, price, type, start_date_en, end_date_en, start_date_fa, end_date_fa, duration) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
+    // ۱. ثبت اولیه برای دریافت ID
+    $sql = "INSERT INTO exhibition_tours (title, slug, description, country_fa, city_fa, country_en, city_en, category, price, start_date_en, end_date_en, start_date_fa, end_date_fa, duration) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    // ترتیب پارامترها مطابق SQL بالا
-    $stmt->bind_param("sssssssssissssi", $title, $slug, $description, $country_fa, $city_fa, $country_en, $city_en, $category, $price, $type, $start_date_en, $end_date_en, $start_date_fa, $end_date_fa, $duration);
+    $stmt->bind_param("sssssssssssssi", $title, $slug, $description, $country_fa, $city_fa, $country_en, $city_en, $category, $price, $start_date_en, $end_date_en, $start_date_fa, $end_date_fa, $duration);
     
     if ($stmt->execute()) {
         $tour_id = $conn->insert_id;
         
-        // ۲. آپلود عکس در پوشه اختصاصی ID
+        // ۲. آپلود عکس در پوشه اختصاصی ID (مطابق فرمت شما)
         if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
-            $upload_dir = "../uploads/tour/" . $tour_id . "/";
+            $upload_dir = "../uploads/e_tours/" . $tour_id . "/";
             if (!file_exists($upload_dir)) { mkdir($upload_dir, 0755, true); }
 
             $file_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
@@ -50,8 +43,9 @@ if (isset($_POST['submit'])) {
             $target_file = $upload_dir . $file_name;
 
             if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
-                $db_path = "../uploads/tour/" . $tour_id . "/" . $file_name;
-                $conn->query("UPDATE tours SET tour_image = '$db_path' WHERE id = $tour_id");
+                // ذخیره مسیر با ../ مطابق دیتابیس شما
+                $db_path = "../uploads/e_tours/" . $tour_id . "/" . $file_name;
+                $conn->query("UPDATE exhibition_tours SET tour_image = '$db_path' WHERE id = $tour_id");
             }
         }
         $message = "success";
@@ -65,7 +59,7 @@ if (isset($_POST['submit'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>افزودن تور مسافرتی</title>
+    <title>افزودن تور نمایشگاهی</title>
     <?php include 'includes.php'; ?>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet"
@@ -80,7 +74,7 @@ if (isset($_POST['submit'])) {
             <?php include 'sidebar.php'; ?>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4">
                 <div class="card shadow">
-                    <div class="card-header bg-info text-white">افزودن تور مسافرتی جدید</div>
+                    <div class="card-header bg-info text-white">افزودن تور نمایشگاهی</div>
                     <div class="card-body">
                         <form enctype="multipart/form-data" method="POST">
                             <div class="mb-3">
@@ -95,7 +89,6 @@ if (isset($_POST['submit'])) {
                                 <label class="form-label">توضیحات کامل:</label>
                                 <textarea id="editor" name="description"></textarea>
                             </div>
-
                             <div class="row mt-4">
                                 <div class="col-md-3"><label>تاریخ رفت (میلادی)</label><input type="date"
                                         class="form-control" id="start_date_en" name="start_date_en" required></div>
@@ -106,7 +99,6 @@ if (isset($_POST['submit'])) {
                                 <div class="col-md-3"><label>تاریخ برگشت (شمسی)</label><input type="text"
                                         class="form-control" id="end_date_fa" name="end_date_fa" readonly></div>
                             </div>
-
                             <div class="row mt-4">
                                 <div class="col-md-6"><label>کشور (فارسی)</label><input type="text" class="form-control"
                                         name="country_fa" required></div>
@@ -119,35 +111,28 @@ if (isset($_POST['submit'])) {
                                 <div class="col-md-6"><label>City (English)</label><input type="text"
                                         class="form-control" name="city_en" required></div>
                             </div>
-
                             <div class="row mt-3">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label>دسته‌بندی</label>
                                     <select class="form-control" name="category" required>
-                                        <option value="تفریحی">تفریحی</option>
-                                        <option value="گردشگری">گردشگری</option>
-                                        <option value="زیارتی">زیارتی</option>
+                                        <option value="صنایع غذایی">صنایع غذایی</option>
+                                        <option value="پوشاک و مد">پوشاک و مد</option>
+                                        <option value="تجهیزات پزشکی">تجهیزات پزشکی</option>
+                                        <option value="الکترونیک">الکترونیک</option>
+                                        <option value="چاپ و بسته بندی">چاپ و بسته بندی</option>
                                         <option value="سایر">سایر</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4">
-                                    <label>نوع تور</label>
-                                    <select class="form-control" name="type" required>
-                                        <option value="1">خارجی</option>
-                                        <option value="2">داخلی</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4"><label>شروع قیمت (فقط عدد)</label><input type="number"
+                                <div class="col-md-6"><label>شروع قیمت (فقط عدد)</label><input type="number"
                                         class="form-control" name="price" required></div>
                             </div>
-                            <button name="submit" class="btn btn-info mt-4 mb-3 text-white">ذخیره تور مسافرتی</button>
+                            <button name="submit" class="btn btn-info mt-4 mb-3 text-white">ذخیره تور جدید</button>
                         </form>
                     </div>
                 </div>
             </main>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/persian-date@1.1.0/dist/persian-date.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
@@ -164,15 +149,12 @@ if (isset($_POST['submit'])) {
         }
         setupDate('start_date_en', 'start_date_fa');
         setupDate('end_date_en', 'end_date_fa');
-
-        // ادیتور Jodit
         new Jodit('#editor', {
             height: 350,
             language: 'fa',
             direction: 'rtl'
         });
     });
-
     <?php if($message == "success"): ?>
     Swal.fire({
         icon: 'success',
@@ -180,13 +162,13 @@ if (isset($_POST['submit'])) {
         text: 'تور با موفقیت ایجاد و عکس ذخیره شد',
         confirmButtonText: 'تایید'
     }).then(() => {
-        window.location.href = 'tours_list.php';
+        window.location.href = 'exhibition_tours.php';
     });
     <?php elseif($message == "error"): ?>
     Swal.fire({
         icon: 'error',
         title: 'خطا',
-        text: 'مشکلی در ثبت اطلاعات وجود دارد'
+        text: 'مشکلی در اتصال به دیتابیس وجود دارد'
     });
     <?php endif; ?>
     </script>

@@ -3,9 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>نمایش تور | آژانس سرزمین مادری</title>
+    <title>جزئیات تور نمایشگاهی | سرزمین مادری</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="جزئیات تورهای گردشگری آژانس سرزمین مادری">
     <link rel="stylesheet" href="styles.css">
     <?php
     include 'includes.php';
@@ -16,113 +15,141 @@
 <body>
     <?php include 'header.php'; ?>
 
-    <div class="tour-container">
+    <div class="container tour-container">
         <?php
-        // تغییر کلیدی: بررسی پارامتر 'id'
         if (isset($_GET['id'])) {
-
-            $tour_id = (int)$_GET['id']; // تبدیل به عدد صحیح برای امنیت بیشتر
-
-            // استفاده از prepared statement برای جستجوی بر اساس ID
+            $tour_id = (int)$_GET['id'];
             $stmt = $conn->prepare("SELECT * FROM exhibition_tours WHERE id = ?");
-            $stmt->bind_param("i", $tour_id); // 'i' به معنای عدد صحیح (Integer)
+            $stmt->bind_param("i", $tour_id);
             $stmt->execute();
             $result = $stmt->get_result();
 
-            if ($row = $result->fetch_assoc()) { ?>
+            if ($row = $result->fetch_assoc()) { 
+                // حل مشکل نمایش تاریخ در صورت نبودن فیلد جدید در دیتابیس قدیمی
+                $display_date = $row['start_date_fa'] ?? ($row['date_fa'] ?? 'تعیین نشده');
+                ?>
 
-                <div class="tour-card">
-                    <div class="tour-content">
-                        <div class="tour-image-col">
-                            <span class="tour-badge">پیشنهاد ویژه</span>
-                            <div class="tour-header">
-                                <img
-                                    src="<?= $row['tour_image'] ?>"
-                                    alt="<?= htmlspecialchars($row['title']) ?>"
-                                    class="tour-main-image img-fluid">
-                            </div>
+        <div class="tour-main-wrapper">
+
+            <div class="tour-content-area">
+                <div class="modern-card">
+                    <div class="modern-image-container">
+                        <span class="tour-badge">تور برگزیده</span>
+                        <img src="<?= $row['tour_image'] ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                    </div>
+
+                    <h1 class="tour-main-title"><?= htmlspecialchars($row['title']) ?></h1>
+
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-globe"></i>
+                            <span>کشور</span>
+                            <strong><?= htmlspecialchars($row['country_fa']) ?></strong>
                         </div>
-
-                        <div class="tour-details-col">
-                            <h1 class="tour-title"><?= htmlspecialchars($row['title']) ?></h1>
-
-                            <div class="tour-meta">
-                                <div class="tour-meta-item">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <?= htmlspecialchars($row['country_fa']) ?> - <?= htmlspecialchars($row['city_fa']) ?>
-                                </div>
-                                <div class="tour-meta-item">
-                                    <i class="far fa-calendar-alt"></i>
-                                    <?= htmlspecialchars($row['date_fa']) ?>
-                                </div>
-                                <div class="tour-meta-item">
-                                    <i class="fas fa-clock"></i>
-                                    مدت تور: <?= htmlspecialchars($row['duration'] ?? '۷ روز') ?>
-                                </div>
-                            </div>
-
-                            <div class="tour-description">
-                                <?= nl2br($row['description']) ?>
-                            </div>
-
-                            <div class="tour-info">
-                                <div class="info-row">
-                                    <span class="info-label">کشور:</span>
-                                    <span class="info-value"><?= htmlspecialchars($row['country_fa']) ?> (<?= htmlspecialchars($row['country_en']) ?>)</span>
-                                </div>
-                                <div class="info-row">
-                                    <span class="info-label">شهر:</span>
-                                    <span class="info-value"><?= htmlspecialchars($row['city_fa']) ?> (<?= htmlspecialchars($row['city_en']) ?>)</span>
-                                </div>
-                                <div class="info-row">
-                                    <span class="info-label">تاریخ شمسی:</span>
-                                    <span class="info-value"><?= htmlspecialchars($row['date_fa']) ?></span>
-                                </div>
-                                <div class="info-row">
-                                    <span class="info-label">تاریخ میلادی:</span>
-                                    <span class="info-value"><?= htmlspecialchars($row['date_en']) ?></span>
-                                </div>
-                            </div>
-
-                            <div class="price-box">
-                                <span class="price-label">شروع قیمت از</span>
-                                <div class="price-value"><?= number_format($row['price']) ?> تومان</div>
-                                <a class="btn-book" style="text-decoration: none;"
-                                    href="../request_form_tour?tour_id=<?= urlencode($row['id']) ?>">
-                                    <i class="fas fa-shopping-cart"></i> رزرو تور
-                                </a>
-                            </div>
-
-                            <div class="gallery-thumbnails">
-                                <?php
-                                // نمایش تصاویر گالری
-                                $images = json_decode($row['gallery_images'] ?? '[]', true);
-                                foreach ($images as $index => $image) {
-                                    echo '<img src="' . htmlspecialchars(str_replace('../', '', $image)) . '" 
-                                         class="thumbnail" 
-                                         alt="تصویر ' . ($index + 1) . ' تور ' . htmlspecialchars($row['title']) . '">';
-                                }
-                                ?>
-                            </div>
+                        <div class="feature-item">
+                            <i class="fas fa-city"></i>
+                            <span>شهر</span>
+                            <strong><?= htmlspecialchars($row['city_fa']) ?></strong>
+                        </div>
+                        <div class="feature-item">
+                            <i class="far fa-calendar-check"></i>
+                            <span>تاریخ شروع</span>
+                            <strong><?= htmlspecialchars($display_date) ?></strong>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>مدت زمان</span>
+                            <strong><?= htmlspecialchars($row['duration'] ?? '7') ?> روز</strong>
                         </div>
                     </div>
+
+                    <div class="tour-description px-4">
+                        <h3 class="fw-bold mb-3" style="color:#1a2a6c;">درباره رویداد:</h3>
+                        <div class="content-text">
+                            <?= $row['description'] ?>
+                        </div>
+                    </div>
+
+                    <div class="gallery-thumbnails p-4">
+                        <?php
+                                $images = json_decode($row['gallery_images'] ?? '[]', true);
+                                foreach ($images as $image) {
+                                    echo '<img src="' . htmlspecialchars(str_replace('../', '', $image)) . '" class="thumbnail">';
+                                }
+                                ?>
+                    </div>
                 </div>
+            </div>
+
+            <div class="tour-sidebar-area">
+                <div class="sidebar-widget">
+                    <div class="text-center">
+                        <span class="text-muted d-block mb-1">شروع نرخ از:</span>
+                        <h2 class="price-value text-primary fw-bold mb-3"><?= number_format($row['price']) ?> <small
+                                style="font-size:14px">تومان</small></h2>
+                        <a href="../request_form_tour?tour_id=<?= $row['id'] ?>"
+                            class="btn btn-info btn-lg w-100 py-3 fw-bold text-white shadow-sm"
+                            style="border-radius:15px;">
+                            <i class="fas fa-paper-plane me-2"></i> درخواست رزرو فوری
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">آخرین تورهای نمایشگاهی</h3>
+                    <?php
+                            $recent_sql = "SELECT id, title, price, tour_image FROM exhibition_tours WHERE id != ? ORDER BY id DESC LIMIT 4";
+                            $res_stmt = $conn->prepare($recent_sql);
+                            $res_stmt->bind_param("i", $tour_id);
+                            $res_stmt->execute();
+                            $recent_result = $res_stmt->get_result();
+
+                            while ($recent = $recent_result->fetch_assoc()) { ?>
+                    <a href="tour-details.php?id=<?= $recent['id'] ?>" class="text-decoration-none text-dark">
+                        <div class="recent-tour-item">
+                            <img src="<?= $recent['tour_image'] ?>" class="recent-tour-img">
+                            <div class="recent-tour-info">
+                                <h4><?= mb_strimwidth($recent['title'], 0, 40, "...") ?></h4>
+                                <span class="price"><?= number_format($recent['price']) ?> تومان</span>
+                            </div>
+                        </div>
+                    </a>
+                    <?php } ?>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">پیشنهادات ویژه</h3>
+                    <?php
+                            $recent_sql = "SELECT id, title, price, tour_image FROM exhibition_tours WHERE id != ? ORDER BY id DESC LIMIT 4";
+                            $res_stmt = $conn->prepare($recent_sql);
+                            $res_stmt->bind_param("i", $tour_id);
+                            $res_stmt->execute();
+                            $recent_result = $res_stmt->get_result();
+
+                            while ($recent = $recent_result->fetch_assoc()) { ?>
+                    <a href="tour-details.php?id=<?= $recent['id'] ?>" class="text-decoration-none text-dark">
+                        <div class="recent-tour-item">
+                            <img src="<?= $recent['tour_image'] ?>" class="recent-tour-img">
+                            <div class="recent-tour-info">
+                                <h4><?= mb_strimwidth($recent['title'], 0, 40, "...") ?></h4>
+                                <span class="price"><?= number_format($recent['price']) ?> تومان</span>
+                            </div>
+                        </div>
+                    </a>
+                    <?php } ?>
+                </div>
+
+            </div>
+
+        </div>
+
         <?php
             } else {
-                echo '<div class="alert alert-danger text-center mt-5 py-3">
-                        تور مورد نظر پیدا نشد. <a href="index.php">بازگشت به صفحه تورها</a>
-                      </div>';
+                echo '<div class="alert alert-danger text-center mt-5">تور یافت نشد.</div>';
             }
-        } else {
-            // اصلاح پیام خطا
-            echo '<div class="alert alert-warning text-center mt-5 py-3">
-                    شناسه (ID) تور ارسال نشده است. <a href="index.php">مشاهده تورهای موجود</a>
-                  </div>';
         }
         ?>
     </div>
-
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     <?php include "footer.php"; ?>
 </body>

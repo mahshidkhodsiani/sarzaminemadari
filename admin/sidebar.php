@@ -12,7 +12,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <a href="requests.php" class="<?= $currentPage === 'requests.php' ? 'active' : '' ?>">
         <i class="bi bi-arrow-up-square"></i> درخواست تورها
     </a>
-    <a href="exhibition_tours.php" class="<?= $currentPage === 'exhibition_tours.php' ? 'active' : '' ?>">
+    <a href="add_exhibition.php" class="<?= $currentPage === 'add_exhibition.php' ? 'active' : '' ?>">
         <i class="bi bi-airplane"></i> افزودن تور نمایشگاهی
     </a>
     <a href="add_tour.php" class="<?= $currentPage === 'add_tour.php' ? 'active' : '' ?>">
