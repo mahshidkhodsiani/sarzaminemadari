@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../css/styles.css">
 
-
     <?php
     include 'includes.php';
     include '../config.php';
@@ -37,7 +36,8 @@
             $search_params[] = '%' . $_GET['city_fa'] . '%';
         }
         if (!empty($_GET['date_en'])) {
-            $search_conditions[] = "date_en = ?";
+            // اصلاح شده: استفاده از ستون صحیح دیتابیس برای تاریخ شروع
+            $search_conditions[] = "start_date_en = ?";
             $search_params[] = $_GET['date_en'];
         }
     }
@@ -75,8 +75,6 @@
     $stmt->execute();
     $result = $stmt->get_result();
     ?>
-
-
 </head>
 
 <body>
@@ -119,78 +117,82 @@
 
         <div class="row">
             <?php if ($result->num_rows > 0): ?>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <div class="col-md-4 mb-4">
-                        <div class="tour-card">
-                            <img src="<?= htmlspecialchars($row['tour_image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>" class="tour-img mb-3">
-                            <h3><?= htmlspecialchars($row['title']) ?></h3>
-                            <p><strong>کشور:</strong> <?= htmlspecialchars($row['country_fa']) ?></p>
-                            <p><strong>شهر:</strong> <?= htmlspecialchars($row['city_fa']) ?></p>
-                            <p><strong>تاریخ میلادی:</strong> <?= htmlspecialchars($row['date_en']) ?></p>
-                            <p><strong>تاریخ شمسی:</strong> <?= htmlspecialchars($row['date_fa']) ?></p>
-                            <p><strong>قیمت:</strong> <?= number_format($row['price']) ?> تومان</p>
-                            
-                            <a href="tour-details.php?id=<?= $row['id']?>" class="btn btn-warning w-100">دیدن تور</a>
-                            
-                        </div>
-                    </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <div class="col-12">
-                    <div class="alert alert-info text-center">تور نمایشگاهی یافت نشد</div>
+            <?php while ($row = $result->fetch_assoc()): ?>
+            <div class="col-md-4 mb-4">
+                <div class="tour-card">
+                    <img src="<?= htmlspecialchars($row['tour_image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>"
+                        class="tour-img mb-3">
+                    <h3><?= htmlspecialchars($row['title']) ?></h3>
+                    <p><strong>کشور:</strong> <?= htmlspecialchars($row['country_fa']) ?></p>
+                    <p><strong>شهر:</strong> <?= htmlspecialchars($row['city_fa']) ?></p>
+                    <p><strong>تاریخ میلادی:</strong> <?= htmlspecialchars($row['start_date_en']) ?></p>
+                    <p><strong>تاریخ شمسی:</strong> <?= htmlspecialchars($row['start_date_fa']) ?></p>
+                    <p><strong>قیمت:</strong> <?= number_format($row['price']) ?> تومان</p>
+
+                    <a href="tour-details.php?id=<?= $row['id']?>" class="btn btn-warning w-100">دیدن تور</a>
                 </div>
+            </div>
+            <?php endwhile; ?>
+            <?php else: ?>
+            <div class="col-12">
+                <div class="alert alert-info text-center">تور نمایشگاهی یافت نشد</div>
+            </div>
             <?php endif; ?>
         </div>
 
-
         <?php if ($total_pages > 1): ?>
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <?php if ($page > 1): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => 1])) ?>" aria-label="First">
-                                <span aria-hidden="true">&laquo;&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $page - 1])) ?>" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                    <?php endif; ?>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <?php if ($page > 1): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => 1])) ?>"
+                        aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $page - 1])) ?>"
+                        aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <?php endif; ?>
 
-                    <?php
+                <?php
                     $start = max(1, $page - 2);
                     $end = min($total_pages, $page + 2);
 
                     if ($start > 1): ?>
-                        <li class="page-item disabled"><span class="page-link">...</span></li>
-                    <?php endif; ?>
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+                <?php endif; ?>
 
-                    <?php for ($i = $start; $i <= $end; $i++): ?>
-                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                            <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $i])) ?>"><?= $i ?></a>
-                        </li>
-                    <?php endfor; ?>
+                <?php for ($i = $start; $i <= $end; $i++): ?>
+                <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                    <a class="page-link"
+                        href="?<?= http_build_query(array_merge($_GET, ['page' => $i])) ?>"><?= $i ?></a>
+                </li>
+                <?php endfor; ?>
 
-                    <?php if ($end < $total_pages): ?>
-                        <li class="page-item disabled"><span class="page-link">...</span></li>
-                    <?php endif; ?>
+                <?php if ($end < $total_pages): ?>
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+                <?php endif; ?>
 
-                    <?php if ($page < $total_pages): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $page + 1])) ?>" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $total_pages])) ?>" aria-label="Last">
-                                <span aria-hidden="true">&raquo;&raquo;</span>
-                            </a>
-                        </li>
-                    <?php endif; ?>
-                </ul>
-            </nav>
+                <?php if ($page < $total_pages): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $page + 1])) ?>"
+                        aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $total_pages])) ?>"
+                        aria-label="Last">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                </li>
+                <?php endif; ?>
+            </ul>
+        </nav>
         <?php endif; ?>
 
     </div>

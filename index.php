@@ -64,12 +64,25 @@
             <div class="carousel-item active">
                 <img src="img/1.jpg" class="d-block w-100" alt="Slide 1">
             </div>
+            <!-- ..... -->
             <div class="carousel-item">
-                <img src="img/2.jpg" class="d-block w-100" alt="Slide 2">
+                <img src="https://moonshid.ir/uploadimg/85/WhatsApp%20Image%202025-12-31%20at%2012.15.24%20PM.jpeg"
+                    class="d-block w-100" alt="Slide 2">
+            </div>
+            <!-- ..... -->
+            <!-- ..... -->
+            <div class="carousel-item">
+                <img src="https://moonshid.ir/uploadimg/84/WhatsApp%20Image%202025-12-31%20at%201.17.33%20PM.jpeg"
+                    class="d-block w-100" alt="Slide 3">
+            </div>
+            <!-- ..... -->
+            <div class="carousel-item">
+                <img src="img/2.jpg" class="d-block w-100" alt="Slide 4">
             </div>
             <div class="carousel-item">
-                <img src="img/3.jpg" class="d-block w-100" alt="Slide 3">
+                <img src="img/3.jpg" class="d-block w-100" alt="Slide 5">
             </div>
+
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>

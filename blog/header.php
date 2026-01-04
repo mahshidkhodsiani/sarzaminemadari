@@ -1,8 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light">
     <a href="../">
         <img src="../img/logo.png" width="70px" height="70px">
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -10,13 +11,13 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item dropdown">
-                <a href="ticket" class="nav-link text-dark">
+                <a href="ticket" class="nav-link text-light">
                     <i class="bi bi-ticket"></i> بلیط
                 </a>
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
                     <i class="bi bi-building"></i> هتل
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
@@ -50,7 +51,7 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
                     <i class="bi bi-compass"></i> تورها
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
@@ -165,13 +166,13 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-dark" href="e_tours">
+                <a class="nav-link text-light" href="../e_tours">
                     <i class="bi bi-calendar-event"></i> تورهای نمایشگاهی
                 </a>
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
                     <i class="bi bi-gear"></i> خدمات
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
@@ -191,11 +192,11 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
                     <i class="bi bi-map"></i> سرزمین ما
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
-                    <li><a class="dropdown-item" href="blog"><i class="bi bi-book"></i> مجله</a></li>
+                    <li><a class="dropdown-item" href="./"><i class="bi bi-book"></i> مجله</a></li>
                     <li><a class="dropdown-item" href="#"><i class="bi bi-people"></i> درباره ما</a></li>
                     <li><a class="dropdown-item" href="#"><i class="bi bi-newspaper"></i> اخبار</a></li>
                     <li><a class="dropdown-item" href="#"><i class="bi bi-bell"></i> اطلاعیه ها</a></li>
@@ -207,46 +208,47 @@
 </nav>
 
 <style>
-    /* پررنگ‌تر کردن نوشته‌ها */
-    .navbar-nav .nav-link,
-    .dropdown-menu .dropdown-item {
-        font-weight: 600;
-        font-size: 16px;
-    }
+/* پررنگ‌تر کردن نوشته‌ها */
+.navbar-nav .nav-link,
+.dropdown-menu .dropdown-item {
+    font-weight: 600;
+    font-size: 16px;
+}
 
-    /* فاصله بیشتر بین آیتم‌ها */
-    .navbar-nav .nav-item {
-        margin-left: 18px;
-        margin-right: 18px;
-    }
+/* فاصله بیشتر بین آیتم‌ها */
+.navbar-nav .nav-item {
+    margin-left: 18px;
+    margin-right: 18px;
+}
 
-    /* زیباتر شدن حالت hover */
-    .navbar-nav .nav-link:hover,
-    .dropdown-menu .dropdown-item:hover {
-        color: #0d6efd !important;
-        background-color: rgba(13, 110, 253, 0.08);
-        border-radius: 6px;
-    }
+/* زیباتر شدن حالت hover */
+.navbar-nav .nav-link:hover,
+.dropdown-menu .dropdown-item:hover {
+    color: #0d6efd !important;
+    background-color: rgba(13, 110, 253, 0.08);
+    border-radius: 6px;
+}
 
-    /* ظاهر بهتر برای dropdown */
-    .dropdown-menu {
-        padding: 10px 0;
-        border-radius: 10px;
-    }
+/* ظاهر بهتر برای dropdown */
+.dropdown-menu {
+    padding: 10px 0;
+    border-radius: 10px;
+}
 
-    /* فاصله دادن در منوهای چندسطحی */
-    .dropdown-menu .dropdown-menu {
-        margin-right: 10px;
-    }
+/* فاصله دادن در منوهای چندسطحی */
+.dropdown-menu .dropdown-menu {
+    margin-right: 10px;
+}
 
-    /* فاصله بین آیتم‌های داخل dropdown */
-    .dropdown-menu .dropdown-item {
-        padding: 10px 20px;
-    }
+/* فاصله بین آیتم‌های داخل dropdown */
+.dropdown-menu .dropdown-item {
+    padding: 10px 20px;
+}
 
-    /* استایل آیکون‌ها */
-    .navbar-nav .nav-link i,
-    .dropdown-menu .dropdown-item i {
-        margin-left: 8px; /* فاصله بین آیکون و متن */
-    }
+/* استایل آیکون‌ها */
+.navbar-nav .nav-link i,
+.dropdown-menu .dropdown-item i {
+    margin-left: 8px;
+    /* فاصله بین آیکون و متن */
+}
 </style>

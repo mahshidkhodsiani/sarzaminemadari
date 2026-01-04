@@ -166,7 +166,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-light" href="e_tours">
+                <a class="nav-link text-light" href="./">
                     <i class="bi bi-calendar-event"></i> تورهای نمایشگاهی
                 </a>
             </li>
@@ -196,7 +196,7 @@
                     <i class="bi bi-map"></i> سرزمین ما
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-end">
-                    <li><a class="dropdown-item" href="blog"><i class="bi bi-book"></i> مجله</a></li>
+                    <li><a class="dropdown-item" href="../blog"><i class="bi bi-book"></i> مجله</a></li>
                     <li><a class="dropdown-item" href="#"><i class="bi bi-people"></i> درباره ما</a></li>
                     <li><a class="dropdown-item" href="#"><i class="bi bi-newspaper"></i> اخبار</a></li>
                     <li><a class="dropdown-item" href="#"><i class="bi bi-bell"></i> اطلاعیه ها</a></li>
