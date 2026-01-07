@@ -129,7 +129,7 @@
                                     <?php echo htmlspecialchars($tour_data['country_fa'] . ' - ' . $tour_data['city_fa']); ?>
                                 </p>
                                 <p class="mb-2"><strong>تاریخ:</strong>
-                                    <?php echo htmlspecialchars($tour_data['start_date_fa'] ?? $tour_data['date_fa'] ?? 'نامشخص'); ?>
+                                    <?php echo htmlspecialchars($tour_data['start_date_fa'] ?? $tour_data['start_date_en'] ?? 'نامشخص'); ?>
                                 </p>
                                 <p class="mb-0"><strong>قیمت پایه:</strong>
                                     <?php echo number_format($tour_data['price']); ?> تومان</p>

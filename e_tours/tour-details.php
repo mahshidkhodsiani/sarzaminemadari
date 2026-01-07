@@ -1,44 +1,88 @@
+<?php
+include 'includes.php';
+include '../config.php';
+
+// ابتدا دریافت اطلاعات برای استفاده در تگ‌های Head
+$tour_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$stmt = $conn->prepare("SELECT * FROM exhibition_tours WHERE id = ?");
+$stmt->bind_param("i", $tour_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+if ($row) {
+    $title = htmlspecialchars($row['title']);
+    $description = mb_strimwidth(strip_tags($row['description']), 0, 160, "...");
+    $current_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $display_date = $row['start_date_fa'] ?? ($row['date_fa'] ?? 'تعیین نشده');
+} else {
+    $title = "تور یافت نشد | سرزمین مادری";
+    $description = "جزئیات تور مورد نظر یافت نشد.";
+}
+?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
-    <title>جزئیات تور نمایشگاهی | سرزمین مادری</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title><?= $title ?> | سرزمین مادری</title>
+    <meta name="description" content="<?= $description ?>">
+    <link rel="canonical" href="<?= $current_url ?? '' ?>">
+
+    <meta property="og:locale" content="fa_IR">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<?= $title ?>">
+    <meta property="og:description" content="<?= $description ?>">
+    <meta property="og:url" content="<?= $current_url ?? '' ?>">
+    <meta property="og:site_name" content="سرزمین مادری">
+    <meta property="og:image" content="<?= $row['tour_image'] ?? '' ?>">
+
     <link rel="stylesheet" href="styles.css">
-    <?php
-    include 'includes.php';
-    include '../config.php';
-    ?>
+    <link rel="icon" type="image/png" href="../img/logo.png">
+
+    <?php if ($row): ?>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": "<?= $title ?>",
+        "image": "<?= $row['tour_image'] ?>",
+        "description": "<?= $description ?>",
+        "brand": {
+            "@type": "Brand",
+            "name": "سرزمین مادری"
+        },
+        "offers": {
+            "@type": "Offer",
+            "url": "<?= $current_url ?>",
+            "priceCurrency": "IRT",
+            "price": "<?= $row['price'] ?>",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+    <?php endif; ?>
+
 </head>
 
 <body>
     <?php include 'header.php'; ?>
 
     <div class="container tour-container">
-        <?php
-        if (isset($_GET['id'])) {
-            $tour_id = (int)$_GET['id'];
-            $stmt = $conn->prepare("SELECT * FROM exhibition_tours WHERE id = ?");
-            $stmt->bind_param("i", $tour_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            if ($row = $result->fetch_assoc()) { 
-                // حل مشکل نمایش تاریخ در صورت نبودن فیلد جدید در دیتابیس قدیمی
-                $display_date = $row['start_date_fa'] ?? ($row['date_fa'] ?? 'تعیین نشده');
-                ?>
-
+        <?php if ($row): ?>
         <div class="tour-main-wrapper">
 
             <div class="tour-content-area">
                 <div class="modern-card">
                     <div class="modern-image-container">
                         <span class="tour-badge">تور برگزیده</span>
-                        <img src="<?= $row['tour_image'] ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                        <img src="<?= $row['tour_image'] ?>" alt="رزرو <?= $title ?> - سرزمین مادری"
+                            title="<?= $title ?>">
                     </div>
 
-                    <h1 class="tour-main-title"><?= htmlspecialchars($row['title']) ?></h1>
+                    <h1 class="tour-main-title"><?= $title ?></h1>
 
                     <div class="feature-grid">
                         <div class="feature-item">
@@ -64,7 +108,7 @@
                     </div>
 
                     <div class="tour-description px-4">
-                        <h3 class="fw-bold mb-3" style="color:#1a2a6c;">درباره رویداد:</h3>
+                        <h2 class="fw-bold mb-3" style="color:#1a2a6c; font-size: 1.5rem;">درباره رویداد نمایشگاهی</h2>
                         <div class="content-text">
                             <?= $row['description'] ?>
                         </div>
@@ -72,11 +116,12 @@
 
                     <div class="gallery-thumbnails p-4">
                         <?php
-                                $images = json_decode($row['gallery_images'] ?? '[]', true);
-                                foreach ($images as $image) {
-                                    echo '<img src="' . htmlspecialchars(str_replace('../', '', $image)) . '" class="thumbnail">';
-                                }
-                                ?>
+                        $images = json_decode($row['gallery_images'] ?? '[]', true);
+                        foreach ($images as $image) {
+                            $img_url = htmlspecialchars(str_replace('../', '', $image));
+                            echo '<img src="' . $img_url . '" class="thumbnail" alt="گالری تصاویر ' . $title . '">';
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -89,7 +134,7 @@
                                 style="font-size:14px">تومان</small></h2>
                         <a href="../request_form_tour?tour_id=<?= $row['id'] ?>"
                             class="btn btn-info btn-lg w-100 py-3 fw-bold text-white shadow-sm"
-                            style="border-radius:15px;">
+                            style="border-radius:15px;" rel="nofollow">
                             <i class="fas fa-paper-plane me-2"></i> درخواست رزرو فوری
                         </a>
                     </div>
@@ -98,38 +143,18 @@
                 <div class="sidebar-widget">
                     <h3 class="widget-title">آخرین تورهای نمایشگاهی</h3>
                     <?php
-                            $recent_sql = "SELECT id, title, price, tour_image FROM exhibition_tours WHERE id != ? ORDER BY id DESC LIMIT 4";
-                            $res_stmt = $conn->prepare($recent_sql);
-                            $res_stmt->bind_param("i", $tour_id);
-                            $res_stmt->execute();
-                            $recent_result = $res_stmt->get_result();
+                    $recent_sql = "SELECT id, title, price, tour_image FROM exhibition_tours WHERE id != ? ORDER BY id DESC LIMIT 4";
+                    $res_stmt = $conn->prepare($recent_sql);
+                    $res_stmt->bind_param("i", $tour_id);
+                    $res_stmt->execute();
+                    $recent_result = $res_stmt->get_result();
 
-                            while ($recent = $recent_result->fetch_assoc()) { ?>
-                    <a href="tour-details.php?id=<?= $recent['id'] ?>" class="text-decoration-none text-dark">
+                    while ($recent = $recent_result->fetch_assoc()) { ?>
+                    <a href="tour-details.php?id=<?= $recent['id'] ?>" class="text-decoration-none text-dark"
+                        title="<?= htmlspecialchars($recent['title']) ?>">
                         <div class="recent-tour-item">
-                            <img src="<?= $recent['tour_image'] ?>" class="recent-tour-img">
-                            <div class="recent-tour-info">
-                                <h4><?= mb_strimwidth($recent['title'], 0, 40, "...") ?></h4>
-                                <span class="price"><?= number_format($recent['price']) ?> تومان</span>
-                            </div>
-                        </div>
-                    </a>
-                    <?php } ?>
-                </div>
-
-                <div class="sidebar-widget">
-                    <h3 class="widget-title">پیشنهادات ویژه</h3>
-                    <?php
-                            $recent_sql = "SELECT id, title, price, tour_image FROM exhibition_tours WHERE id != ? ORDER BY id DESC LIMIT 4";
-                            $res_stmt = $conn->prepare($recent_sql);
-                            $res_stmt->bind_param("i", $tour_id);
-                            $res_stmt->execute();
-                            $recent_result = $res_stmt->get_result();
-
-                            while ($recent = $recent_result->fetch_assoc()) { ?>
-                    <a href="tour-details.php?id=<?= $recent['id'] ?>" class="text-decoration-none text-dark">
-                        <div class="recent-tour-item">
-                            <img src="<?= $recent['tour_image'] ?>" class="recent-tour-img">
+                            <img src="<?= $recent['tour_image'] ?>" class="recent-tour-img"
+                                alt="<?= htmlspecialchars($recent['title']) ?>">
                             <div class="recent-tour-info">
                                 <h4><?= mb_strimwidth($recent['title'], 0, 40, "...") ?></h4>
                                 <span class="price"><?= number_format($recent['price']) ?> تومان</span>
@@ -140,15 +165,11 @@
                 </div>
 
             </div>
-
         </div>
-
-        <?php
-            } else {
-                echo '<div class="alert alert-danger text-center mt-5">تور یافت نشد.</div>';
-            }
-        }
-        ?>
+        <?php else: ?>
+        <div class="alert alert-danger text-center mt-5">متاسفانه تور مورد نظر یافت نشد. <br> <a href="index.php">مشاهده
+                لیست تمامی تورها</a></div>
+        <?php endif; ?>
     </div>
 
     <?php include "footer.php"; ?>

@@ -717,7 +717,8 @@ body {
 
 .modern-card {
     background: #fff;
-    border-radius: 20px;
+    border-radius: 25px;
+    border: 2px solid black;
     box-shadow: 0 10px 40px rgba(0,0,0,0.05);
     overflow: hidden;
     margin-bottom: 30px;
@@ -826,10 +827,23 @@ body {
 }
 
 footer {
-  background-color: #39359a !important;
+  background-color: #4b499e !important;
 }
 
 nav {
-  background-color: #39359a !important;
+  background-color: #4b499e !important;
 
 }
+
+
+
+/* اصلاح استایل توضیحات */
+.tour-description img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    /* این خط معجزه می‌کند: تصویر را متناسب برش می‌زند و نمی‌کشد */
+    object-position: center;
+    /* تمرکز روی وسط تصویر */
+}
+

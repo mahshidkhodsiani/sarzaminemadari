@@ -35,11 +35,6 @@
                         referrerpolicy='origin'
                         src='https://trustseal.enamad.ir/logo.aspx?id=606954&Code=HyDtd75KhDvcEagShFRWdx0kg0VxLc2y'
                         alt='' style='cursor:pointer' code='HyDtd75KhDvcEagShFRWdx0kg0VxLc2y'></a>
-                <a referrerpolicy='origin' target='_blank'
-                    href='https://trustseal.enamad.ir/?id=606954&Code=HyDtd75KhDvcEagShFRWdx0kg0VxLc2y'><img
-                        referrerpolicy='origin'
-                        src='https://trustseal.enamad.ir/logo.aspx?id=606954&Code=HyDtd75KhDvcEagShFRWdx0kg0VxLc2y'
-                        alt='' style='cursor:pointer' code='HyDtd75KhDvcEagShFRWdx0kg0VxLc2y'></a>
             </div>
 
         </div>

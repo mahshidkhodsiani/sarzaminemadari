@@ -53,6 +53,9 @@
     include 'includes.php';
     include 'config.php';
     ?>
+
+
+
 </head>
 
 <body>
@@ -431,11 +434,53 @@
     </div>
 
 
-    <div class="container mt-4" style="background-color: #efe446ff;">
-        <div class="row">
+
+
+    <div class="container mt-4" style="background-color: #f3f954ff; border-radius: 10px;">
+        <div class="row p-3">
             <h3>برترین همراهان</h3>
         </div>
+
+        <div class="logo-slider-container">
+            <div class="logo-track" id="logoTrack">
+                <div class="logo-item"><img src="img/27.png" alt="1"></div>
+                <div class="logo-item"><img src="https://via.placeholder.com/150x80?text=Logo+2" alt="2"></div>
+                <div class="logo-item"><img src="https://via.placeholder.com/150x80?text=Logo+3" alt="3"></div>
+                <div class="logo-item"><img src="https://via.placeholder.com/150x80?text=Logo+4" alt="4"></div>
+                <div class="logo-item"><img src="https://via.placeholder.com/150x80?text=Logo+5" alt="5"></div>
+                <div class="logo-item"><img src="https://via.placeholder.com/150x80?text=Logo+6" alt="6"></div>
+                <div class="logo-item"><img src="https://via.placeholder.com/150x80?text=Logo+7" alt="7"></div>
+                <div class="logo-item"><img src="https://via.placeholder.com/150x80?text=Logo+8" alt="8"></div>
+                <div class="logo-item"><img src="https://via.placeholder.com/150x80?text=Logo+9" alt="9"></div>
+            </div>
+        </div>
     </div>
+
+
+
+    <script>
+    const track = document.getElementById('logoTrack');
+    const items = document.querySelectorAll('.logo-item');
+    const totalItems = items.length;
+    const visibleItems = 6;
+    let currentIndex = 0;
+
+    function nextSlide() {
+        currentIndex++;
+
+        // اگر به انتهای لیست رسیدیم (با احتساب 6 تا نمایشی)، برگرد به اول
+        if (currentIndex > totalItems - visibleItems) {
+            currentIndex = 0;
+        }
+
+        const offset = -(currentIndex * (100 / visibleItems));
+        track.style.transform = `translateX(${offset}%)`;
+    }
+
+    // اجرای خودکار هر 3 ثانیه
+    setInterval(nextSlide, 3000);
+    </script>
+
 
 
     <?php include 'footer.php'; ?>

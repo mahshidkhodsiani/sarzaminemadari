@@ -406,10 +406,43 @@ textarea {
 /* ///////////////////////////// */
 
 footer {
-  background-color: #39359a !important;
+  background-color: #4b499e !important;
 }
 
 nav {
-  background-color: #39359a !important;
+  background-color: #4b499e !important;
 
+}
+
+/* ..... */
+.logo-slider-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    padding: 20px 0;
+}
+
+.logo-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.logo-item {
+    min-width: calc(100% / 6);
+    /* نمایش 6 آیتم در هر لحظه */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo-item img {
+    max-width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+    transition: 0.3s;
+}
+
+.logo-item img:hover {
+    filter: grayscale(0%);
 }
