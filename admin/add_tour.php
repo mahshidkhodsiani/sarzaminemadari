@@ -77,74 +77,79 @@ if (isset($_POST['submit'])) {
 <body>
     <div class="container-fluid">
         <div class="row">
-            <?php include 'sidebar.php'; ?>
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4">
-                <div class="card shadow">
-                    <div class="card-header bg-info text-white">افزودن تور مسافرتی جدید</div>
-                    <div class="card-body">
-                        <form enctype="multipart/form-data" method="POST">
-                            <div class="mb-3">
-                                <label class="form-label">عنوان تور *</label>
-                                <input type="text" class="form-control" name="title" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">عکس اصلی (Label) *</label>
-                                <input class="form-control" type="file" name="image" accept="image/*" required>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label">توضیحات کامل:</label>
-                                <textarea id="editor" name="description"></textarea>
-                            </div>
-
-                            <div class="row mt-4">
-                                <div class="col-md-3"><label>تاریخ رفت (میلادی)</label><input type="date"
-                                        class="form-control" id="start_date_en" name="start_date_en" required></div>
-                                <div class="col-md-3"><label>تاریخ رفت (شمسی)</label><input type="text"
-                                        class="form-control" id="start_date_fa" name="start_date_fa" readonly></div>
-                                <div class="col-md-3"><label>تاریخ برگشت (میلادی)</label><input type="date"
-                                        class="form-control" id="end_date_en" name="end_date_en" required></div>
-                                <div class="col-md-3"><label>تاریخ برگشت (شمسی)</label><input type="text"
-                                        class="form-control" id="end_date_fa" name="end_date_fa" readonly></div>
-                            </div>
-
-                            <div class="row mt-4">
-                                <div class="col-md-6"><label>کشور (فارسی)</label><input type="text" class="form-control"
-                                        name="country_fa" required></div>
-                                <div class="col-md-6"><label>شهر (فارسی)</label><input type="text" class="form-control"
-                                        name="city_fa" required></div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-6"><label>Country (English)</label><input type="text"
-                                        class="form-control" name="country_en" required></div>
-                                <div class="col-md-6"><label>City (English)</label><input type="text"
-                                        class="form-control" name="city_en" required></div>
-                            </div>
-
-                            <div class="row mt-3">
-                                <div class="col-md-4">
-                                    <label>دسته‌بندی</label>
-                                    <select class="form-control" name="category" required>
-                                        <option value="تفریحی">تفریحی</option>
-                                        <option value="گردشگری">گردشگری</option>
-                                        <option value="زیارتی">زیارتی</option>
-                                        <option value="سایر">سایر</option>
-                                    </select>
+            <div class="col-md-3">
+                <?php include 'sidebar.php'; ?>
+            </div>
+            <div class="col-md-9">
+                <main>
+                    <div class="card shadow">
+                        <div class="card-header bg-info text-white">افزودن تور مسافرتی جدید</div>
+                        <div class="card-body">
+                            <form enctype="multipart/form-data" method="POST">
+                                <div class="mb-3">
+                                    <label class="form-label">عنوان تور *</label>
+                                    <input type="text" class="form-control" name="title" required>
                                 </div>
-                                <div class="col-md-4">
-                                    <label>نوع تور</label>
-                                    <select class="form-control" name="type" required>
-                                        <option value="1">خارجی</option>
-                                        <option value="2">داخلی</option>
-                                    </select>
+                                <div class="mb-3">
+                                    <label class="form-label">عکس اصلی (Label) *</label>
+                                    <input class="form-control" type="file" name="image" accept="image/*" required>
                                 </div>
-                                <div class="col-md-4"><label>شروع قیمت (فقط عدد)</label><input type="number"
-                                        class="form-control" name="price" required></div>
-                            </div>
-                            <button name="submit" class="btn btn-info mt-4 mb-3 text-white">ذخیره تور مسافرتی</button>
-                        </form>
+                                <div class="mb-4">
+                                    <label class="form-label">توضیحات کامل:</label>
+                                    <textarea id="editor" name="description"></textarea>
+                                </div>
+
+                                <div class="row mt-4">
+                                    <div class="col-md-3"><label>تاریخ رفت (میلادی)</label><input type="date"
+                                            class="form-control" id="start_date_en" name="start_date_en" required></div>
+                                    <div class="col-md-3"><label>تاریخ رفت (شمسی)</label><input type="text"
+                                            class="form-control" id="start_date_fa" name="start_date_fa" readonly></div>
+                                    <div class="col-md-3"><label>تاریخ برگشت (میلادی)</label><input type="date"
+                                            class="form-control" id="end_date_en" name="end_date_en" required></div>
+                                    <div class="col-md-3"><label>تاریخ برگشت (شمسی)</label><input type="text"
+                                            class="form-control" id="end_date_fa" name="end_date_fa" readonly></div>
+                                </div>
+
+                                <div class="row mt-4">
+                                    <div class="col-md-6"><label>کشور (فارسی)</label><input type="text"
+                                            class="form-control" name="country_fa" required></div>
+                                    <div class="col-md-6"><label>شهر (فارسی)</label><input type="text"
+                                            class="form-control" name="city_fa" required></div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6"><label>Country (English)</label><input type="text"
+                                            class="form-control" name="country_en" required></div>
+                                    <div class="col-md-6"><label>City (English)</label><input type="text"
+                                            class="form-control" name="city_en" required></div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <label>دسته‌بندی</label>
+                                        <select class="form-control" name="category" required>
+                                            <option value="تفریحی">تفریحی</option>
+                                            <option value="گردشگری">گردشگری</option>
+                                            <option value="زیارتی">زیارتی</option>
+                                            <option value="سایر">سایر</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>نوع تور</label>
+                                        <select class="form-control" name="type" required>
+                                            <option value="1">خارجی</option>
+                                            <option value="2">داخلی</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4"><label>شروع قیمت (فقط عدد)</label><input type="number"
+                                            class="form-control" name="price" required></div>
+                                </div>
+                                <button name="submit" class="btn btn-info mt-4 mb-3 text-white">ذخیره تور
+                                    مسافرتی</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </main>
+                </main>
+            </div>
         </div>
     </div>
 

@@ -35,98 +35,106 @@ $id = $all_data['id'];
 
     <div class="container-fluid">
         <div class="row">
-            <?php include 'sidebar.php'; ?>
+            <div class="col-md-3">
+                <?php include 'sidebar.php'; ?>
+            </div>
+            <div class="col-md-9">
 
-            <!-- Main Content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4">
-                <div class="card shadow">
-                    <div class="card-header bg-info text-white">
-                        افزودن مقاله جدید
-                    </div>
-                    <div class="card-body">
-                        <form enctype="multipart/form-data" action="" method="POST">
-                            <!-- عنوان مقاله -->
-                            <div class="mb-3">
-                                <label for="title" class="form-label">عنوان مقاله *</label>
-                                <input type="text" class="form-control" id="title" name="title" required>
-                            </div>
+                <!-- Main Content -->
+                <main class="">
+                    <div class="card shadow">
+                        <div class="card-header bg-info text-white">
+                            افزودن مقاله جدید
+                        </div>
+                        <div class="card-body">
+                            <form enctype="multipart/form-data" action="" method="POST">
+                                <!-- عنوان مقاله -->
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">عنوان مقاله *</label>
+                                    <input type="text" class="form-control" id="title" name="title" required>
+                                </div>
 
-                            <!-- slug -->
-                            <div class="mb-3">
-                                <label for="slug" class="form-label">Slug (نامک) *</label>
-                                <input type="text" class="form-control" id="slug" name="slug" required>
-                                <small class="text-muted">این فیلد به صورت خودکار از عنوان مقاله ایجاد می‌شود</small>
-                            </div>
+                                <!-- slug -->
+                                <div class="mb-3">
+                                    <label for="slug" class="form-label">Slug (نامک) *</label>
+                                    <input type="text" class="form-control" id="slug" name="slug" required>
+                                    <small class="text-muted">این فیلد به صورت خودکار از عنوان مقاله ایجاد
+                                        می‌شود</small>
+                                </div>
 
-                            <!-- محتوای مقاله -->
-                            <!-- <div class="mb-4">
+                                <!-- محتوای مقاله -->
+                                <!-- <div class="mb-4">
                                 <label for="content" class="form-label">محتوای مقاله *</label>
                                 <textarea id="content" name="content"></textarea>
                             </div> -->
 
 
-                            <textarea id="editor" name="content"></textarea>
-                            <script>
+                                <textarea id="editor" name="content"></textarea>
+                                <script>
                                 const editor = new Jodit('#editor', {
                                     removeButtons: ['source'],
                                     language: 'fa',
                                     height: 500,
 
                                 });
-                            </script>
+                                </script>
 
 
 
 
-                            <!-- تصویر شاخص -->
-                            <div class="mb-3">
-                                <label for="featured_image" class="form-label">تصویر شاخص</label>
-                                <input class="form-control" type="file" id="featured_image" name="featured_image" accept="image/*">
-                                <small class="text-muted">فرمت‌های مجاز: JPG, PNG, GIF - حداکثر حجم: 2MB</small>
-                            </div>
-
-
-                            <!-- وضعیت -->
-                            <div class="mb-3">
-                                <label for="status" class="form-label">وضعیت انتشار *</label>
-                                <select class="form-control" id="status" name="status" required>
-                                    <option value="published">منتشر شده</option>
-                                    <option value="draft">پیش‌نویس</option>
-                                    <option value="pending">در انتظار بررسی</option>
-                                </select>
-                            </div>
-
-                            <!-- متا تگ‌ها -->
-                            <div class="card mt-4 mb-4">
-                                <div class="card-header bg-light">
-                                    تنظیمات سئو
+                                <!-- تصویر شاخص -->
+                                <div class="mb-3">
+                                    <label for="featured_image" class="form-label">تصویر شاخص</label>
+                                    <input class="form-control" type="file" id="featured_image" name="featured_image"
+                                        accept="image/*">
+                                    <small class="text-muted">فرمت‌های مجاز: JPG, PNG, GIF - حداکثر حجم: 2MB</small>
                                 </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <label for="meta_title" class="form-label">عنوان متا</label>
-                                        <input type="text" class="form-control" id="meta_title" name="meta_title">
-                                        <small class="text-muted">حداکثر 60 کاراکتر</small>
+
+
+                                <!-- وضعیت -->
+                                <div class="mb-3">
+                                    <label for="status" class="form-label">وضعیت انتشار *</label>
+                                    <select class="form-control" id="status" name="status" required>
+                                        <option value="published">منتشر شده</option>
+                                        <option value="draft">پیش‌نویس</option>
+                                        <option value="pending">در انتظار بررسی</option>
+                                    </select>
+                                </div>
+
+                                <!-- متا تگ‌ها -->
+                                <div class="card mt-4 mb-4">
+                                    <div class="card-header bg-light">
+                                        تنظیمات سئو
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="meta_description" class="form-label">توضیحات متا</label>
-                                        <textarea class="form-control" id="meta_description" name="meta_description" rows="2"></textarea>
-                                        <small class="text-muted">حداکثر 160 کاراکتر</small>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="meta_keywords" class="form-label">کلمات کلیدی متا</label>
-                                        <input type="text" class="form-control" id="meta_keywords" name="meta_keywords">
-                                        <small class="text-muted">کلمات را با کاما جدا کنید</small>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="meta_title" class="form-label">عنوان متا</label>
+                                            <input type="text" class="form-control" id="meta_title" name="meta_title">
+                                            <small class="text-muted">حداکثر 60 کاراکتر</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="meta_description" class="form-label">توضیحات متا</label>
+                                            <textarea class="form-control" id="meta_description" name="meta_description"
+                                                rows="2"></textarea>
+                                            <small class="text-muted">حداکثر 160 کاراکتر</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="meta_keywords" class="form-label">کلمات کلیدی متا</label>
+                                            <input type="text" class="form-control" id="meta_keywords"
+                                                name="meta_keywords">
+                                            <small class="text-muted">کلمات را با کاما جدا کنید</small>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <br>
+                                <br>
 
-                            <button name="submit" class="btn btn-info">ذخیره مقاله</button>
-                            <br>
-                        </form>
+                                <button name="submit" class="btn btn-info">ذخیره مقاله</button>
+                                <br>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </main>
+                </main>
+            </div>
         </div>
     </div>
 
@@ -134,23 +142,23 @@ $id = $all_data['id'];
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-            // ایجاد خودکار slug از عنوان
-            $('#title').on('input', function() {
-                const title = $(this).val();
-                const slug = title.replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, '')
-                    .replace(/\s+/g, '-')
-                    .toLowerCase();
-                $('#slug').val(slug);
-            });
+    $(document).ready(function() {
+        // ایجاد خودکار slug از عنوان
+        $('#title').on('input', function() {
+            const title = $(this).val();
+            const slug = title.replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, '')
+                .replace(/\s+/g, '-')
+                .toLowerCase();
+            $('#slug').val(slug);
         });
+    });
     </script>
 
 
     <script>
-        $('form').submit(function() {
-            $('#editor').val(editor.getEditorValue()); // انتقال محتوا به textarea
-        });
+    $('form').submit(function() {
+        $('#editor').val(editor.getEditorValue()); // انتقال محتوا به textarea
+    });
     </script>
 </body>
 

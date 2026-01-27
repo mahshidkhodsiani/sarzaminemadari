@@ -44,76 +44,80 @@ $pages = ceil($total_count / $limit);
 <body>
     <div class="container-fluid">
         <div class="row">
-            <?php include 'sidebar.php'; ?>
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4">
-                <div class="card shadow">
-                    <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">مدیریت تورها (تعداد کل: <?= $total_count ?>)</h5>
-                        <a href="add_exhibition.php" class="btn btn-sm btn-light">افزودن تور جدید</a>
-                    </div>
-                    <div class="table-responsive p-3">
-                        <table class="table table-striped align-middle">
-                            <thead>
-                                <tr>
-                                    <th>تصویر</th>
-                                    <th>عنوان تور</th>
-                                    <th>تاریخ (شمسی)</th>
-                                    <th>قیمت</th>
-                                    <th>عملیات</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
+            <div class="col-md-3">
+                <?php include 'sidebar.php'; ?>
+            </div>
+            <div class="col-md-9">
+                <main>
+                    <div class="card shadow">
+                        <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">مدیریت تورها (تعداد کل: <?= $total_count ?>)</h5>
+                            <a href="add_exhibition.php" class="btn btn-sm btn-light">افزودن تور جدید</a>
+                        </div>
+                        <div class="table-responsive p-3">
+                            <table class="table table-striped align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>تصویر</th>
+                                        <th>عنوان تور</th>
+                                        <th>تاریخ (شمسی)</th>
+                                        <th>قیمت</th>
+                                        <th>عملیات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
                                 // کوئری با LIMIT برای صفحه‌بندی
                                 $query = $conn->query("SELECT * FROM exhibition_tours ORDER BY id DESC LIMIT $start, $limit");
                                 if($query->num_rows > 0):
                                     while($row = $query->fetch_assoc()): ?>
-                                <tr>
-                                    <td><img src="<?= $row['tour_image'] ?>" width="70" class="rounded border"></td>
-                                    <td class="small fw-bold"><?= $row['title'] ?></td>
-                                    <td><?= $row['start_date_fa'] ?></td>
-                                    <td><?= number_format($row['price']) ?></td>
-                                    <td>
-                                        <div class="btn-group" dir="ltr">
-                                            <button onclick="confirmDelete(<?= $row['id'] ?>)"
-                                                class="btn btn-sm btn-outline-danger">حذف</button>
-                                            <a href="edit_exhibition.php?id=<?= $row['id'] ?>"
-                                                class="btn btn-sm btn-outline-primary">ویرایش</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <?php endwhile; 
+                                    <tr>
+                                        <td><img src="<?= $row['tour_image'] ?>" width="70" class="rounded border"></td>
+                                        <td class="small fw-bold"><?= $row['title'] ?></td>
+                                        <td><?= $row['start_date_fa'] ?></td>
+                                        <td><?= number_format($row['price']) ?></td>
+                                        <td>
+                                            <div class="btn-group" dir="ltr">
+                                                <button onclick="confirmDelete(<?= $row['id'] ?>)"
+                                                    class="btn btn-sm btn-outline-danger">حذف</button>
+                                                <a href="edit_exhibition.php?id=<?= $row['id'] ?>"
+                                                    class="btn btn-sm btn-outline-primary">ویرایش</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php endwhile; 
                                 else: ?>
-                                <tr>
-                                    <td colspan="5" class="text-center py-4">هیچ توری یافت نشد.</td>
-                                </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
+                                    <tr>
+                                        <td colspan="5" class="text-center py-4">هیچ توری یافت نشد.</td>
+                                    </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
 
-                        <?php if ($pages > 1): ?>
-                        <nav aria-label="Page navigation" class="mt-4">
-                            <ul class="pagination justify-content-center" dir="ltr">
-                                <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
-                                    <a class="page-link" href="?page=<?= $page - 1 ?>">قبلی</a>
-                                </li>
+                            <?php if ($pages > 1): ?>
+                            <nav aria-label="Page navigation" class="mt-4">
+                                <ul class="pagination justify-content-center" dir="ltr">
+                                    <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
+                                        <a class="page-link" href="?page=<?= $page - 1 ?>">قبلی</a>
+                                    </li>
 
-                                <?php for($i = 1; $i <= $pages; $i++): ?>
-                                <li class="page-item <?= ($page == $i) ? 'active' : '' ?>">
-                                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                                </li>
-                                <?php endfor; ?>
+                                    <?php for($i = 1; $i <= $pages; $i++): ?>
+                                    <li class="page-item <?= ($page == $i) ? 'active' : '' ?>">
+                                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                                    </li>
+                                    <?php endfor; ?>
 
-                                <li class="page-item <?= ($page >= $pages) ? 'disabled' : '' ?>">
-                                    <a class="page-link" href="?page=<?= $page + 1 ?>">بعدی</a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <?php endif; ?>
+                                    <li class="page-item <?= ($page >= $pages) ? 'disabled' : '' ?>">
+                                        <a class="page-link" href="?page=<?= $page + 1 ?>">بعدی</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <?php endif; ?>
 
+                        </div>
                     </div>
-                </div>
-            </main>
+                </main>
+            </div>
         </div>
     </div>
 

@@ -54,64 +54,69 @@ $stmt->close();
 
     <div class="container-fluid">
         <div class="row">
-            <?php include 'sidebar.php'; ?>
+            <div class="col-md-3">
+                <?php include 'sidebar.php'; ?>
+            </div>
+            <div class="col-md-9">
 
-            <main class="col-md-10 ms-sm-auto col-lg-10 px-md-4 content">
-                <nav class="navbar navbar-expand navbar-light bg-white shadow-sm rounded mb-4 mt-3">
-                    <div class="container-fluid">
-                        <a class="navbar-brand fw-bold" href="#">مدیریت درخواست‌های تور</a>
-                    </div>
-                </nav>
+                <main class="">
+                    <nav class="navbar navbar-expand navbar-light bg-white shadow-sm rounded mb-4 mt-3">
+                        <div class="container-fluid">
+                            <a class="navbar-brand fw-bold" href="#">مدیریت درخواست‌های تور</a>
+                        </div>
+                    </nav>
 
-                <div class="card shadow-sm mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title mb-4">لیست آخرین درخواست‌های رزرو</h5>
-                        <div class="table-responsive">
-                            <table class="request-table table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>شناسه</th>
-                                        <th>نام متقاضی</th>
-                                        <th>تلفن</th>
-                                        <th>نام تور</th>
-                                        <th>کشور / شهر</th>
-                                        <th>تاریخ تور (شروع)</th>
-                                        <th>تعداد</th>
-                                        <th>زمان ثبت درخواست</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if (empty($requests)): ?>
-                                    <tr>
-                                        <td colspan="8" class="text-center py-4">هیچ درخواستی یافت نشد.</td>
-                                    </tr>
-                                    <?php endif; ?>
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">لیست آخرین درخواست‌های رزرو</h5>
+                            <div class="table-responsive">
+                                <table class="request-table table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>شناسه</th>
+                                            <th>نام متقاضی</th>
+                                            <th>تلفن</th>
+                                            <th>نام تور</th>
+                                            <th>کشور / شهر</th>
+                                            <th>تاریخ تور (شروع)</th>
+                                            <th>تعداد</th>
+                                            <th>زمان ثبت درخواست</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (empty($requests)): ?>
+                                        <tr>
+                                            <td colspan="8" class="text-center py-4">هیچ درخواستی یافت نشد.</td>
+                                        </tr>
+                                        <?php endif; ?>
 
-                                    <?php foreach ($requests as $request): ?>
-                                    <tr data-bs-toggle="modal" data-bs-target="#requestModal" style="cursor: pointer;"
-                                        onclick="loadRequestDetails(<?= $request['id'] ?>)">
-                                        <td><?= htmlspecialchars($request['id']) ?></td>
-                                        <td class="fw-bold"><?= htmlspecialchars($request['name']) ?></td>
-                                        <td><?= htmlspecialchars($request['phone']) ?></td>
-                                        <td>
-                                            <span class="badge bg-light text-dark border">
-                                                <?= htmlspecialchars($request['tour_title'] ?? 'نامشخص') ?>
-                                            </span>
-                                        </td>
-                                        <td><?= htmlspecialchars($request['country'] ?? '-') ?>
-                                            (<?= htmlspecialchars($request['city'] ?? '-') ?>)</td>
-                                        <td><?= htmlspecialchars($request['tour_date'] ?? '-') ?></td>
-                                        <td><?= htmlspecialchars($request['passengers']) ?> نفر</td>
-                                        <td style="font-size: 0.85rem; color: #666;">
-                                            <?= htmlspecialchars($request['request_date']) ?></td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                        <?php foreach ($requests as $request): ?>
+                                        <tr data-bs-toggle="modal" data-bs-target="#requestModal"
+                                            style="cursor: pointer;"
+                                            onclick="loadRequestDetails(<?= $request['id'] ?>)">
+                                            <td><?= htmlspecialchars($request['id']) ?></td>
+                                            <td class="fw-bold"><?= htmlspecialchars($request['name']) ?></td>
+                                            <td><?= htmlspecialchars($request['phone']) ?></td>
+                                            <td>
+                                                <span class="badge bg-light text-dark border">
+                                                    <?= htmlspecialchars($request['tour_title'] ?? 'نامشخص') ?>
+                                                </span>
+                                            </td>
+                                            <td><?= htmlspecialchars($request['country'] ?? '-') ?>
+                                                (<?= htmlspecialchars($request['city'] ?? '-') ?>)</td>
+                                            <td><?= htmlspecialchars($request['tour_date'] ?? '-') ?></td>
+                                            <td><?= htmlspecialchars($request['passengers']) ?> نفر</td>
+                                            <td style="font-size: 0.85rem; color: #666;">
+                                                <?= htmlspecialchars($request['request_date']) ?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </main>
+                </main>
+            </div>
         </div>
     </div>
 
